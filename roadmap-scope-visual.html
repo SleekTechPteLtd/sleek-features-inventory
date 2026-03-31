@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleek Features Inventory - Domain Roadmap</title>
+    <style>
+      body { margin: 0; font-family: Inter, Arial, sans-serif; background: #0b1220; color: #e6ecfb; }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; }
+      .panel { background: #121a2b; border: 1px solid #2a3757; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+      h1 { margin: 0 0 8px; }
+      .muted { color: #9db0d7; }
+      .filters button { margin: 0 8px 8px 0; border: 1px solid #304266; background: #1b2742; color: #e6ecfb; border-radius: 999px; padding: 7px 11px; cursor: pointer; }
+      .filters button.active { border-color: #6aa7ff; background: #1a3361; }
+      .timeline { display: grid; grid-template-columns: 170px 1fr; gap: 10px; }
+      .phase { color: #9db0d7; font-size: 13px; border-right: 1px dashed #2a3757; padding-right: 8px; }
+      .track { display: grid; gap: 8px; }
+      .card { border: 1px solid #2a3757; border-radius: 10px; background: #101a2f; padding: 10px; }
+      .card h3 { margin: 0; font-size: 15px; }
+      .badge { float: right; font-size: 11px; border: 1px solid #385186; border-radius: 999px; padding: 2px 8px; color: #c2d4fb; }
+      .card p { margin: 8px 0; color: #a5b7dd; font-size: 13px; }
+      .card a { color: #9dc5ff; font-size: 12px; text-decoration: none; }
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th, td { border: 1px solid #2a3757; text-align: left; vertical-align: top; padding: 8px; }
+      th { background: #0f1a31; color: #bed0f5; }
+      .chip { display: inline-block; margin: 2px 4px 2px 0; border: 1px solid #2a3757; border-radius: 999px; padding: 2px 8px; background: #111d35; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Sleek Features Inventory - Domain Roadmap & Scope</h1>
+      <p class="muted">Per-domain view: Platform, CLM, Compliance, CorpSec, Accounting.</p>
+
+      <section class="panel">
+        <div class="filters" id="domainFilters"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Roadmap Timeline</h2>
+        <div class="timeline">
+          <div class="phase"><strong>Now (0-6 weeks)</strong></div>
+          <div class="track" id="phase-now"></div>
+          <div class="phase"><strong>Next (6-12 weeks)</strong></div>
+          <div class="track" id="phase-next"></div>
+          <div class="phase"><strong>Later (12+ weeks)</strong></div>
+          <div class="track" id="phase-later"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Scope Matrix (Per Domain)</h2>
+        <table>
+          <thead>
+            <tr><th>Domain</th><th>Primary outcomes</th><th>Main surfaces</th><th>Reference docs</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Platform</td>
+              <td>Auth/AuthZ/integrations/operations core capabilities</td>
+              <td><span class="chip">platform/*</span><span class="chip">sleek-auth</span><span class="chip">sleek-back</span></td>
+              <td><a href="./platform/README.md">platform/README.md</a></td>
+            </tr>
+            <tr>
+              <td>CLM</td>
+              <td>Contract lifecycle features</td>
+              <td><span class="chip">clm/*</span></td>
+              <td><a href="./clm/README.md">clm/README.md</a></td>
+            </tr>
+            <tr>
+              <td>Compliance</td>
+              <td>KYC/AML/risk capabilities</td>
+              <td><span class="chip">compliance/*</span></td>
+              <td><a href="./compliance/README.md">compliance/README.md</a></td>
+            </tr>
+            <tr>
+              <td>CorpSec</td>
+              <td>Corporate secretarial outcomes and register workflows</td>
+              <td><span class="chip">corpsec/*</span></td>
+              <td><a href="./corpsec/README.md">corpsec/README.md</a></td>
+            </tr>
+            <tr>
+              <td>Accounting</td>
+              <td>Billing/accounting/payment reconciliation outcomes</td>
+              <td><span class="chip">accounting/*</span></td>
+              <td><a href="./accounting/README.md">accounting/README.md</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    <script>
+      const items = [
+        { phase: "now", domain: "platform", title: "Consolidate Platform baseline", description: "Keep Platform rows canonical and de-duplicated.", ref: "./platform/README.md" },
+        { phase: "next", domain: "clm", title: "Expand CLM domain inventory", description: "Create and validate CLM capability rows with evidence.", ref: "./clm/README.md" },
+        { phase: "next", domain: "compliance", title: "Expand Compliance inventory", description: "Document KYC/AML/risk capabilities and boundaries.", ref: "./compliance/README.md" },
+        { phase: "next", domain: "corpsec", title: "Expand CorpSec inventory", description: "Map corpsec workflows to capability-level rows.", ref: "./corpsec/README.md" },
+        { phase: "next", domain: "accounting", title: "Expand Accounting inventory", description: "Capture invoice/payment/accounting outcomes.", ref: "./accounting/README.md" },
+        { phase: "later", domain: "governance", title: "Cross-domain PO validation workflow", description: "Move Draft rows to validated states with clear signoffs.", ref: "./Sleek%20Feature%20Scope%20Audit%20Hub.md" }
+      ];
+
+      const filters = [
+        { id: "all", label: "All" },
+        { id: "platform", label: "Platform" },
+        { id: "clm", label: "CLM" },
+        { id: "compliance", label: "Compliance" },
+        { id: "corpsec", label: "CorpSec" },
+        { id: "accounting", label: "Accounting" },
+        { id: "governance", label: "Governance" }
+      ];
+
+      const filterRoot = document.getElementById("domainFilters");
+      let selected = "all";
+
+      function renderFilters() {
+        filterRoot.innerHTML = "";
+        filters.forEach((f) => {
+          const b = document.createElement("button");
+          b.textContent = f.label;
+          if (f.id === selected) b.classList.add("active");
+          b.onclick = () => { selected = f.id; render(); };
+          filterRoot.appendChild(b);
+        });
+      }
+
+      function card(item) {
+        const el = document.createElement("div");
+        el.className = "card";
+        el.innerHTML = `<h3>${item.title}<span class="badge">${item.domain}</span></h3><p>${item.description}</p><a href="${item.ref}">${item.ref}</a>`;
+        return el;
+      }
+
+      function render() {
+        renderFilters();
+        const byPhase = { now: document.getElementById("phase-now"), next: document.getElementById("phase-next"), later: document.getElementById("phase-later") };
+        Object.values(byPhase).forEach((el) => (el.innerHTML = ""));
+        items.filter((i) => selected === "all" || i.domain === selected).forEach((i) => byPhase[i.phase].appendChild(card(i)));
+      }
+
+      render();
+    </script>
+  </body>
+</html>

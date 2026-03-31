@@ -29,8 +29,27 @@ The canonical **process, column definitions, and spreadsheet link** live in:
 | `README.md` | This file — orientation and workflow |
 | `Sleek Feature Scope Audit Hub.md` | Audit goals, sheet columns, process, links |
 | `platform/` | First markdown area: Platform + Sleeksign; [index](./platform/README.md) |
+| `clm/` | CLM domain draft inventory; [index](./clm/README.md) |
+| `compliance/` | Compliance domain draft inventory; [index](./compliance/README.md) |
+| `corpsec/` | CorpSec domain draft inventory; [index](./corpsec/README.md) |
+| `accounting/` | Accounting domain draft inventory; [index](./accounting/README.md) |
 
 Additional top-level folders (e.g. Corpsec, Bookkeeping) appear **as other squads add them** — same hub and sheet conventions.
+
+## Serve locally (visual roadmap)
+
+To open the domain roadmap page in your browser:
+
+```bash
+cd sleek-features-inventory-
+python3 -m http.server 8788
+```
+
+Then open:
+
+- [http://127.0.0.1:8788/roadmap-scope-visual.html](http://127.0.0.1:8788/roadmap-scope-visual.html)
+
+Stop the server with `Ctrl + C`.
 
 ## Clone
 
