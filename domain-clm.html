@@ -11,7 +11,8 @@
       .menu { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0; } .menu a { padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; }
       .menu a.active { border-color:#5a8dde; background:#162747; color:#e5efff; } .muted { color:var(--muted); } .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; }
       .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #2f7e59; background:#143a2a; color:#a6f2cd; }
-      .category-pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #43608c; background:#14223d; color:#bcd2f7; margin-left:8px; }
+      .category-pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #1f8f94; background:#0f3a3d; color:#98f3f7; margin-left:8px; text-transform:uppercase; }
+      .category-pill-customer-app { border-color:#b76a15; background:#3f270d; color:#ffc27d; }
       .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
       .subgrid { display:grid; gap:8px; }
       .subgrid h5 { margin:0; font-size:12px; color:#b7caf2; }
@@ -66,6 +67,7 @@
 
         modules.forEach((moduleEl) => {
           const title = moduleEl.querySelector("h3");
+          const moduleLink = moduleEl.querySelector("small a");
           const listItems = moduleEl.querySelectorAll("ul li");
 
           listItems.forEach((li, idx) => {
@@ -93,7 +95,14 @@
 
           const featureCount = listItems.length;
           totalFeatures += featureCount;
-          if (title) title.innerHTML = `${title.textContent} <span class="pill">${featureCount} features</span>`;
+          if (title) {
+            const modulePath = (moduleLink?.textContent || "").trim();
+            const surfaceMatch = modulePath.match(/clm\/(sleek-admin|customer-app)-/i);
+            const moduleSurface = surfaceMatch ? surfaceMatch[1].toLowerCase() : "";
+            const surfacePillClass = moduleSurface === "customer-app" ? "category-pill category-pill-customer-app" : "category-pill";
+            const moduleSurfacePill = moduleSurface ? `<span class="${surfacePillClass}">${moduleSurface}</span>` : "";
+            title.innerHTML = `${title.textContent}${moduleSurfacePill} <span class="pill">${featureCount} features</span>`;
+          }
         });
 
         const moduleCountEl = document.getElementById("moduleCount");
