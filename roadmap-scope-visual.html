@@ -40,7 +40,7 @@
   <body>
     <div class="wrap">
       <h1>Sleek Features Inventory - Overview</h1>
-      <p class="muted">Summary view for migration planning: known vs unknown feature coverage by domain.</p>
+      <p class="muted">Summary view for migration planning across TLD (domain) -> module -> feature.</p>
       <nav class="menu">
         <a class="active" href="./roadmap-scope-visual.html">Overview</a>
         <a href="./domain-platform.html">Platform</a>
@@ -54,7 +54,7 @@
         <strong>Goal</strong>
         <p class="goal muted">
           Make sure we list all features in each domain so we can estimate migration effort to the new platform.
-          Use domain pages to maintain topic-level feature inventory and image references from real project surfaces.
+          Use domain pages to maintain module-level feature inventory and image references from real project surfaces.
         </p>
         <div class="stats" id="stats"></div>
       </section>
@@ -67,9 +67,10 @@
           <thead>
             <tr>
               <th>Domain</th>
-              <th>Topics</th>
+              <th>Modules</th>
               <th>Known features</th>
               <th>Unknown features</th>
+              <th>Feature highlights</th>
               <th>Coverage</th>
               <th>Page</th>
             </tr>
@@ -81,22 +82,22 @@
 
     <script>
       const domains = [
-        { name: "Platform", topics: 6, known: 0, unknown: 18, page: "./domain-platform.html" },
-        { name: "CLM", topics: 1, known: 3, unknown: 7, page: "./domain-clm.html" },
-        { name: "Compliance", topics: 1, known: 3, unknown: 9, page: "./domain-compliance.html" },
-        { name: "CorpSec", topics: 1, known: 3, unknown: 10, page: "./domain-corpsec.html" },
-        { name: "Accounting", topics: 1, known: 3, unknown: 11, page: "./domain-accounting.html" }
+        { name: "Platform", modules: 6, known: 18, unknown: 6, highlights: ["Hosted login and PKCE", "Policies, roles, assignments", "Auth0/CMS/mailer/files integrations"], page: "./domain-platform.html" },
+        { name: "CLM", modules: 1, known: 3, unknown: 7, highlights: ["Contract renewal reminders", "Recipient targeting", "Email and in-app delivery"], page: "./domain-clm.html" },
+        { name: "Compliance", modules: 1, known: 3, unknown: 9, highlights: ["Dynamic KYC questionnaire", "Risk scoring thresholds", "Review and approval flow"], page: "./domain-compliance.html" },
+        { name: "CorpSec", modules: 1, known: 3, unknown: 10, highlights: ["Register updates and history", "Officer/shareholder edits", "Export and audit visibility"], page: "./domain-corpsec.html" },
+        { name: "Accounting", modules: 1, known: 3, unknown: 11, highlights: ["Payment capture and matching", "Reconciliation exceptions", "Admin follow-up workflow"], page: "./domain-accounting.html" }
       ];
 
       function renderStats() {
         const domainCount = domains.length;
-        const topicCount = domains.reduce((sum, domain) => sum + domain.topics, 0);
+        const moduleCount = domains.reduce((sum, domain) => sum + domain.modules, 0);
         const knownTotal = domains.reduce((sum, domain) => sum + domain.known, 0);
         const unknownTotal = domains.reduce((sum, domain) => sum + domain.unknown, 0);
         const stats = document.getElementById("stats");
         stats.innerHTML = `
           <span class="chip">${domainCount} domains</span>
-          <span class="chip">${topicCount} topics currently listed</span>
+          <span class="chip">${moduleCount} modules currently listed</span>
           <span class="chip tag-ok">${knownTotal} known features</span>
           <span class="chip tag-unknown">${unknownTotal} unknown features</span>
         `;
@@ -111,9 +112,10 @@
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${domain.name}</td>
-            <td>${domain.topics}</td>
+            <td>${domain.modules}</td>
             <td class="tag-ok">${domain.known}</td>
             <td class="tag-unknown">${domain.unknown}</td>
+            <td><small class="muted">${domain.highlights.join(" · ")}</small></td>
             <td><div class="bar"><span style="width:${pct}%"></span></div><small class="muted">${pct}% known</small></td>
             <td><a href="${domain.page}">Open ${domain.name}</a></td>
           `;
