@@ -16,6 +16,8 @@
       .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; margin-bottom:10px; }
       .topic h3 { margin:0 0 6px; }
       .muted { color:var(--muted); }
+      .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #2f7e59; background:#143a2a; color:#a6f2cd; }
+      .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
       .grid { display:grid; gap:10px; grid-template-columns: repeat(2, minmax(0,1fr)); margin-top:10px; }
       .box { border:1px dashed #37507b; border-radius:8px; padding:10px; background:#101d36; min-height:110px; }
       .box h4 { margin:0 0 6px; font-size:13px; color:#c9d9fa; }
@@ -41,6 +43,13 @@
       <section class="panel">
         <strong>Domain reference:</strong> <a href="./platform/README.md">platform/README.md</a>
       </section>
+      <section class="panel">
+        <strong>Inventory counts:</strong>
+        <div class="pill-row">
+          <span class="pill">Modules: <span id="moduleCount">0</span></span>
+          <span class="pill">Features: <span id="featureCount">0</span></span>
+        </div>
+      </section>
 
       <section class="panel">
         <article class="topic"><h3>Authentication</h3><small class="muted"><a href="./platform/authentication/README.md">platform/authentication/README.md</a></small><div class="grid"><section class="box"><h4>Features</h4><ul><li>Hosted login, OAuth and PKCE callback flows</li><li>User registration with captcha and T&amp;C gates</li><li>Password recovery and email verification</li><li>MFA and code-based verification</li><li>OAuth client management and M2M token issuance</li><li>Nest JWT and M2M guard integration</li><li>Admin login-as customer with single-use token</li></ul></section><section class="box"><h4>Image references</h4><div class="editable" contenteditable="true">Add links/paths to screenshots or Figma</div></section></div></article>
@@ -51,5 +60,20 @@
         <article class="topic"><h3>Scans Pending</h3><small class="muted"><a href="./platform/scans-pending/README.md">platform/scans-pending/README.md</a></small><div class="grid"><section class="box"><h4>Unknown / pending discovery</h4><ul><li>Track features that still need confirmation</li></ul></section><section class="box"><h4>Image references</h4><div class="editable" contenteditable="true">Add links/paths to screenshots or Figma</div></section></div></article>
       </section>
     </div>
+    <script>
+      (function () {
+        const modules = document.querySelectorAll(".topic");
+        let totalFeatures = 0;
+        modules.forEach((moduleEl) => {
+          const title = moduleEl.querySelector("h3");
+          const list = moduleEl.querySelector("ul");
+          const featureCount = list ? list.querySelectorAll("li").length : 0;
+          totalFeatures += featureCount;
+          if (title) title.innerHTML = `${title.textContent} <span class="pill">${featureCount} features</span>`;
+        });
+        document.getElementById("moduleCount").textContent = modules.length;
+        document.getElementById("featureCount").textContent = totalFeatures;
+      })();
+    </script>
   </body>
 </html>
