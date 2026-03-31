@@ -3,141 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleek Features Inventory - Domain Roadmap</title>
+    <title>Sleek Features Inventory - Overview</title>
     <style>
-      body { margin: 0; font-family: Inter, Arial, sans-serif; background: #0b1220; color: #e6ecfb; }
-      .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; }
-      .panel { background: #121a2b; border: 1px solid #2a3757; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+      :root {
+        --bg: #0b1220;
+        --panel: #121a2b;
+        --line: #2a3757;
+        --text: #e6ecfb;
+        --muted: #9db0d7;
+        --chip: #111d35;
+        --ok: #2ab673;
+        --warn: #ffcd56;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); }
+      .wrap { max-width: 1150px; margin: 0 auto; padding: 24px 16px 40px; }
       h1 { margin: 0 0 8px; }
-      .muted { color: #9db0d7; }
-      .filters button { margin: 0 8px 8px 0; border: 1px solid #304266; background: #1b2742; color: #e6ecfb; border-radius: 999px; padding: 7px 11px; cursor: pointer; }
-      .filters button.active { border-color: #6aa7ff; background: #1a3361; }
-      .timeline { display: grid; grid-template-columns: 170px 1fr; gap: 10px; }
-      .phase { color: #9db0d7; font-size: 13px; border-right: 1px dashed #2a3757; padding-right: 8px; }
-      .track { display: grid; gap: 8px; }
-      .card { border: 1px solid #2a3757; border-radius: 10px; background: #101a2f; padding: 10px; }
-      .card h3 { margin: 0; font-size: 15px; }
-      .badge { float: right; font-size: 11px; border: 1px solid #385186; border-radius: 999px; padding: 2px 8px; color: #c2d4fb; }
-      .card p { margin: 8px 0; color: #a5b7dd; font-size: 13px; }
-      .card a { color: #9dc5ff; font-size: 12px; text-decoration: none; }
+      .muted { color: var(--muted); }
+      .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+      .menu { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 0; }
+      .menu a { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: #101a2f; color: #c9d9fa; text-decoration: none; font-size: 13px; }
+      .menu a.active { border-color: #5a8dde; background: #162747; color: #e5efff; }
+      .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+      .chip { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; background: var(--chip); font-size: 12px; }
       table { width: 100%; border-collapse: collapse; font-size: 13px; }
-      th, td { border: 1px solid #2a3757; text-align: left; vertical-align: top; padding: 8px; }
-      th { background: #0f1a31; color: #bed0f5; }
-      .chip { display: inline-block; margin: 2px 4px 2px 0; border: 1px solid #2a3757; border-radius: 999px; padding: 2px 8px; background: #111d35; font-size: 12px; }
+      th, td { border: 1px solid var(--line); text-align: left; vertical-align: top; padding: 8px; }
+      th { color: #cfe0ff; background: #0f1a31; }
+      .bar { height: 8px; border-radius: 999px; background: #1a2946; overflow: hidden; }
+      .bar > span { display: block; height: 8px; background: var(--ok); }
+      .tag-ok { color: #8be6bb; }
+      .tag-unknown { color: #ffd26a; }
+      .goal { margin-top: 8px; line-height: 1.45; }
+      a { color: #9dc5ff; text-decoration: none; }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <h1>Sleek Features Inventory - Domain Roadmap & Scope</h1>
-      <p class="muted">Per-domain view: Platform, CLM, Compliance, CorpSec, Accounting.</p>
+      <h1>Sleek Features Inventory - Overview</h1>
+      <p class="muted">Summary view for migration planning: known vs unknown feature coverage by domain.</p>
+      <nav class="menu">
+        <a class="active" href="./roadmap-scope-visual.html">Overview</a>
+        <a href="./domain-platform.html">Platform</a>
+        <a href="./domain-clm.html">CLM</a>
+        <a href="./domain-compliance.html">Compliance</a>
+        <a href="./domain-corpsec.html">CorpSec</a>
+        <a href="./domain-accounting.html">Accounting</a>
+      </nav>
 
       <section class="panel">
-        <div class="filters" id="domainFilters"></div>
+        <strong>Goal</strong>
+        <p class="goal muted">
+          Make sure we list all features in each domain so we can estimate migration effort to the new platform.
+          Use domain pages to maintain topic-level feature inventory and image references from real project surfaces.
+        </p>
+        <div class="stats" id="stats"></div>
       </section>
 
       <section class="panel">
-        <h2>Roadmap Timeline</h2>
-        <div class="timeline">
-          <div class="phase"><strong>Now (0-6 weeks)</strong></div>
-          <div class="track" id="phase-now"></div>
-          <div class="phase"><strong>Next (6-12 weeks)</strong></div>
-          <div class="track" id="phase-next"></div>
-          <div class="phase"><strong>Later (12+ weeks)</strong></div>
-          <div class="track" id="phase-later"></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>Scope Matrix (Per Domain)</h2>
+        <h2>Coverage of Knowns and Unknowns</h2>
+        <p class="muted">Known = features already identified for migration. Unknown = still to discover/validate with evidence.</p>
+        <p class="muted">Counts are starter estimates and should be updated as domain pages are refined.</p>
         <table>
           <thead>
-            <tr><th>Domain</th><th>Primary outcomes</th><th>Main surfaces</th><th>Reference docs</th></tr>
+            <tr>
+              <th>Domain</th>
+              <th>Topics</th>
+              <th>Known features</th>
+              <th>Unknown features</th>
+              <th>Coverage</th>
+              <th>Page</th>
+            </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Platform</td>
-              <td>Auth/AuthZ/integrations/operations core capabilities</td>
-              <td><span class="chip">platform/*</span><span class="chip">sleek-auth</span><span class="chip">sleek-back</span></td>
-              <td><a href="./platform/README.md">platform/README.md</a></td>
-            </tr>
-            <tr>
-              <td>CLM</td>
-              <td>Contract lifecycle features</td>
-              <td><span class="chip">clm/*</span></td>
-              <td><a href="./clm/README.md">clm/README.md</a></td>
-            </tr>
-            <tr>
-              <td>Compliance</td>
-              <td>KYC/AML/risk capabilities</td>
-              <td><span class="chip">compliance/*</span></td>
-              <td><a href="./compliance/README.md">compliance/README.md</a></td>
-            </tr>
-            <tr>
-              <td>CorpSec</td>
-              <td>Corporate secretarial outcomes and register workflows</td>
-              <td><span class="chip">corpsec/*</span></td>
-              <td><a href="./corpsec/README.md">corpsec/README.md</a></td>
-            </tr>
-            <tr>
-              <td>Accounting</td>
-              <td>Billing/accounting/payment reconciliation outcomes</td>
-              <td><span class="chip">accounting/*</span></td>
-              <td><a href="./accounting/README.md">accounting/README.md</a></td>
-            </tr>
-          </tbody>
+          <tbody id="coverageRows"></tbody>
         </table>
       </section>
     </div>
 
     <script>
-      const items = [
-        { phase: "now", domain: "platform", title: "Consolidate Platform baseline", description: "Keep Platform rows canonical and de-duplicated.", ref: "./platform/README.md" },
-        { phase: "next", domain: "clm", title: "Expand CLM domain inventory", description: "Create and validate CLM capability rows with evidence.", ref: "./clm/README.md" },
-        { phase: "next", domain: "compliance", title: "Expand Compliance inventory", description: "Document KYC/AML/risk capabilities and boundaries.", ref: "./compliance/README.md" },
-        { phase: "next", domain: "corpsec", title: "Expand CorpSec inventory", description: "Map corpsec workflows to capability-level rows.", ref: "./corpsec/README.md" },
-        { phase: "next", domain: "accounting", title: "Expand Accounting inventory", description: "Capture invoice/payment/accounting outcomes.", ref: "./accounting/README.md" },
-        { phase: "later", domain: "governance", title: "Cross-domain PO validation workflow", description: "Move Draft rows to validated states with clear signoffs.", ref: "./Sleek%20Feature%20Scope%20Audit%20Hub.md" }
+      const domains = [
+        { name: "Platform", topics: 6, known: 0, unknown: 18, page: "./domain-platform.html" },
+        { name: "CLM", topics: 1, known: 3, unknown: 7, page: "./domain-clm.html" },
+        { name: "Compliance", topics: 1, known: 3, unknown: 9, page: "./domain-compliance.html" },
+        { name: "CorpSec", topics: 1, known: 3, unknown: 10, page: "./domain-corpsec.html" },
+        { name: "Accounting", topics: 1, known: 3, unknown: 11, page: "./domain-accounting.html" }
       ];
 
-      const filters = [
-        { id: "all", label: "All" },
-        { id: "platform", label: "Platform" },
-        { id: "clm", label: "CLM" },
-        { id: "compliance", label: "Compliance" },
-        { id: "corpsec", label: "CorpSec" },
-        { id: "accounting", label: "Accounting" },
-        { id: "governance", label: "Governance" }
-      ];
+      function renderStats() {
+        const domainCount = domains.length;
+        const topicCount = domains.reduce((sum, domain) => sum + domain.topics, 0);
+        const knownTotal = domains.reduce((sum, domain) => sum + domain.known, 0);
+        const unknownTotal = domains.reduce((sum, domain) => sum + domain.unknown, 0);
+        const stats = document.getElementById("stats");
+        stats.innerHTML = `
+          <span class="chip">${domainCount} domains</span>
+          <span class="chip">${topicCount} topics currently listed</span>
+          <span class="chip tag-ok">${knownTotal} known features</span>
+          <span class="chip tag-unknown">${unknownTotal} unknown features</span>
+        `;
+      }
 
-      const filterRoot = document.getElementById("domainFilters");
-      let selected = "all";
-
-      function renderFilters() {
-        filterRoot.innerHTML = "";
-        filters.forEach((f) => {
-          const b = document.createElement("button");
-          b.textContent = f.label;
-          if (f.id === selected) b.classList.add("active");
-          b.onclick = () => { selected = f.id; render(); };
-          filterRoot.appendChild(b);
+      function renderCoverage() {
+        const tbody = document.getElementById("coverageRows");
+        tbody.innerHTML = "";
+        domains.forEach((domain) => {
+          const total = domain.known + domain.unknown;
+          const pct = total > 0 ? Math.round((domain.known / total) * 100) : 0;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${domain.name}</td>
+            <td>${domain.topics}</td>
+            <td class="tag-ok">${domain.known}</td>
+            <td class="tag-unknown">${domain.unknown}</td>
+            <td><div class="bar"><span style="width:${pct}%"></span></div><small class="muted">${pct}% known</small></td>
+            <td><a href="${domain.page}">Open ${domain.name}</a></td>
+          `;
+          tbody.appendChild(tr);
         });
       }
 
-      function card(item) {
-        const el = document.createElement("div");
-        el.className = "card";
-        el.innerHTML = `<h3>${item.title}<span class="badge">${item.domain}</span></h3><p>${item.description}</p><a href="${item.ref}">${item.ref}</a>`;
-        return el;
-      }
-
-      function render() {
-        renderFilters();
-        const byPhase = { now: document.getElementById("phase-now"), next: document.getElementById("phase-next"), later: document.getElementById("phase-later") };
-        Object.values(byPhase).forEach((el) => (el.innerHTML = ""));
-        items.filter((i) => selected === "all" || i.domain === selected).forEach((i) => byPhase[i.phase].appendChild(card(i)));
-      }
-
-      render();
+      renderStats();
+      renderCoverage();
     </script>
   </body>
 </html>

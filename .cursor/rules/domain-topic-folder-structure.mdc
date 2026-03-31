@@ -1,0 +1,33 @@
+---
+description: Enforce domains at root and topics inside each domain folder
+alwaysApply: true
+---
+
+# Domain and Topic Folder Structure
+
+For this project, the repository structure is authoritative:
+
+- Root folders represent **domains**.
+- Folders inside each domain represent **topics** within that domain.
+
+## Required organization
+
+- Create new domain-level inventory work as a top-level folder (for example `platform/`, `clm/`, `compliance/`, `corpsec/`, `accounting/`).
+- Place topic groupings under the corresponding domain folder.
+- Keep capability files under the correct topic and domain path.
+
+## Do not
+
+- Do not treat root folders as topics.
+- Do not create cross-domain topic folders at the repository root.
+- Do not place topic files in the wrong domain just because evidence comes from a shared repo.
+
+## Visual and documentation alignment
+
+- Any structure documentation or visuals (for example `roadmap-scope-visual.html`) must describe:
+  - root folders as domains, and
+  - nested folders as topics.
+- Any change to root domain folders (add, remove, rename, or repurpose) must include UI updates in the same change:
+  - `roadmap-scope-visual.html` (overview and coverage), and
+  - the relevant domain pages (for example `domain-platform.html`, `domain-clm.html`, `domain-compliance.html`, `domain-corpsec.html`, `domain-accounting.html`).
+- If domain/topic coverage changes materially, update known/unknown counts on `roadmap-scope-visual.html` and update topic sections on the affected domain page(s).

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleek Features Inventory - Compliance</title>
+    <style>
+      :root { --bg:#0b1220; --panel:#121a2b; --line:#2a3757; --text:#e6ecfb; --muted:#9db0d7; }
+      * { box-sizing: border-box; } body { margin:0; font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
+      .wrap { max-width:1100px; margin:0 auto; padding:24px 16px 40px; } .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:14px; }
+      .menu { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0; } .menu a { padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; }
+      .menu a.active { border-color:#5a8dde; background:#162747; color:#e5efff; } .muted { color:var(--muted); } .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; }
+      .grid { display:grid; gap:10px; grid-template-columns: repeat(2, minmax(0,1fr)); margin-top:10px; } .box { border:1px dashed #37507b; border-radius:8px; padding:10px; background:#101d36; min-height:110px; }
+      .box h4 { margin:0 0 6px; font-size:13px; color:#c9d9fa; } .box ul { margin:0; padding-left:18px; color:#afc2e8; font-size:13px; } .editable { border:1px solid #304a77; border-radius:6px; padding:8px; background:#0c1629; min-height:54px; color:#d8e5ff; font-size:13px; }
+      a { color:#9dc5ff; text-decoration:none; } @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Compliance Domain</h1>
+      <p class="muted">Topics inside the `compliance/` domain folder.</p>
+      <nav class="menu">
+        <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a class="active" href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a href="./domain-accounting.html">Accounting</a>
+      </nav>
+      <section class="panel"><strong>Domain reference:</strong> <a href="./compliance/README.md">compliance/README.md</a></section>
+      <section class="panel">
+        <article class="topic">
+          <h3>KYC Risk Questionnaire</h3>
+          <small class="muted"><a href="./compliance/kyc-risk-questionnaire.md">compliance/kyc-risk-questionnaire.md</a></small>
+          <div class="grid">
+            <section class="box"><h4>Known features</h4><ul><li>Dynamic questionnaire by entity type</li><li>Risk scoring thresholds</li><li>Review and approval flow</li></ul></section>
+            <section class="box"><h4>Image references</h4><div class="editable" contenteditable="true">Add links/paths to screenshots or Figma</div></section>
+          </div>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>
