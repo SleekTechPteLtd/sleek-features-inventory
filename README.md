@@ -4,7 +4,7 @@ Version-controlled **draft rows and evidence** for the **Sleek Feature Scope Aud
 
 ## What this repo is for
 
-- **Capture** Platform-leaning capabilities (and **Sleeksign** under `platform/sleeksign/`) as markdown “row drafts”: master-sheet columns, short descriptions, code/repo evidence, open questions, and review status.
+- **Capture** capabilities from **any** master-sheet **Domain** (Corpsec, Bookkeeping, Platform, Sleeksign, and the rest) as markdown “row drafts”: master-sheet columns, short descriptions, code/repo evidence, open questions, and review status. **We started with Platform** (shared identity, authz, integrations, operations) plus **Sleeksign** under [`platform/sleeksign/`](./platform/sleeksign/README.md); other domains can add their own top-level folders beside `platform/` as squads contribute.
 - **Align** squads on definitions, overlap, and gaps before architecture or delivery planning.
 - **Stay living**: treat content as **Draft** until product owners validate (see the hub doc).
 
@@ -16,7 +16,7 @@ The canonical **process, column definitions, and spreadsheet link** live in:
 
 1. **Open the hub** — Read working principles, what counts as a feature, column meanings, and the link to the **[Feature Master Sheet](https://docs.google.com/spreadsheets/d/1-8-fY-WRoXcbBYsz5XQgLYVhuUKN2Q6GQmXitJNRvGs/edit?usp=sharing)**.
 2. **Add or update the sheet** — New capabilities belong in the spreadsheet first (or in parallel if you prefer), using the **Domain** enum and other columns from the hub.
-3. **Add deep-draft markdown when helpful** — For Platform / Sleeksign areas, add or edit files under [`platform/`](./platform/README.md): pick the category ([authentication](./platform/authentication/README.md), [authorization](./platform/authorization/README.md), [external-integrations](./platform/external-integrations/README.md), [operations](./platform/operations/README.md), [sleeksign](./platform/sleeksign/README.md)). Each file should mirror a sheet row and include **Evidence** (repos, paths, endpoints).
+3. **Add deep-draft markdown when helpful** — **Platform** drafts (including **Sleeksign** at [`platform/sleeksign/`](./platform/sleeksign/README.md)) live under [`platform/`](./platform/README.md): pick a category ([authentication](./platform/authentication/README.md), [authorization](./platform/authorization/README.md), [external-integrations](./platform/external-integrations/README.md), [operations](./platform/operations/README.md), [sleeksign](./platform/sleeksign/README.md)). **Other domains** can add their own folder at the repo root as those inventories start. Each file should mirror a sheet row and include **Evidence** (repos, paths, endpoints).
 4. **Avoid duplicate auth rows** — Legacy `sleek-back` / customer admin login paths are **migration context**, not second copies of Sleek Auth rows. See [platform/authentication/README.md § Scope](./platform/authentication/README.md#scope-no-duplicate-auth-rows).
 5. **Unsure which domain?** — Use [platform/inventory-scope-and-domains.md](./platform/inventory-scope-and-domains.md) and the cross-repo map [platform/cross-repo-sleek-surfaces-map.md](./platform/cross-repo-sleek-surfaces-map.md).
 
@@ -28,9 +28,9 @@ The canonical **process, column definitions, and spreadsheet link** live in:
 |------|---------|
 | `README.md` | This file — orientation and workflow |
 | `Sleek Feature Scope Audit Hub.md` | Audit goals, sheet columns, process, links |
-| `platform/` | Draft capability docs (Platform + Sleeksign); [index](./platform/README.md) |
+| `platform/` | First markdown area: Platform + Sleeksign; [index](./platform/README.md) |
 
-Other master-sheet domains (e.g. Corpsec, Bookkeeping) may get **sibling folders at the repo root** when those squads maintain markdown here — same hub and sheet conventions.
+Additional top-level folders (e.g. Corpsec, Bookkeeping) appear **as other squads add them** — same hub and sheet conventions.
 
 ## Clone
 
