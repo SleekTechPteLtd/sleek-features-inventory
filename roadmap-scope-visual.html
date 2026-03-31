@@ -13,7 +13,6 @@
         --muted: #9db0d7;
         --chip: #111d35;
         --ok: #2ab673;
-        --warn: #ffcd56;
       }
       * { box-sizing: border-box; }
       body { margin: 0; font-family: Inter, Arial, sans-serif; background: var(--bg); color: var(--text); }
@@ -32,7 +31,7 @@
       .bar { height: 8px; border-radius: 999px; background: #1a2946; overflow: hidden; }
       .bar > span { display: block; height: 8px; background: var(--ok); }
       .tag-ok { color: #8be6bb; }
-      .tag-unknown { color: #ffd26a; }
+      .tag-must { color: #7fd6ff; }
       .goal { margin-top: 8px; line-height: 1.45; }
       a { color: #9dc5ff; text-decoration: none; }
     </style>
@@ -54,24 +53,24 @@
         <strong>Goal</strong>
         <p class="goal muted">
           Make sure we list all features in each domain so we can estimate migration effort to the new platform.
-          Use domain pages to maintain module-level feature inventory and image references from real project surfaces.
+          Use domain pages to maintain module-level feature inventory, mark must-have migration scope, and track today vs migration references.
         </p>
         <div class="stats" id="stats"></div>
       </section>
 
       <section class="panel">
-        <h2>Coverage of Knowns and Unknowns</h2>
-        <p class="muted">Known = features already identified for migration. Unknown = still to discover/validate with evidence.</p>
+        <h2>Feature and Migration Scope Summary</h2>
+        <p class="muted">Track listed features per domain and identify must-have features for migration scope.</p>
         <p class="muted">Counts are starter estimates and should be updated as domain pages are refined.</p>
         <table>
           <thead>
             <tr>
               <th>Domain</th>
               <th>Modules</th>
-              <th>Known features</th>
-              <th>Unknown features</th>
+              <th>Listed features</th>
+              <th>Must-have for migration</th>
               <th>Feature highlights</th>
-              <th>Coverage</th>
+              <th>Migration ratio</th>
               <th>Page</th>
             </tr>
           </thead>
@@ -82,24 +81,24 @@
 
     <script>
       const domains = [
-        { name: "Platform", modules: 6, known: 18, unknown: 6, highlights: ["Hosted login and PKCE", "Policies, roles, assignments", "Auth0/CMS/mailer/files integrations"], page: "./domain-platform.html" },
-        { name: "CLM", modules: 1, known: 3, unknown: 7, highlights: ["Contract renewal reminders", "Recipient targeting", "Email and in-app delivery"], page: "./domain-clm.html" },
-        { name: "Compliance", modules: 1, known: 3, unknown: 9, highlights: ["Dynamic KYC questionnaire", "Risk scoring thresholds", "Review and approval flow"], page: "./domain-compliance.html" },
-        { name: "CorpSec", modules: 1, known: 3, unknown: 10, highlights: ["Register updates and history", "Officer/shareholder edits", "Export and audit visibility"], page: "./domain-corpsec.html" },
-        { name: "Accounting", modules: 1, known: 3, unknown: 11, highlights: ["Payment capture and matching", "Reconciliation exceptions", "Admin follow-up workflow"], page: "./domain-accounting.html" }
+        { name: "Platform", modules: 6, listed: 29, mustHave: 18, highlights: ["Hosted login and PKCE", "Policies, roles, assignments", "Auth0/CMS/mailer/files integrations"], page: "./domain-platform.html" },
+        { name: "CLM", modules: 1, listed: 3, mustHave: 2, highlights: ["Contract renewal reminders", "Recipient targeting", "Email and in-app delivery"], page: "./domain-clm.html" },
+        { name: "Compliance", modules: 1, listed: 3, mustHave: 3, highlights: ["Dynamic KYC questionnaire", "Risk scoring thresholds", "Review and approval flow"], page: "./domain-compliance.html" },
+        { name: "CorpSec", modules: 1, listed: 3, mustHave: 2, highlights: ["Register updates and history", "Officer/shareholder edits", "Export and audit visibility"], page: "./domain-corpsec.html" },
+        { name: "Accounting", modules: 1, listed: 3, mustHave: 3, highlights: ["Payment capture and matching", "Reconciliation exceptions", "Admin follow-up workflow"], page: "./domain-accounting.html" }
       ];
 
       function renderStats() {
         const domainCount = domains.length;
         const moduleCount = domains.reduce((sum, domain) => sum + domain.modules, 0);
-        const knownTotal = domains.reduce((sum, domain) => sum + domain.known, 0);
-        const unknownTotal = domains.reduce((sum, domain) => sum + domain.unknown, 0);
+        const listedTotal = domains.reduce((sum, domain) => sum + domain.listed, 0);
+        const mustHaveTotal = domains.reduce((sum, domain) => sum + domain.mustHave, 0);
         const stats = document.getElementById("stats");
         stats.innerHTML = `
           <span class="chip">${domainCount} domains</span>
           <span class="chip">${moduleCount} modules currently listed</span>
-          <span class="chip tag-ok">${knownTotal} known features</span>
-          <span class="chip tag-unknown">${unknownTotal} unknown features</span>
+          <span class="chip tag-ok">${listedTotal} listed features</span>
+          <span class="chip tag-must">${mustHaveTotal} must-have migration features</span>
         `;
       }
 
@@ -107,16 +106,15 @@
         const tbody = document.getElementById("coverageRows");
         tbody.innerHTML = "";
         domains.forEach((domain) => {
-          const total = domain.known + domain.unknown;
-          const pct = total > 0 ? Math.round((domain.known / total) * 100) : 0;
+          const pct = domain.listed > 0 ? Math.round((domain.mustHave / domain.listed) * 100) : 0;
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>${domain.name}</td>
             <td>${domain.modules}</td>
-            <td class="tag-ok">${domain.known}</td>
-            <td class="tag-unknown">${domain.unknown}</td>
+            <td class="tag-ok">${domain.listed}</td>
+            <td class="tag-must">${domain.mustHave}</td>
             <td><small class="muted">${domain.highlights.join(" · ")}</small></td>
-            <td><div class="bar"><span style="width:${pct}%"></span></div><small class="muted">${pct}% known</small></td>
+            <td><div class="bar"><span style="width:${pct}%"></span></div><small class="muted">${pct}% must-have</small></td>
             <td><a href="${domain.page}">Open ${domain.name}</a></td>
           `;
           tbody.appendChild(tr);
