@@ -27,6 +27,10 @@
       .priority-pill { display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid #43608c; background:#14223d; color:#bcd2f7; font-size:11px; }
       .grid { display:grid; gap:10px; grid-template-columns: repeat(2, minmax(0,1fr)); margin-top:10px; } .box { border:1px dashed #37507b; border-radius:8px; padding:10px; background:#101d36; min-height:110px; }
       .box h4 { margin:0 0 6px; font-size:13px; color:#c9d9fa; } .box ul { margin:0; padding-left:18px; color:#afc2e8; font-size:13px; } .editable { border:1px solid #304a77; border-radius:6px; padding:8px; background:#0c1629; min-height:54px; color:#d8e5ff; font-size:13px; }
+      .today-gallery { display:grid; gap:8px; }
+      .today-image-link { display:block; border:1px solid #304a77; border-radius:6px; padding:6px; background:#0c1629; }
+      .today-image-link img { display:block; width:100%; height:auto; border-radius:4px; }
+      .today-image-path { display:block; margin-top:6px; color:#9db0d7; font-size:11px; word-break:break-all; }
       a { color:#9dc5ff; text-decoration:none; } @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -61,6 +65,32 @@
     </div>
     <script>
       (function () {
+        const todayImagesByModule = {
+          "sleek-admin-subscription-management": ["image-20260330-023802 (2).png", "image-20260330-024247.png"],
+          "sleek-admin-invoice-management": ["image-20260330-024338.png"],
+          "sleek-admin-credit-balance": ["image-20260330-024423.png"],
+          "sleek-admin-payment-request": ["image-20260330-024453.png"],
+          "sleek-admin-refund-downgrade": ["image-20260330-025106.png", "image-20260330-025145.png"],
+          "sleek-admin-upgrade": ["image-20260330-033640.png", "image-20260330-033815.png"],
+          "sleek-admin-coupon": ["image-20260330-034222.png", "image-20260330-034317.png"],
+          "sleek-admin-sds": [
+            "image-20260330-035534.png",
+            "image-20260330-040709.png",
+            "image-20260330-040740.png",
+            "image-20260330-040815.png",
+            "image-20260330-040902.png",
+            "image-20260330-041532.png",
+          ],
+          "sleek-admin-subscription-config": ["image-20260330-041430.png", "image-20260330-070347.png"],
+          "customer-app-payment-methods": ["image-20260330-083132.png"],
+          "customer-app-unified-payment-page": ["image-20260331-040653.png"],
+          "customer-app-my-subscription": ["image-20260331-063436.png"],
+          "customer-app-billing-history": ["image-20260331-063456.png"],
+          "customer-app-payment-method-management": ["image-20260331-063517.png"],
+          "customer-app-subscription-renewal": ["image-20260331-063540.png"],
+          "customer-app-referral-code": ["image-20260331-065006.png"],
+        };
+
         const modules = document.querySelectorAll(".topic");
         let totalFeatures = 0;
         let totalMustHave = 0;
@@ -95,8 +125,43 @@
 
           const featureCount = listItems.length;
           totalFeatures += featureCount;
+          const modulePath = (moduleLink?.textContent || "").trim();
+          const moduleFolderMatch = modulePath.match(/clm\/([^/]+)\//i);
+          const moduleFolder = moduleFolderMatch ? moduleFolderMatch[1] : "";
+          const todayImages = todayImagesByModule[moduleFolder] || [];
+          const editableBlocks = moduleEl.querySelectorAll(".subgrid .editable");
+          const todayBlock = editableBlocks[0];
+          const migrationBlock = editableBlocks[1];
+          if (todayBlock && todayImages.length) {
+            todayBlock.removeAttribute("contenteditable");
+            todayBlock.classList.add("today-gallery");
+            todayBlock.innerHTML = todayImages
+              .map((fileName) => {
+                const relativePath = `./clm/${moduleFolder}/today-version/${fileName}`;
+                const encodedHref = encodeURI(relativePath);
+                return `
+                  <a class="today-image-link" href="${encodedHref}" target="_blank" rel="noopener noreferrer">
+                    <img src="${encodedHref}" alt="${fileName}" loading="lazy" />
+                    <span class="today-image-path">${relativePath}</span>
+                  </a>
+                `;
+              })
+              .join("");
+          }
+          if (migrationBlock && moduleFolder) {
+            const migrationRelativePath = `./clm/${moduleFolder}/migration-version/placeholder.png`;
+            const migrationHref = encodeURI(migrationRelativePath);
+            migrationBlock.removeAttribute("contenteditable");
+            migrationBlock.classList.add("today-gallery");
+            migrationBlock.innerHTML = `
+              <a class="today-image-link" href="${migrationHref}" target="_blank" rel="noopener noreferrer">
+                <img src="${migrationHref}" alt="migration placeholder" loading="lazy" />
+                <span class="today-image-path">${migrationRelativePath}</span>
+              </a>
+            `;
+          }
+
           if (title) {
-            const modulePath = (moduleLink?.textContent || "").trim();
             const surfaceMatch = modulePath.match(/clm\/(sleek-admin|customer-app)-/i);
             const moduleSurface = surfaceMatch ? surfaceMatch[1].toLowerCase() : "";
             const surfacePillClass = moduleSurface === "customer-app" ? "category-pill category-pill-customer-app" : "category-pill";
