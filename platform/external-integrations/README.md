@@ -14,3 +14,4 @@ Authentication and IAM **product** features stay in [../authentication/](../auth
 | [sleek-cms-sdk-and-platform-config.md](./sleek-cms-sdk-and-platform-config.md) | `@sleek-sdk/sleek-cms`, config API, cache + CORS sync |
 | [customer-mfe-localization-english-chinese.md](./customer-mfe-localization-english-chinese.md) | CMS-gated EN/ZH localization toggle in customer portal |
 | [sleek-mailer-ts-transactional-email.md](./sleek-mailer-ts-transactional-email.md) | `sleek-mailer-ts`: Kafka + templates + SendGrid/AWS transactional mail |
+| [sleek-files-service-file-storage-and-access.md](./sleek-files-service-file-storage-and-access.md) | `sleek-files-service`: shared upload/download, folder and permission APIs |
