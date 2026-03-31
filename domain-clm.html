@@ -11,6 +11,7 @@
       .menu { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0; } .menu a { padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; }
       .menu a.active { border-color:#5a8dde; background:#162747; color:#e5efff; } .muted { color:var(--muted); } .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; }
       .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #2f7e59; background:#143a2a; color:#a6f2cd; }
+      .category-pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #43608c; background:#14223d; color:#bcd2f7; margin-left:8px; }
       .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
       .subgrid { display:grid; gap:8px; }
       .subgrid h5 { margin:0; font-size:12px; color:#b7caf2; }
@@ -36,14 +37,22 @@
         <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a class="active" href="./domain-clm.html">CLM (Customer Lifecycle Management)</a><a href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a href="./domain-accounting.html">Accounting</a>
       </nav>
       <section class="panel"><strong>Domain reference:</strong> <a href="./clm/README.md">clm/README.md</a></section>
-      <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span></div></section>
-      <p class="muted">Each feature shows a must-have checkbox and a priority label (P1/P2 by default).</p>
+      <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Categories: <span id="categoryCount">0</span></span><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Must-have modules: <span id="mustHaveCount">0</span></span></div></section>
+      <p class="muted">Each module shows a must-have checkbox and a priority label (P1/P2 by default).</p>
       <section class="panel">
         <article class="topic">
-          <h3>Contract Renewal Reminders</h3>
-          <small class="muted"><a href="./clm/contract-renewal-reminders.md">clm/contract-renewal-reminders.md</a></small>
+          <h3>Sleek Admin <span class="category-pill">Category: Sleek Admin app</span></h3>
+          <small class="muted"><a href="./clm/README.md">clm/README.md</a></small>
           <div class="grid">
-            <section class="box"><h4>Features</h4><ul><li>Reminder schedule rules</li><li>Recipient targeting</li><li>Delivery channels (email/in-app)</li></ul></section>
+            <section class="box"><h4>Modules</h4><ul><li><a href="./clm/sleek-admin-subscription-management/README.md">Subscription management</a></li><li><a href="./clm/sleek-admin-invoice-management/README.md">Invoice management</a></li><li><a href="./clm/sleek-admin-credit-balance/README.md">Credit balance</a></li><li><a href="./clm/sleek-admin-payment-request/README.md">Payment request</a></li><li><a href="./clm/sleek-admin-refund-downgrade/README.md">Refund and downgrade</a></li><li><a href="./clm/sleek-admin-upgrade/README.md">Upgrade</a></li><li><a href="./clm/sleek-admin-coupon/README.md">Coupon</a></li><li><a href="./clm/sleek-admin-sds/README.md">SDS</a></li><li><a href="./clm/sleek-admin-subscription-config/README.md">Subscription config</a></li></ul></section>
+            <section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section>
+          </div>
+        </article>
+        <article class="topic">
+          <h3>Customer App <span class="category-pill">Category: Customer App</span></h3>
+          <small class="muted"><a href="./clm/README.md">clm/README.md</a></small>
+          <div class="grid">
+            <section class="box"><h4>Modules</h4><ul><li><a href="./clm/customer-app-payment-methods/README.md">Payment methods</a></li><li><a href="./clm/customer-app-unified-payment-page/README.md">Unified payment page</a></li><li><a href="./clm/customer-app-my-subscription/README.md">My subscription</a></li><li><a href="./clm/customer-app-billing-history/README.md">Billing history</a></li><li><a href="./clm/customer-app-payment-method-management/README.md">Payment method management</a></li><li><a href="./clm/customer-app-subscription-renewal/README.md">Subscription renewal</a></li><li><a href="./clm/customer-app-referral-code/README.md">Referral code</a></li></ul></section>
             <section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section>
           </div>
         </article>
@@ -52,7 +61,7 @@
     <script>
       (function () {
         const modules = document.querySelectorAll(".topic");
-        let totalFeatures = 0;
+        let totalModules = 0;
         let totalMustHave = 0;
 
         modules.forEach((moduleEl) => {
@@ -82,16 +91,16 @@
             `;
           });
 
-          const featureCount = listItems.length;
-          totalFeatures += featureCount;
-          if (title) title.innerHTML = `${title.textContent} <span class="pill">${featureCount} features</span>`;
+          const moduleCount = listItems.length;
+          totalModules += moduleCount;
+          if (title) title.innerHTML = `${title.textContent} <span class="pill">${moduleCount} modules</span>`;
         });
 
+        const categoryCountEl = document.getElementById("categoryCount");
         const moduleCountEl = document.getElementById("moduleCount");
-        const featureCountEl = document.getElementById("featureCount");
         const mustHaveCountEl = document.getElementById("mustHaveCount");
-        if (moduleCountEl) moduleCountEl.textContent = modules.length;
-        if (featureCountEl) featureCountEl.textContent = totalFeatures;
+        if (categoryCountEl) categoryCountEl.textContent = modules.length;
+        if (moduleCountEl) moduleCountEl.textContent = totalModules;
         if (mustHaveCountEl) mustHaveCountEl.textContent = totalMustHave;
       })();
     </script>
