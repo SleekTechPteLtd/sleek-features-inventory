@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE (local)
+*.swp
+*.swo
+*~
+.idea/
+*.sublime-*
+
+# Secrets (if any local env files are ever added)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Optional tooling caches
+.cache/
