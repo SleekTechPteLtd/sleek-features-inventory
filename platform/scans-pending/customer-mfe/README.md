@@ -12,6 +12,8 @@ See [../../inventory-scope-and-domains.md](../../inventory-scope-and-domains.md)
 
 Document capabilities where the **customer app** is the right surface and the story is **not** “same as Sleek Auth.” File `.md` under the appropriate `platform/<category>/` folder with **Evidence** pointing here and to backends (often `sleek-back`).
 
+Localization (English/Chinese) is tracked in [../../external-integrations/customer-mfe-localization-english-chinese.md](../../external-integrations/customer-mfe-localization-english-chinese.md).
+
 ## Evidence hotspots
 
 - `customer-main/src/proxies/back-end/**`
