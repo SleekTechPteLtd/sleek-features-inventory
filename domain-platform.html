@@ -25,6 +25,15 @@
       .editable { border:1px solid #304a77; border-radius:6px; padding:8px; background:#0c1629; min-height:54px; color:#d8e5ff; font-size:13px; }
       .subgrid { display:grid; gap:8px; }
       .subgrid h5 { margin:0; font-size:12px; color:#b7caf2; }
+
+      .feature-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+      .must-toggle { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#9db0d7; }
+      .must-toggle input { position:absolute; opacity:0; pointer-events:none; }
+      .checkmark { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:4px; border:1px solid #486089; color:#7f94b7; background:#101a2f; font-size:12px; }
+      .must-toggle.is-on .checkmark { border-color:#2f7e59; background:#143a2a; color:#a6f2cd; }
+      .must-toggle.is-on .must-text { color:#a6f2cd; }
+      .feature-label { color:#dbe7ff; }
+      .priority-pill { display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid #43608c; background:#14223d; color:#bcd2f7; font-size:11px; }
       a { color:#9dc5ff; text-decoration:none; }
       @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
     </style>
@@ -49,9 +58,10 @@
         <strong>Inventory counts:</strong>
         <div class="pill-row">
           <span class="pill">Modules: <span id="moduleCount">0</span></span>
-          <span class="pill">Features: <span id="featureCount">0</span></span>
+          <span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span>
         </div>
       </section>
+      <p class="muted">Each feature shows a must-have checkbox and a priority label (P1/P2 by default).</p>
 
       <section class="panel">
         <article class="topic"><h3>Authentication</h3><small class="muted"><a href="./platform/authentication/README.md">platform/authentication/README.md</a></small><div class="grid"><section class="box"><h4>Features</h4><ul><li>Hosted login, OAuth and PKCE callback flows</li><li>User registration with captcha and T&amp;C gates</li><li>Password recovery and email verification</li><li>MFA and code-based verification</li><li>OAuth client management and M2M token issuance</li><li>Nest JWT and M2M guard integration</li><li>Admin login-as customer with single-use token</li></ul></section><section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section></div></article>
@@ -66,16 +76,48 @@
       (function () {
         const modules = document.querySelectorAll(".topic");
         let totalFeatures = 0;
+        let totalMustHave = 0;
+
         modules.forEach((moduleEl) => {
           const title = moduleEl.querySelector("h3");
-          const list = moduleEl.querySelector("ul");
-          const featureCount = list ? list.querySelectorAll("li").length : 0;
+          const listItems = moduleEl.querySelectorAll("ul li");
+
+          listItems.forEach((li, idx) => {
+            const raw = li.textContent.trim();
+            const explicitMust = /\[Must-have\]/i.test(raw);
+            const priorityMatch = raw.match(/\[P([0-3])\]/i);
+            const priority = priorityMatch ? `P${priorityMatch[1]}` : idx === 0 ? "P1" : "P2";
+            const mustHave = explicitMust || idx === 0;
+            const cleaned = raw.replace(/\[Must-have\]/ig, "").replace(/\[P[0-3]\]/ig, "").trim();
+
+            if (mustHave) totalMustHave += 1;
+
+            li.innerHTML = `
+              <div class="feature-row">
+                <span class="must-toggle ${mustHave ? "is-on" : ""}">
+                  <input type="checkbox" ${mustHave ? "checked" : ""} disabled />
+                  <span class="checkmark">✓</span>
+                  <span class="must-text">Must-have</span>
+                </span>
+                <span class="feature-label">${cleaned}</span>
+                <span class="priority-pill">${priority}</span>
+              </div>
+            `;
+          });
+
+          const featureCount = listItems.length;
           totalFeatures += featureCount;
           if (title) title.innerHTML = `${title.textContent} <span class="pill">${featureCount} features</span>`;
         });
-        document.getElementById("moduleCount").textContent = modules.length;
-        document.getElementById("featureCount").textContent = totalFeatures;
+
+        const moduleCountEl = document.getElementById("moduleCount");
+        const featureCountEl = document.getElementById("featureCount");
+        const mustHaveCountEl = document.getElementById("mustHaveCount");
+        if (moduleCountEl) moduleCountEl.textContent = modules.length;
+        if (featureCountEl) featureCountEl.textContent = totalFeatures;
+        if (mustHaveCountEl) mustHaveCountEl.textContent = totalMustHave;
       })();
     </script>
+
   </body>
 </html>
