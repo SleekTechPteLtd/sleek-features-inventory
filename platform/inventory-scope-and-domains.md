@@ -1,6 +1,6 @@
 # Inventory scope: Platform vs other master-sheet domains
 
-Use this when scanning **sleek-back**, **customer-mfe**, or any large repo so capabilities land under the right **Domain** column and the right **documentation tree** (this repo only has `platform/` today; other domains can add sibling folders under `ai-initiative/` when squads maintain markdown inventories).
+Use this when scanning **sleek-back**, **customer-mfe**, or any large repo so capabilities land under the right **Domain** column and the right **documentation tree** (this repo only has `platform/` today; other domains can add sibling folders at the **repository root** when squads maintain markdown inventories).
 
 Aligned with [Sleek Feature Scope Audit Hub](../Sleek%20Feature%20Scope%20Audit%20Hub.md) (spreadsheet **Domain** enum).
 
@@ -23,7 +23,7 @@ Answer for the **user story**, not the repo name.
 5. **Is the outcome company formation, filings, registers, corporate actions?**
   If yes → usually **Corpsec**, not Platform—**do not** file under `platform/` unless the capability is purely shared identity/platform glue.
 6. **Is the outcome receipts, expenses, accounting files, bank/tax workflows?**
-  If yes → usually **Bookkeeping & Accounting**—add a future `ai-initiative/bookkeeping/` (or similar) when that inventory exists; keep **Platform** free of bookkeeping product rows.
+  If yes → usually **Bookkeeping & Accounting**—add a future `bookkeeping/` (or similar) at the repo root when that inventory exists; keep **Platform** free of bookkeeping product rows.
 7. **Is the outcome e-sign / document lifecycle for Sleeksign?**
   If yes → **Sleeksign**.
 8. **Is the outcome KYC / AML / risk questionnaires / Onfido?**
@@ -37,7 +37,7 @@ Answer for the **user story**, not the repo name.
 | Domain column (target) | Where to add `.md` today                                                                                                                     |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Platform**           | `platform/<category>/` (authentication, authorization, external-integrations, operations)                                                    |
-| Any other domain       | Master sheet row + evidence; optional new top-level folder next to `platform/` when that squad owns markdown (e.g. `ai-initiative/corpsec/`) |
+| Any other domain       | Master sheet row + evidence; optional new top-level folder next to `platform/` when that squad owns markdown (e.g. `corpsec/`) |
 
 
 ## sleek-back — `app-router.js` mount points (first-pass domain hints)
