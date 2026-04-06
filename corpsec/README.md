@@ -7,14 +7,35 @@ This folder holds draft **Corpsec** rows from the shared master sheet, grouped b
 | Folder | Use |
 |--------|-----|
 | **`admin-app/`** | One markdown file per master-sheet row whose *Entry Point / Surface* is the **Admin App** (72 files). |
-| **`client-app/`** | Client App entry points (see [client-app/README.md](./client-app/README.md)); not populated in this batch. |
+| **`client-app/`** | One markdown file per master-sheet row whose *Entry Point / Surface* is the **Client App** (13 files). Evidence: **customer-main**, **customer-common**, **customer-root**. |
 | **`company-register-management.md`** | Legacy sample capability doc (kept for reference). |
 
-Regenerate admin-app stubs from the CSV (skips `view-and-search-company-list.md` so the hand-enriched file is preserved):
+Regenerate from CSV:
 
 ```bash
-python3 scripts/generate-corpsec-admin-app-md.py
+python3 scripts/generate-corpsec-admin-app-md.py   # skips view-and-search-company-list.md
+python3 scripts/generate-corpsec-client-app-md.py
 ```
+
+## Client App — feature index
+
+Sorted by slug (same as `domain-corpsec.html`). Sheet **Disposition** for these rows is *Unknown* (no `[Must-have]` tag).
+
+- [Client Portal – Company Secretary File Browser](./client-app/client-portal-company-secretary-file-browser.md)
+- [Client Portal – History of Requests View](./client-app/client-portal-history-of-requests-view.md)
+- [Client Portal – On-going Requests View](./client-app/client-portal-on-going-requests-view.md)
+- [Client Request – Appointment of New Director](./client-app/client-request-appointment-of-new-director.md)
+- [Client Request – Change Company Address](./client-app/client-request-change-company-address.md)
+- [Client Request – Change Company Name](./client-app/client-request-change-company-name.md)
+- [Client Request – Change of Business Activity](./client-app/client-request-change-of-business-activity.md)
+- [Client Request – Change of Director](./client-app/client-request-change-of-director.md)
+- [Client Request – Change of Officer's Particulars](./client-app/client-request-change-of-officer-s-particulars.md)
+- [Client Request – Change of Shareholder's Particulars](./client-app/client-request-change-of-shareholder-s-particulars.md)
+- [Client Request – Open Bank Account](./client-app/client-request-open-bank-account.md)
+- [Client Request – Resignation of Director](./client-app/client-request-resignation-of-director.md)
+- [Client Request – Update My Details](./client-app/client-request-update-my-details.md)
+
+More detail: [client-app/README.md](./client-app/README.md).
 
 ## Admin App — feature index
 
