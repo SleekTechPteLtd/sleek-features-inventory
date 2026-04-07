@@ -1,9 +1,103 @@
-<!doctype html>
+#!/usr/bin/env python3
+"""
+Regenerate domain-accounting.html from accounting/<module>/*.md inventory.
+
+Usage (from repo root):
+  python3 scripts/generate-accounting-domain-html.py
+"""
+
+from __future__ import annotations
+
+import html
+import sys
+from pathlib import Path
+
+
+def repo_root() -> Path:
+    return Path(__file__).resolve().parent.parent
+
+
+def humanize_slug(slug: str) -> str:
+    return " ".join(p.capitalize() for p in slug.replace("_", "-").split("-") if p)
+
+
+def extract_h1(md_path: Path) -> str | None:
+    try:
+        text = md_path.read_text(encoding="utf-8")
+    except OSError as e:
+        print(f"warn: could not read {md_path}: {e}", file=sys.stderr)
+        return None
+    for line in text.splitlines():
+        line = line.strip()
+        if line.startswith("# "):
+            return line[2:].strip()
+    return None
+
+
+def link_title_from_file(md_path: Path) -> str:
+    h1 = extract_h1(md_path)
+    if h1:
+        return h1
+    stem = md_path.stem
+    return humanize_slug(stem)
+
+
+def emit_article(module_dir: Path, module_slug: str) -> str:
+    md_files = sorted(module_dir.glob("*.md"))
+    if not md_files:
+        return ""
+
+    display = humanize_slug(module_slug)
+    lines: list[str] = []
+    lines.append('        <article class="topic skip-feature-transform">')
+    lines.append(f'          <h3 data-title="{html.escape(display, quote=True)}">{html.escape(display)}</h3>')
+    folder_href = f"./accounting/{module_slug}/"
+    lines.append(
+        f'          <small class="muted">Inventory files: <a href="{html.escape(folder_href, quote=True)}">accounting/{html.escape(module_slug)}/</a></small>'
+    )
+    lines.append('          <div class="grid">')
+    lines.append('            <section class="box" style="grid-column: 1 / -1;">')
+    lines.append('              <h4>Features</h4>')
+    lines.append(
+        '              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">'
+    )
+    for md in md_files:
+        rel = f"./accounting/{module_slug}/{md.name}"
+        title = link_title_from_file(md)
+        lines.append(
+            f'              <li><a href="{html.escape(rel, quote=True)}">{html.escape(title)}</a></li>'
+        )
+    lines.append("              </ul>")
+    lines.append("            </section>")
+    lines.append("          </div>")
+    lines.append("        </article>")
+    return "\n".join(lines) + "\n"
+
+
+def main() -> int:
+    root = repo_root()
+    accounting = root / "accounting"
+    if not accounting.is_dir():
+        print(f"error: missing {accounting}", file=sys.stderr)
+        return 1
+
+    module_dirs = sorted(
+        p for p in accounting.iterdir() if p.is_dir() and not p.name.startswith(".")
+    )
+
+    blocks: list[str] = []
+    for d in module_dirs:
+        blocks.append(emit_article(d, d.name))
+
+    generated = "".join(blocks)
+
+    out_path = root / "domain-accounting.html"
+    template_before = """<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleek Features Inventory - Compliance</title>
+    <title>Sleek Features Inventory - Accounting</title>
     <style>
       :root { --bg:#0b1220; --panel:#121a2b; --line:#2a3757; --text:#e6ecfb; --muted:#9db0d7; }
       * { box-sizing: border-box; } body { margin:0; font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
@@ -30,23 +124,19 @@
   </head>
   <body>
     <div class="wrap">
-      <h1>Compliance Domain</h1>
-      <p class="muted">Modules inside the `compliance/` TLD domain folder.</p>
+      <h1>Accounting Domain</h1>
+      <p class="muted">Modules inside the `accounting/` TLD domain folder.</p>
       <nav class="menu">
-        <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a class="active" href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a href="./domain-accounting.html">Accounting</a>
+        <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a class="active" href="./domain-accounting.html">Accounting</a>
       </nav>
-      <section class="panel"><strong>Domain reference:</strong> <a href="./compliance/README.md">compliance/README.md</a></section>
+      <section class="panel"><strong>Domain reference:</strong> <a href="./accounting/README.md">accounting/README.md</a></section>
       <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span></div></section>
-      <p class="muted">Each feature shows a must-have checkbox and a priority label (P1/P2 by default).</p>
+      <p class="muted">Each module below links to markdown feature rows. Add a <code>[Must-have]</code> prefix on a list item to count it toward migration scope. Interactive must-have and priority labels apply only to modules that do not use the link-list layout.</p>
       <section class="panel">
-        <article class="topic">
-          <h3>KYC Risk Questionnaire</h3>
-          <small class="muted"><a href="./compliance/kyc-risk-questionnaire.md">compliance/kyc-risk-questionnaire.md</a></small>
-          <div class="grid">
-            <section class="box"><h4>Features</h4><ul><li>Dynamic questionnaire by entity type</li><li>Risk scoring thresholds</li><li>Review and approval flow</li></ul></section>
-            <section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section>
-          </div>
-        </article>
+      <!-- GENERATED_ACCOUNTING_TOPICS_START -->
+"""
+
+    template_after = """      <!-- GENERATED_ACCOUNTING_TOPICS_END -->
       </section>
     </div>
     <script>
@@ -59,13 +149,26 @@
           const title = moduleEl.querySelector("h3");
           const listItems = moduleEl.querySelectorAll("ul li");
 
+          if (moduleEl.classList.contains("skip-feature-transform")) {
+            listItems.forEach((li) => {
+              const raw = li.textContent.trim();
+              if (/\\[Must-have\\]/i.test(raw)) totalMustHave += 1;
+            });
+            totalFeatures += listItems.length;
+            if (title) {
+              const base = title.getAttribute("data-title") || title.textContent.trim();
+              title.innerHTML = `${base} <span class="pill">${listItems.length} features</span>`;
+            }
+            return;
+          }
+
           listItems.forEach((li, idx) => {
             const raw = li.textContent.trim();
-            const explicitMust = /\[Must-have\]/i.test(raw);
-            const priorityMatch = raw.match(/\[P([0-3])\]/i);
+            const explicitMust = /\\[Must-have\\]/i.test(raw);
+            const priorityMatch = raw.match(/\\[P([0-3])\\]/i);
             const priority = priorityMatch ? `P${priorityMatch[1]}` : idx === 0 ? "P1" : "P2";
             const mustHave = explicitMust || idx === 0;
-            const cleaned = raw.replace(/\[Must-have\]/ig, "").replace(/\[P[0-3]\]/ig, "").trim();
+            const cleaned = raw.replace(/\\[Must-have\\]/ig, "").replace(/\\[P[0-3]\\]/ig, "").trim();
 
             if (mustHave) totalMustHave += 1;
 
@@ -98,3 +201,16 @@
 
   </body>
 </html>
+"""
+
+    full = template_before + generated + template_after
+    out_path.write_text(full, encoding="utf-8")
+
+    n_mod = sum(1 for b in blocks if b)
+    n_feat = sum(len(list(d.glob("*.md"))) for d in module_dirs)
+    print(f"wrote {out_path} ({n_mod} modules, {n_feat} feature files)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

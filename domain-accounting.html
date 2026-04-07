@@ -7,9 +7,9 @@
     <style>
       :root { --bg:#0b1220; --panel:#121a2b; --line:#2a3757; --text:#e6ecfb; --muted:#9db0d7; }
       * { box-sizing: border-box; } body { margin:0; font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
-      .wrap { max-width:1100px; margin:0 auto; padding:24px 16px 40px; } .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:14px; }
-      .menu { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 0; } .menu a { padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; }
-      .menu a.active { border-color:#5a8dde; background:#162747; color:#e5efff; } .muted { color:var(--muted); } .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; }
+      .wrap { max-width:1100px; margin:0 auto; padding:24px 16px 40px; } .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:20px; }
+      .menu { display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 20px; } .menu a { padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; }
+      .menu a.active { border-color:#5a8dde; background:#162747; color:#e5efff; } .muted { color:var(--muted); } .topic { border:1px solid var(--line); border-radius:10px; padding:12px; background:#0f172b; margin-bottom:16px; } .topic:last-child { margin-bottom:0; }
       .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; border:1px solid #2f7e59; background:#143a2a; color:#a6f2cd; }
       .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
       .subgrid { display:grid; gap:8px; }
@@ -37,16 +37,2087 @@
       </nav>
       <section class="panel"><strong>Domain reference:</strong> <a href="./accounting/README.md">accounting/README.md</a></section>
       <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span></div></section>
-      <p class="muted">Each feature shows a must-have checkbox and a priority label (P1/P2 by default).</p>
+      <p class="muted">Each module below links to markdown feature rows. Add a <code>[Must-have]</code> prefix on a list item to count it toward migration scope. Interactive must-have and priority labels apply only to modules that do not use the link-list layout.</p>
       <section class="panel">
-        <article class="topic">
-          <h3>Invoice and Payment Reconciliation</h3>
-          <small class="muted"><a href="./accounting/invoice-and-payment-reconciliation.md">accounting/invoice-and-payment-reconciliation.md</a></small>
+      <!-- GENERATED_ACCOUNTING_TOPICS_START -->
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Accounting Transfer Xero Email">Accounting Transfer Xero Email</h3>
+          <small class="muted">Inventory files: <a href="./accounting/accounting-transfer-xero-email/">accounting/accounting-transfer-xero-email/</a></small>
           <div class="grid">
-            <section class="box"><h4>Features</h4><ul><li>Payment capture and matching</li><li>Reconciliation exception handling</li><li>Admin follow-up workflow</li></ul></section>
-            <section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section>
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/accounting-transfer-xero-email/request-xero-transfer-to-sleek-email.md">Request Xero transfer-to-Sleek email</a></li>
+              <li><a href="./accounting/accounting-transfer-xero-email/send-xero-transfer-and-access-onboarding-emails.md">Send Xero transfer and user-access onboarding emails</a></li>
+              </ul>
+            </section>
           </div>
         </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Add Company To Audit Logs Command">Add Company To Audit Logs Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/add-company-to-audit-logs-command/">accounting/add-company-to-audit-logs-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/add-company-to-audit-logs-command/enrich-audit-logs-with-document-company.md">Enrich audit logs with document company</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Admin">Admin</h3>
+          <small class="muted">Inventory files: <a href="./accounting/admin/">accounting/admin/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/admin/bulk-import-accounting-questionnaire-data.md">Bulk import accounting questionnaire data</a></li>
+              <li><a href="./accounting/admin/bulk-import-australian-companies-from-csv.md">Bulk import Australian companies from CSV</a></li>
+              <li><a href="./accounting/admin/bulk-update-accounting-dashboard-privileges.md">Bulk update accounting dashboard privileges</a></li>
+              <li><a href="./accounting/admin/import-and-export-registrable-controller-data.md">Import and export registrable controller data</a></li>
+              <li><a href="./accounting/admin/manage-company-subscriptions.md">Manage company subscriptions</a></li>
+              <li><a href="./accounting/admin/post-payment-onboarding-and-customer-app-access.md">Configure post-payment onboarding bypass and customer app access</a></li>
+              <li><a href="./accounting/admin/review-pep-declaration-answers.md">Review PEP declaration answers</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="App">App</h3>
+          <small class="muted">Inventory files: <a href="./accounting/app/">accounting/app/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/app/confirm-receipt-gateway-availability.md">Confirm receipt gateway availability</a></li>
+              <li><a href="./accounting/app/monitor-coding-engine-availability.md">Monitor coding engine availability</a></li>
+              <li><a href="./accounting/app/sign-out-coding-engine-session.md">Sign out of coding engine session</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="App Command">App Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/app-command/">accounting/app-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/app-command/auto-migrate-eligible-companies-from-sleek-back.md">Auto-migrate eligible companies from Sleek Back</a></li>
+              <li><a href="./accounting/app-command/clear-migrations-stuck-in-review-or-ready.md">Clear migrations stuck in review or ready</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Archive Documents">Archive Documents</h3>
+          <small class="muted">Inventory files: <a href="./accounting/archive-documents/">accounting/archive-documents/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/archive-documents/archive-aged-document-events.md">Archive aged document events</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Archive Documents Based On Sheet Command">Archive Documents Based On Sheet Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/archive-documents-based-on-sheet-command/">accounting/archive-documents-based-on-sheet-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/archive-documents-based-on-sheet-command/bulk-archive-documents-from-google-sheet.md">Bulk archive documents from a Google Sheet</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Auditor">Auditor</h3>
+          <small class="muted">Inventory files: <a href="./accounting/auditor/">accounting/auditor/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/auditor/manage-company-audit-comments.md">Manage company audit comments</a></li>
+              <li><a href="./accounting/auditor/record-structured-audit-events.md">Record structured audit events</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Auditor V2">Auditor V2</h3>
+          <small class="muted">Inventory files: <a href="./accounting/auditor-v2/">accounting/auditor-v2/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/auditor-v2/review-platform-audit-logs.md">Review platform audit logs</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Auto Charge Payment Requests">Auto Charge Payment Requests</h3>
+          <small class="muted">Inventory files: <a href="./accounting/auto-charge-payment-requests/">accounting/auto-charge-payment-requests/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/auto-charge-payment-requests/align-payment-request-date-for-auto-charge.md">Align payment request date for auto-charge</a></li>
+              <li><a href="./accounting/auto-charge-payment-requests/run-payment-request-auto-charge-batch.md">Run payment request auto-charge batch</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Autorecon Router">Autorecon Router</h3>
+          <small class="muted">Inventory files: <a href="./accounting/autorecon-router/">accounting/autorecon-router/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/autorecon-router/reconcile-documents-to-bank-transactions.md">Reconcile documents to bank transactions</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Bank">Bank</h3>
+          <small class="muted">Inventory files: <a href="./accounting/bank/">accounting/bank/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/bank/view-company-bank-accounts-from-connected-ledger.md">View company bank accounts from the connected ledger</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Batch Reconciliation Command">Batch Reconciliation Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/batch-reconciliation-command/">accounting/batch-reconciliation-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/batch-reconciliation-command/batch-reconcile-published-documents-with-sleekbooks.md">Batch reconcile published documents with Sleekbooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Bot">Bot</h3>
+          <small class="muted">Inventory files: <a href="./accounting/bot/">accounting/bot/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/bot/submit-and-queue-accounting-bot-requests.md">Submit and queue accounting bot requests</a></li>
+              <li><a href="./accounting/bot/track-bot-job-outcomes-and-sync-integrations.md">Track bot job outcomes and sync integrations</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Camunda Workflow">Camunda Workflow</h3>
+          <small class="muted">Inventory files: <a href="./accounting/camunda-workflow/">accounting/camunda-workflow/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/camunda-workflow/compliance-onboarding-governance-workflows.md">Compliance, onboarding, and governance workflows</a></li>
+              <li><a href="./accounting/camunda-workflow/manage-e-sign-and-document-circulation-in-workflows.md">Manage e-sign and document circulation in workflows</a></li>
+              <li><a href="./accounting/camunda-workflow/operate-camunda-workflow-processes.md">Operate Camunda workflow processes</a></li>
+              <li><a href="./accounting/camunda-workflow/process-camunda-automation-integrations.md">Process Camunda automation integrations</a></li>
+              <li><a href="./accounting/camunda-workflow/regional-incorporation-and-company-transfers.md">Regional incorporation and company transfers</a></li>
+              <li><a href="./accounting/camunda-workflow/run-director-and-share-structure-changes.md">Run director and share-structure change workflows</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ce Xero Publish Listener">Ce Xero Publish Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ce-xero-publish-listener/">accounting/ce-xero-publish-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ce-xero-publish-listener/publish-accounting-documents-to-xero.md">Publish accounting documents to Xero</a></li>
+              <li><a href="./accounting/ce-xero-publish-listener/reflect-xero-invoice-publish-outcomes-in-documents.md">Reflect Xero invoice publish outcomes in documents</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Celery Autorecon">Celery Autorecon</h3>
+          <small class="muted">Inventory files: <a href="./accounting/celery-autorecon/">accounting/celery-autorecon/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/celery-autorecon/process-queued-auto-reconciliation.md">Process queued auto-reconciliation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Celery Extract">Celery Extract</h3>
+          <small class="muted">Inventory files: <a href="./accounting/celery-extract/">accounting/celery-extract/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/celery-extract/process-bank-statement-extraction-jobs.md">Process bank statement extractions</a></li>
+              <li><a href="./accounting/celery-extract/resolve-statement-config-from-remote-file.md">Resolve statement configuration from remote file</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Claim Report">Claim Report</h3>
+          <small class="muted">Inventory files: <a href="./accounting/claim-report/">accounting/claim-report/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/claim-report/backfill-expense-claim-line-base-amounts.md">Backfill base amounts on expense claim line items</a></li>
+              <li><a href="./accounting/claim-report/curate-expense-claim-line-items.md">Curate expense claim line items</a></li>
+              <li><a href="./accounting/claim-report/expense-claim-period-cutover.md">Expense claim period cutover</a></li>
+              <li><a href="./accounting/claim-report/export-expense-claim-reports-as-pdf.md">Export expense claim reports as PDF</a></li>
+              <li><a href="./accounting/claim-report/manage-expense-claim-reports.md">Manage expense claim reports</a></li>
+              <li><a href="./accounting/claim-report/publish-expense-claims-to-accounting-ledger.md">Publish expense claims to the accounting ledger</a></li>
+              <li><a href="./accounting/claim-report/unpublish-expense-claim-ledger-postings.md">Unpublish expense claim ledger postings</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Cleanup Stale Matches Command">Cleanup Stale Matches Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/cleanup-stale-matches-command/">accounting/cleanup-stale-matches-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/cleanup-stale-matches-command/clean-stale-sleekbooks-reconciliation-matches.md">Clean stale SleekBooks reconciliation matches</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Coa">Coa</h3>
+          <small class="muted">Inventory files: <a href="./accounting/coa/">accounting/coa/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/coa/view-company-chart-of-accounts.md">View company chart of accounts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Comments">Comments</h3>
+          <small class="muted">Inventory files: <a href="./accounting/comments/">accounting/comments/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/comments/comment-on-missing-documents.md">Comment on missing documents</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Companies">Companies</h3>
+          <small class="muted">Inventory files: <a href="./accounting/companies/">accounting/companies/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/companies/search-and-list-registered-companies.md">Search and list registered companies</a></li>
+              <li><a href="./accounting/companies/sync-company-master-data-from-erp.md">Sync company master data from ERP</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company">Company</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company/">accounting/company/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company/browse-and-look-up-companies.md">Browse and look up companies</a></li>
+              <li><a href="./accounting/company/resolve-resource-user-company-access.md">Resolve resource user company access</a></li>
+              <li><a href="./accounting/company/send-coding-engine-expense-claim-launch-announcement.md">Send Coding Engine expense claim launch announcement</a></li>
+              <li><a href="./accounting/company/synchronize-company-master-data-from-sleekback.md">Synchronize company master data from Sleek Back</a></li>
+              <li><a href="./accounting/company/update-company-records-and-document-submission.md">Update company records and document submission settings</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Based Receipt Cleanup Command">Company Based Receipt Cleanup Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-based-receipt-cleanup-command/">accounting/company-based-receipt-cleanup-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-based-receipt-cleanup-command/archive-stale-company-paid-receipts.md">Archive stale company-paid receipts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Designated Representatives">Company Designated Representatives</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-designated-representatives/">accounting/company-designated-representatives/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-designated-representatives/manage-company-designated-representatives.md">Manage company designated representatives</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company House Controller">Company House Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-house-controller/">accounting/company-house-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-house-controller/record-uk-incorporation-on-company.md">Record UK incorporation on the company</a></li>
+              <li><a href="./accounting/company-house-controller/send-companies-house-acknowledgements.md">Send Companies House acknowledgements</a></li>
+              <li><a href="./accounting/company-house-controller/submit-uk-company-incorporation-to-companies-house.md">Submit UK company incorporation to Companies House</a></li>
+              <li><a href="./accounting/company-house-controller/track-companies-house-incorporation-progress.md">Track Companies House incorporation progress</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Listener">Company Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-listener/">accounting/company-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-listener/sync-company-records-from-platform-events.md">Sync company records from platform events</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Settings">Company Settings</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-settings/">accounting/company-settings/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-settings/configure-company-accounting-tools.md">Configure company accounting tools</a></li>
+              <li><a href="./accounting/company-settings/link-external-accounting-systems.md">Link external accounting systems</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Significant Controllers Register Controller">Company Significant Controllers Register Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-significant-controllers-register-controller/">accounting/company-significant-controllers-register-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-significant-controllers-register-controller/manage-significant-controllers-register.md">Manage significant controllers register</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company Supplier">Company Supplier</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-supplier/">accounting/company-supplier/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-supplier/browse-company-supplier-relationships-and-metrics.md">Browse company supplier relationships and metrics</a></li>
+              <li><a href="./accounting/company-supplier/maintain-company-supplier-document-and-rule-counts.md">Maintain company supplier document and rule counts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company User">Company User</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-user/">accounting/company-user/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-user/align-kyc-metadata-timestamps-on-company-users.md">Align KYC metadata timestamps on company users</a></li>
+              <li><a href="./accounting/company-user/request-profile-update-from-company-users.md">Request profile updates from company users</a></li>
+              <li><a href="./accounting/company-user/review-company-user-kyc-activity.md">Review company user KYC activity</a></li>
+              <li><a href="./accounting/company-user/trigger-and-chase-company-user-kyc-refresh.md">Trigger and chase company user KYC refresh</a></li>
+              <li><a href="./accounting/company-user/view-pep-declaration-answers-company-users.md">View PEP declaration answers for company users</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Company User Role">Company User Role</h3>
+          <small class="muted">Inventory files: <a href="./accounting/company-user-role/">accounting/company-user-role/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/company-user-role/manage-corporate-directors.md">Manage corporate directors</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Companysettings Accounting Ids">Companysettings Accounting Ids</h3>
+          <small class="muted">Inventory files: <a href="./accounting/companysettings-accounting-ids/">accounting/companysettings-accounting-ids/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/companysettings-accounting-ids/bulk-import-accounting-company-settings-sg.md">Bulk import accounting integration company settings</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Computation">Computation</h3>
+          <small class="muted">Inventory files: <a href="./accounting/computation/">accounting/computation/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/computation/file-eci-form-c-s-and-finalize-assessment.md">File ECI and Form C-S and finalize the assessment</a></li>
+              <li><a href="./accounting/computation/prepare-and-review-tax-computation-inputs.md">Prepare and review tax computation inputs</a></li>
+              <li><a href="./accounting/computation/sync-source-data-for-tax-computation.md">Sync source data for tax computation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin Company Service Controller">Controllers Admin Company Service Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-company-service-controller/">accounting/controllers-admin-company-service-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-company-service-controller/manage-company-subscription-services.md">Manage company subscription services</a></li>
+              <li><a href="./accounting/controllers-admin-company-service-controller/renew-subscription-after-manual-payment.md">Renew subscription after manual payment</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin Coupon Controller">Controllers Admin Coupon Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-coupon-controller/">accounting/controllers-admin-coupon-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-coupon-controller/manage-promotional-coupons.md">Manage promotional coupons</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin Deadline Controller">Controllers Admin Deadline Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-deadline-controller/">accounting/controllers-admin-deadline-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-deadline-controller/manage-company-statutory-deadlines.md">Manage company statutory deadlines</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin Request Instance Controller">Controllers Admin Request Instance Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-request-instance-controller/">accounting/controllers-admin-request-instance-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-request-instance-controller/autopopulate-document-request-templates.md">Autopopulate document request templates</a></li>
+              <li><a href="./accounting/controllers-admin-request-instance-controller/manage-document-request-pipeline.md">Manage document request pipeline</a></li>
+              <li><a href="./accounting/controllers-admin-request-instance-controller/send-documents-for-e-signature.md">Send documents for e-signature</a></li>
+              <li><a href="./accounting/controllers-admin-request-instance-controller/track-physical-printing-fulfillment.md">Track physical printing fulfillment</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin Request Template Controller">Controllers Admin Request Template Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-request-template-controller/">accounting/controllers-admin-request-template-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-request-template-controller/manage-request-templates.md">Manage request templates</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Admin User Controller">Controllers Admin User Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-admin-user-controller/">accounting/controllers-admin-user-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-admin-user-controller/inspect-user-resource-roles-company-assignments.md">Inspect user resource roles and company assignments</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/issue-impersonation-support-access-tokens.md">Issue impersonation and support access tokens</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/manage-user-group-membership.md">Manage user group membership</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/operations-user-lookup-and-profiles.md">Find users and profiles for operations support</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/provision-user-file-root-folder.md">Provision user file root folder</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/record-admin-user-profile-review.md">Record admin user profile review</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/review-kyc-and-retrieved-identity-data.md">Review KYC and retrieved identity data</a></li>
+              <li><a href="./accounting/controllers-admin-user-controller/view-own-admin-permissions-and-profile.md">View own admin permissions and profile</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Company Controller">Controllers Company Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-company-controller/">accounting/controllers-company-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-company-controller/advance-incorporation-onboarding-and-payments.md">Advance incorporation onboarding and payments</a></li>
+              <li><a href="./accounting/controllers-company-controller/assign-accounting-resources-to-company-users.md">Assign accounting resources to company users</a></li>
+              <li><a href="./accounting/controllers-company-controller/complete-accounting-onboarding-finance-reporting.md">Accounting onboarding and finance reporting</a></li>
+              <li><a href="./accounting/controllers-company-controller/complete-kyc-company-questionnaires.md">Complete KYC company questionnaires</a></li>
+              <li><a href="./accounting/controllers-company-controller/list-accounting-companies-for-internal-integration.md">List accounting companies for internal integration</a></li>
+              <li><a href="./accounting/controllers-company-controller/onboard-and-manage-client-companies.md">Onboard and manage client companies</a></li>
+              <li><a href="./accounting/controllers-company-controller/open-and-use-sleek-business-accounts.md">Open and use Sleek business accounts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Deadline Controller">Controllers Deadline Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-deadline-controller/">accounting/controllers-deadline-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-deadline-controller/view-company-statutory-deadlines.md">View company statutory deadlines</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Internal Service Billing Config Controller">Controllers Internal Service Billing Config Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-internal-service-billing-config-controller/">accounting/controllers-internal-service-billing-config-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-internal-service-billing-config-controller/resolve-billing-catalog-for-internal-services.md">Resolve billing catalog for internal services</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Internal Service Company Controller">Controllers Internal Service Company Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-internal-service-company-controller/">accounting/controllers-internal-service-company-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-internal-service-company-controller/align-accounting-questionnaire-multi-currency-internal.md">Align accounting questionnaire multi-currency with bank coverage (internal)</a></li>
+              <li><a href="./accounting/controllers-internal-service-company-controller/company-people-and-resource-access-internal.md">Company people and resource access for internal services</a></li>
+              <li><a href="./accounting/controllers-internal-service-company-controller/internal-company-lookup-and-search.md">Internal company lookup and search</a></li>
+              <li><a href="./accounting/controllers-internal-service-company-controller/review-multi-bank-questionnaire-coverage.md">Multi-bank accounting questionnaire coverage across companies</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Internal Service Receipt User Controller">Controllers Internal Service Receipt User Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-internal-service-receipt-user-controller/">accounting/controllers-internal-service-receipt-user-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-internal-service-receipt-user-controller/inspect-receipt-user-profiles-internal.md">Inspect receipt user profiles for internal operations</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Nominee Director Controller">Controllers Nominee Director Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-nominee-director-controller/">accounting/controllers-nominee-director-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-nominee-director-controller/assign-nominee-director-to-company.md">Assign nominee director to a company</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers V2 Internal Service Company">Controllers V2 Internal Service Company</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-v2-internal-service-company/">accounting/controllers-v2-internal-service-company/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-v2-internal-service-company/bulk-update-company-financial-year-end-from-file.md">Bulk update company financial year end from file</a></li>
+              <li><a href="./accounting/controllers-v2-internal-service-company/company-subscription-data-for-internal-services.md">Company subscription data for internal services</a></li>
+              <li><a href="./accounting/controllers-v2-internal-service-company/sync-accounting-tools-ledger-internal-automation.md">Sync accounting tools ledger from internal automation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Controllers Workflow Controller">Controllers Workflow Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/controllers-workflow-controller/">accounting/controllers-workflow-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/controllers-workflow-controller/track-workflow-instance-progress.md">Track workflow instance progress</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Create Company">Create Company</h3>
+          <small class="muted">Inventory files: <a href="./accounting/create-company/">accounting/create-company/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/create-company/create-company-in-sleek-books.md">Create company in Sleek Books</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Crm Service">Crm Service</h3>
+          <small class="muted">Inventory files: <a href="./accounting/crm-service/">accounting/crm-service/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/crm-service/submit-hubspot-marketing-forms.md">Submit HubSpot marketing forms</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Customers">Customers</h3>
+          <small class="muted">Inventory files: <a href="./accounting/customers/">accounting/customers/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/customers/manage-customers.md">Manage customers</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Daily Company Data Sync Command">Daily Company Data Sync Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/daily-company-data-sync-command/">accounting/daily-company-data-sync-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/daily-company-data-sync-command/daily-company-data-sync-from-sleek.md">Daily company data sync from Sleek (scheduled job)</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Daily Reconciliation Command">Daily Reconciliation Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/daily-reconciliation-command/">accounting/daily-reconciliation-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/daily-reconciliation-command/daily-ml-auto-reconciliation-batch.md">Daily ML auto-reconciliation batch</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Dashboard">Dashboard</h3>
+          <small class="muted">Inventory files: <a href="./accounting/dashboard/">accounting/dashboard/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/dashboard/manage-cit-computation-from-dashboard.md">Manage CIT computation from dashboard</a></li>
+              <li><a href="./accounting/dashboard/monitor-cit-accounting-companies-and-tasks.md">Monitor CIT accounting companies and computation work</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Data Cleanup">Data Cleanup</h3>
+          <small class="muted">Inventory files: <a href="./accounting/data-cleanup/">accounting/data-cleanup/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/data-cleanup/clear-qa-test-company-data.md">Clear QA test company data</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Dext">Dext</h3>
+          <small class="muted">Inventory files: <a href="./accounting/dext/">accounting/dext/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/dext/manage-dext-to-erpnext-sync.md">Sync Dext costs and sales into ERPNext</a></li>
+              <li><a href="./accounting/dext/sync-dext-expense-reports.md">Sync Dext expense reports</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Dext Events">Dext Events</h3>
+          <small class="muted">Inventory files: <a href="./accounting/dext-events/">accounting/dext-events/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/dext-events/manage-dext-document-events.md">Manage Dext document events</a></li>
+              <li><a href="./accounting/dext-events/match-dext-pdfs-to-document-events.md">Match Dext PDFs to document events</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Document">Document</h3>
+          <small class="muted">Inventory files: <a href="./accounting/document/">accounting/document/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/document/collaborate-on-document-processing.md">Collaborate on document processing</a></li>
+              <li><a href="./accounting/document/document-translation-and-readable-sources.md">Document translation and readable sources</a></li>
+              <li><a href="./accounting/document/manage-accounting-documents-and-coding-support.md">Manage accounting documents and coding support</a></li>
+              <li><a href="./accounting/document/publish-align-documents-with-bookkeeping.md">Publish and align documents with bookkeeping</a></li>
+              <li><a href="./accounting/document/re-extract-and-auto-categorize-sales-invoices.md">Re-extract documents and auto-categorize sales invoices</a></li>
+              <li><a href="./accounting/document/sync-document-lifecycle-from-sleekbooks.md">Sync document lifecycle from SleekBooks webhooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Document Events">Document Events</h3>
+          <small class="muted">Inventory files: <a href="./accounting/document-events/">accounting/document-events/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/document-events/manage-document-lifecycle-and-metadata.md">Manage document lifecycle and metadata</a></li>
+              <li><a href="./accounting/document-events/remove-or-request-removal-of-documents.md">Remove or request removal of documents</a></li>
+              <li><a href="./accounting/document-events/retry-document-extraction-for-bookkeeping.md">Retry document extraction for bookkeeping</a></li>
+              <li><a href="./accounting/document-events/review-document-intake-and-sources.md">Review document intake and sources</a></li>
+              <li><a href="./accounting/document-events/submit-receipts-expense-documents.md">Submit receipts and expense documents</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Document Template Controller">Document Template Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/document-template-controller/">accounting/document-template-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/document-template-controller/export-document-html-to-pdf.md">Export document HTML to PDF</a></li>
+              <li><a href="./accounting/document-template-controller/generate-company-document-from-template.md">Generate company document from template</a></li>
+              <li><a href="./accounting/document-template-controller/manage-document-templates.md">Manage document templates</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Email">Email</h3>
+          <small class="muted">Inventory files: <a href="./accounting/email/">accounting/email/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/email/recover-inbound-email-imap-connection.md">Recover inbound email IMAP connection</a></li>
+              <li><a href="./accounting/email/resolve-receipt-user-from-inbound-address.md">Resolve receipt user from inbound email address</a></li>
+              <li><a href="./accounting/email/sync-receipt-inbox-from-sleek-back.md">Sync receipt inbox from Sleek Back</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Email Logs">Email Logs</h3>
+          <small class="muted">Inventory files: <a href="./accounting/email-logs/">accounting/email-logs/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/email-logs/search-receipt-email-delivery-logs.md">Search receipt email delivery logs</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Encrypt Decrypt">Encrypt Decrypt</h3>
+          <small class="muted">Inventory files: <a href="./accounting/encrypt-decrypt/">accounting/encrypt-decrypt/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/encrypt-decrypt/encrypt-or-decrypt-company-text.md">Encrypt or decrypt company text</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Erpnext">Erpnext</h3>
+          <small class="muted">Inventory files: <a href="./accounting/erpnext/">accounting/erpnext/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/erpnext/financial-reports-and-transaction-views.md">Financial reports and transaction views</a></li>
+              <li><a href="./accounting/erpnext/onboard-maintain-companies-accounting-structure.md">Onboard and maintain companies and accounting structure</a></li>
+              <li><a href="./accounting/erpnext/operate-bank-activity-and-reconciliation.md">Operate bank activity and reconciliation</a></li>
+              <li><a href="./accounting/erpnext/record-payments-and-manual-journals.md">Record payments and manual journals</a></li>
+              <li><a href="./accounting/erpnext/reverse-or-remove-incorrect-accounting-documents.md">Reverse or remove incorrect accounting documents</a></li>
+              <li><a href="./accounting/erpnext/sync-invoices-from-extraction-xero-and-ce.md">Sync invoices from extraction, Xero, and CE</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="External Requests">External Requests</h3>
+          <small class="muted">Inventory files: <a href="./accounting/external-requests/">accounting/external-requests/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/external-requests/export-company-receipt-files.md">Export company receipt files</a></li>
+              <li><a href="./accounting/external-requests/keep-app-feature-configuration-aligned-with-cms.md">Keep app feature configuration aligned with CMS</a></li>
+              <li><a href="./accounting/external-requests/sync-receipt-last-published-timestamps.md">Keep receipt last-published dates aligned with Xero and SleekBooks</a></li>
+              <li><a href="./accounting/external-requests/whatsapp-messaging-to-receipt-users.md">WhatsApp messaging to receipt users</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Extraction">Extraction</h3>
+          <small class="muted">Inventory files: <a href="./accounting/extraction/">accounting/extraction/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/extraction/manage-scheduled-accounting-extractions.md">Manage scheduled accounting extractions</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Fastapi Extraction Api">Fastapi Extraction Api</h3>
+          <small class="muted">Inventory files: <a href="./accounting/fastapi-extraction-api/">accounting/fastapi-extraction-api/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/fastapi-extraction-api/extract-bank-statement-transactions.md">Extract bank statement transactions</a></li>
+              <li><a href="./accounting/fastapi-extraction-api/manage-bank-prompt-and-template-configuration.md">Manage bank prompt and template configuration</a></li>
+              <li><a href="./accounting/fastapi-extraction-api/resolve-bank-template-from-statement-upload.md">Resolve bank template from a statement upload</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Feedback">Feedback</h3>
+          <small class="muted">Inventory files: <a href="./accounting/feedback/">accounting/feedback/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/feedback/apply-ml-openai-extraction-to-receipts.md">Apply ML and OpenAI extraction to receipts</a></li>
+              <li><a href="./accounting/feedback/review-and-correct-document-extraction-feedback.md">Review and correct document extraction feedback</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Formcs Submission">Formcs Submission</h3>
+          <small class="muted">Inventory files: <a href="./accounting/formcs-submission/">accounting/formcs-submission/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/formcs-submission/maintain-iras-corppass-auth-for-form-cs.md">Maintain IRAS CorpPass authentication for Form CS</a></li>
+              <li><a href="./accounting/formcs-submission/submit-form-cs-to-iras.md">Submit Form CS to IRAS</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Frappe Client">Frappe Client</h3>
+          <small class="muted">Inventory files: <a href="./accounting/frappe-client/">accounting/frappe-client/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/frappe-client/integrate-erpnext-reads-for-sleekbook-workflows.md">Integrate ERPNext reads for Sleekbook workflows</a></li>
+              <li><a href="./accounting/frappe-client/remove-erpnext-documents-via-signed-api.md">Remove ERPNext documents via signed client API</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Get Dext Ml">Get Dext Ml</h3>
+          <small class="muted">Inventory files: <a href="./accounting/get-dext-ml/">accounting/get-dext-ml/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/get-dext-ml/reconcile-dext-sleek-receipts-ml-matching.md">Reconcile Dext events with Sleek receipts via ML matching</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Get Xero Client Invoices">Get Xero Client Invoices</h3>
+          <small class="muted">Inventory files: <a href="./accounting/get-xero-client-invoices/">accounting/get-xero-client-invoices/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/get-xero-client-invoices/sync-receipt-documents-with-xero-invoice-data.md">Sync receipt documents with Xero invoice data</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Get Xero Invoice">Get Xero Invoice</h3>
+          <small class="muted">Inventory files: <a href="./accounting/get-xero-invoice/">accounting/get-xero-invoice/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/get-xero-invoice/sync-hubdoc-receipt-events-with-xero-invoice-data.md">Sync Hubdoc receipt events with Xero invoice data</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Google">Google</h3>
+          <small class="muted">Inventory files: <a href="./accounting/google/">accounting/google/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/google/connect-google-gmail-for-receipt-gateway.md">Connect Google Gmail for receipt gateway</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Google Auth Routes">Google Auth Routes</h3>
+          <small class="muted">Inventory files: <a href="./accounting/google-auth-routes/">accounting/google-auth-routes/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/google-auth-routes/connect-google-gmail-for-receipt-ingestion.md">Connect Google Gmail for receipt ingestion</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Health">Health</h3>
+          <small class="muted">Inventory files: <a href="./accounting/health/">accounting/health/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/health/report-service-health.md">Report service health</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Hubdoc">Hubdoc</h3>
+          <small class="muted">Inventory files: <a href="./accounting/hubdoc/">accounting/hubdoc/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/hubdoc/run-hubdoc-extraction-sync.md">Sync Hubdoc extractions into bookkeeping</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Image Viewer">Image Viewer</h3>
+          <small class="muted">Inventory files: <a href="./accounting/image-viewer/">accounting/image-viewer/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/image-viewer/preview-receipt-documents-in-data-studio.md">Preview receipt documents in Data Studio</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Invoice">Invoice</h3>
+          <small class="muted">Inventory files: <a href="./accounting/invoice/">accounting/invoice/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/invoice/configure-company-invoice-defaults.md">Configure company invoice defaults</a></li>
+              <li><a href="./accounting/invoice/invoice-customers-and-manage-delivery.md">Invoice customers and manage delivery</a></li>
+              <li><a href="./accounting/invoice/invoicing-onboarding-and-user-preferences.md">Invoicing onboarding and user preferences</a></li>
+              <li><a href="./accounting/invoice/maintain-invoice-customers-and-products.md">Maintain invoice customers and products</a></li>
+              <li><a href="./accounting/invoice/onboarding-invoices-incorporation-transfer.md">Create onboarding invoices for incorporation or transfer</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Invoice Controller">Invoice Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/invoice-controller/">accounting/invoice-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/invoice-controller/reconcile-xero-manage-service-payments.md">Reconcile Xero invoice payments (manage services)</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Invoice Listener">Invoice Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/invoice-listener/">accounting/invoice-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/invoice-listener/sleekbooks-invoice-outcomes-published-documents.md">Apply SleekBooks invoice outcomes to published documents</a></li>
+              <li><a href="./accounting/invoice-listener/sync-purchase-sleekbooks-docs-to-erpnext.md">Sync purchase-related SleekBooks documents to ERPNext</a></li>
+              <li><a href="./accounting/invoice-listener/sync-sales-invoices-and-credit-notes-to-erpnext.md">Sync sales invoices and credit notes from SleekBooks to ERPNext</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Iras Auth">Iras Auth</h3>
+          <small class="muted">Inventory files: <a href="./accounting/iras-auth/">accounting/iras-auth/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/iras-auth/complete-iras-authorization.md">Complete IRAS authorization</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Kafka Consumer">Kafka Consumer</h3>
+          <small class="muted">Inventory files: <a href="./accounting/kafka-consumer/">accounting/kafka-consumer/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/kafka-consumer/async-statement-work-from-kafka.md">Process statement work from Kafka</a></li>
+              <li><a href="./accounting/kafka-consumer/deliver-receipt-image-similarity-to-accounting.md">Deliver receipt image similarity results to accounting</a></li>
+              <li><a href="./accounting/kafka-consumer/feed-bookkeeping-extraction-feedback-to-coding-engine.md">Feed bookkeeping extraction feedback to coding engine</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ledger Transactions">Ledger Transactions</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ledger-transactions/">accounting/ledger-transactions/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ledger-transactions/collaborate-on-ledger-transaction-comments.md">Collaborate on ledger transaction comments</a></li>
+              <li><a href="./accounting/ledger-transactions/control-customer-visibility-of-ledger-transactions.md">Control customer visibility of ledger transactions</a></li>
+              <li><a href="./accounting/ledger-transactions/manage-uncoded-ledger-transaction-queue.md">Manage uncoded ledger transaction queues (supporting documents)</a></li>
+              <li><a href="./accounting/ledger-transactions/migrate-document-source-to-sleek-match.md">Migrate document source to sleek-match</a></li>
+              <li><a href="./accounting/ledger-transactions/submit-and-manage-supporting-documents.md">Submit and manage supporting documents</a></li>
+              <li><a href="./accounting/ledger-transactions/unreconcile-matched-ledger-transactions.md">Unreconcile matched ledger transactions</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Login">Login</h3>
+          <small class="muted">Inventory files: <a href="./accounting/login/">accounting/login/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/login/sign-in-to-accounting.md">Sign in to accounting</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ltd Onboarding">Ltd Onboarding</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ltd-onboarding/">accounting/ltd-onboarding/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ltd-onboarding/manage-uk-ltd-onboarding-from-lc-website.md">Manage UK LTD onboarding from LC Website</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Match Dext Events">Match Dext Events</h3>
+          <small class="muted">Inventory files: <a href="./accounting/match-dext-events/">accounting/match-dext-events/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/match-dext-events/match-dext-expense-pdfs-to-sleek-receipts.md">Match Dext expense PDFs to Sleek receipts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Migrate">Migrate</h3>
+          <small class="muted">Inventory files: <a href="./accounting/migrate/">accounting/migrate/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/migrate/migrate-chart-of-accounts-from-xero.md">Migrate chart of accounts from Xero</a></li>
+              <li><a href="./accounting/migrate/migrate-fiscal-year-from-xero.md">Migrate fiscal year from Xero</a></li>
+              <li><a href="./accounting/migrate/migrate-manual-journals-from-xero.md">Migrate manual journals from Xero</a></li>
+              <li><a href="./accounting/migrate/migrate-opening-balance-sheet-from-xero.md">Migrate opening balance sheet from Xero</a></li>
+              <li><a href="./accounting/migrate/migrate-xero-invoices-bank-transactions-and-pnl.md">Migrate invoices, bank transactions, and P&amp;L from Xero</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Migrate Document Source Command">Migrate Document Source Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/migrate-document-source-command/">accounting/migrate-document-source-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/migrate-document-source-command/migrate-ledger-linked-doc-sources-sleek-match.md">Migrate ledger-linked document sources to sleek-match</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Migration">Migration</h3>
+          <small class="muted">Inventory files: <a href="./accounting/migration/">accounting/migration/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/migration/advance-xero-migration-workflows.md">Advance Xero migration workflows</a></li>
+              <li><a href="./accounting/migration/manage-bookkeeping-migration-records.md">Manage bookkeeping migration records</a></li>
+              <li><a href="./accounting/migration/supervise-migration-pipeline-and-activity.md">Supervise migration pipeline and activity</a></li>
+              <li><a href="./accounting/migration/sync-migration-company-data-from-sleek-and-dext.md">Keep migration company data aligned with Sleek Back and Dext</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Missing Documents">Missing Documents</h3>
+          <small class="muted">Inventory files: <a href="./accounting/missing-documents/">accounting/missing-documents/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/missing-documents/track-and-resolve-missing-receipt-gaps.md">Track and resolve missing receipt gaps</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ml Autorecon Api Root">Ml Autorecon Api Root</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ml-autorecon-api-root/">accounting/ml-autorecon-api-root/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ml-autorecon-api-root/process-reconciliation-queries-from-kafka.md">Process reconciliation queries from Kafka</a></li>
+              <li><a href="./accounting/ml-autorecon-api-root/run-ml-assisted-reconciliation-via-api.md">Run ML-assisted reconciliation via HTTP API</a></li>
+              <li><a href="./accounting/ml-autorecon-api-root/verify-ml-autorecon-service-health.md">Verify ML autorecon service health</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ml Category Results Listener">Ml Category Results Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ml-category-results-listener/">accounting/ml-category-results-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ml-category-results-listener/apply-extraction-outcomes-to-documents.md">Apply ML and OpenAI extraction outcomes to receipts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Ml Feedback">Ml Feedback</h3>
+          <small class="muted">Inventory files: <a href="./accounting/ml-feedback/">accounting/ml-feedback/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/ml-feedback/manage-ml-receipt-feedback.md">Manage ML receipt feedback</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="New Workflow Controller">New Workflow Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/new-workflow-controller/">accounting/new-workflow-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/new-workflow-controller/business-bank-account-opening-workflows.md">Business bank account opening workflows</a></li>
+              <li><a href="./accounting/new-workflow-controller/generate-workflow-esign-and-compliance-documents.md">Generate workflow e-signatures and compliance documents</a></li>
+              <li><a href="./accounting/new-workflow-controller/manage-workflow-processes-tasks.md">Manage workflow processes and tasks</a></li>
+              <li><a href="./accounting/new-workflow-controller/run-accounting-client-onboarding-workflows.md">Run accounting client onboarding workflows</a></li>
+              <li><a href="./accounting/new-workflow-controller/run-corporate-statutory-change-workflows.md">Run corporate statutory change workflows</a></li>
+              <li><a href="./accounting/new-workflow-controller/run-kyc-verification-workflows.md">Run KYC verification workflows</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Onboarding Controller">Onboarding Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/onboarding-controller/">accounting/onboarding-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/onboarding-controller/continue-uk-incorporation-after-payment.md">Continue UK incorporation after payment</a></li>
+              <li><a href="./accounting/onboarding-controller/resend-uk-onboarding-kyc-invitation.md">Resend UK onboarding KYC invitation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Admin">Openapi Tag Admin</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-admin/">accounting/openapi-tag-admin/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-admin/session-via-single-use-admin-token.md">Access user session via single-use admin token</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Enquiry">Openapi Tag Enquiry</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-enquiry/">accounting/openapi-tag-enquiry/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-enquiry/submit-general-customer-enquiry.md">Submit general customer enquiry</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Notification">Openapi Tag Notification</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-notification/">accounting/openapi-tag-notification/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-notification/express-interest-in-accounting-services.md">Express interest in accounting services</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Onboarding">Openapi Tag Onboarding</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-onboarding/">accounting/openapi-tag-onboarding/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-onboarding/create-onboarding-invoices.md">Create onboarding invoices</a></li>
+              <li><a href="./accounting/openapi-tag-onboarding/verify-singapore-companies-against-acra.md">Verify Singapore companies against ACRA</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Sleek Bot Pilot">Openapi Tag Sleek Bot Pilot</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-sleek-bot-pilot/">accounting/openapi-tag-sleek-bot-pilot/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-sleek-bot-pilot/manage-bot-automation-requests.md">Manage bot automation requests</a></li>
+              <li><a href="./accounting/openapi-tag-sleek-bot-pilot/monitor-api-health-and-environment.md">Monitor API health and environment</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Sleek Iras Service">Openapi Tag Sleek Iras Service</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-sleek-iras-service/">accounting/openapi-tag-sleek-iras-service/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-sleek-iras-service/authorize-iras-corppass-and-manage-tokens.md">Authorize IRAS CorpPass and manage access tokens</a></li>
+              <li><a href="./accounting/openapi-tag-sleek-iras-service/submit-corporate-tax-form-cs-to-iras.md">Submit corporate tax Form CS to IRAS</a></li>
+              <li><a href="./accounting/openapi-tag-sleek-iras-service/verify-iras-integration-service-health.md">Verify IRAS integration service health</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag Sleek Receipt Gateway">Openapi Tag Sleek Receipt Gateway</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-sleek-receipt-gateway/">accounting/openapi-tag-sleek-receipt-gateway/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-sleek-receipt-gateway/authorize-google-for-gmail-receipt-gateway.md">Authorize Google for Gmail receipt gateway</a></li>
+              <li><a href="./accounting/openapi-tag-sleek-receipt-gateway/manage-receipt-email-inbox-sync-and-gateway.md">Manage receipt email inbox sync and gateway</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Openapi Tag V1">Openapi Tag V1</h3>
+          <small class="muted">Inventory files: <a href="./accounting/openapi-tag-v1/">accounting/openapi-tag-v1/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/openapi-tag-v1/authenticate-and-manage-user-sessions.md">Authenticate and manage user sessions</a></li>
+              <li><a href="./accounting/openapi-tag-v1/manage-company-shares-and-cap-table.md">Manage company shares and cap table</a></li>
+              <li><a href="./accounting/openapi-tag-v1/track-workflow-instance-progress.md">Track workflow instance progress</a></li>
+              <li><a href="./accounting/openapi-tag-v1/view-shareholder-source-of-funds-disclosure.md">View shareholder source of funds disclosure</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Payment Controller">Payment Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/payment-controller/">accounting/payment-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/payment-controller/browse-pricing-and-invoice-history.md">Browse pricing and invoice history</a></li>
+              <li><a href="./accounting/payment-controller/invite-another-user-to-pay.md">Invite another user to pay</a></li>
+              <li><a href="./accounting/payment-controller/pay-company-formation-and-onboarding.md">Pay company formation and onboarding</a></li>
+              <li><a href="./accounting/payment-controller/pay-corporate-secretary-upgrades.md">Pay for corporate secretary upgrades</a></li>
+              <li><a href="./accounting/payment-controller/pay-subscriptions-mixed-checkout-by-card.md">Pay subscriptions and mixed checkout by card</a></li>
+              <li><a href="./accounting/payment-controller/request-manual-bank-payments-and-invoices.md">Request manual bank payments and invoices</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Payment Request Controller">Payment Request Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/payment-request-controller/">accounting/payment-request-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/payment-request-controller/look-up-billable-items-for-payment-requests.md">Look up billable items for payment requests</a></li>
+              <li><a href="./accounting/payment-request-controller/manage-payment-requests.md">Manage payment requests</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Payment Token">Payment Token</h3>
+          <small class="muted">Inventory files: <a href="./accounting/payment-token/">accounting/payment-token/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/payment-token/issue-short-lived-payment-tokens.md">Issue short-lived payment tokens</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Permission">Permission</h3>
+          <small class="muted">Inventory files: <a href="./accounting/permission/">accounting/permission/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/permission/gate-sleek-book-migration-access.md">Gate SleekBooks migration access</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Platform">Platform</h3>
+          <small class="muted">Inventory files: <a href="./accounting/platform/">accounting/platform/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/platform/configure-sign-in-and-platform-branding.md">Configure sign-in and platform branding</a></li>
+              <li><a href="./accounting/platform/view-signed-in-user-identity.md">View signed-in user identity</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Pull Logs From Twilio">Pull Logs From Twilio</h3>
+          <small class="muted">Inventory files: <a href="./accounting/pull-logs-from-twilio/">accounting/pull-logs-from-twilio/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/pull-logs-from-twilio/sync-whatsapp-sms-logs-from-twilio.md">Sync WhatsApp SMS logs from Twilio</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Pull Logs From Twilio With Dates">Pull Logs From Twilio With Dates</h3>
+          <small class="muted">Inventory files: <a href="./accounting/pull-logs-from-twilio-with-dates/">accounting/pull-logs-from-twilio-with-dates/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/pull-logs-from-twilio-with-dates/backfill-whatsapp-and-sms-logs-from-twilio.md">Backfill WhatsApp and SMS communication logs from Twilio</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Receipts Resubmission">Receipts Resubmission</h3>
+          <small class="muted">Inventory files: <a href="./accounting/receipts-resubmission/">accounting/receipts-resubmission/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/receipts-resubmission/bulk-reprocess-receipt-submissions.md">Bulk reprocess receipt submissions</a></li>
+              <li><a href="./accounting/receipts-resubmission/sync-xero-linked-documents-into-books.md">Sync Xero-linked documents into books</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Reconciliation">Reconciliation</h3>
+          <small class="muted">Inventory files: <a href="./accounting/reconciliation/">accounting/reconciliation/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/reconciliation/accept-or-reject-ml-reconciliation-matches.md">Accept or reject ML reconciliation matches</a></li>
+              <li><a href="./accounting/reconciliation/reconcile-bank-transactions-to-documents.md">Reconcile bank transactions to documents</a></li>
+              <li><a href="./accounting/reconciliation/request-ml-matching-and-reconciliation-automation.md">Request ML matching and reconciliation automation</a></li>
+              <li><a href="./accounting/reconciliation/revert-reconciliation.md">Revert reconciliation</a></li>
+              <li><a href="./accounting/reconciliation/review-reconciliation-status.md">Review reconciliation status</a></li>
+              <li><a href="./accounting/reconciliation/update-bank-transaction-status-in-reconciliation.md">Update bank transaction match status during reconciliation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Reconciliation Listener">Reconciliation Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/reconciliation-listener/">accounting/reconciliation-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/reconciliation-listener/apply-core-engine-bank-reconciliation-to-erpnext.md">Apply Core Engine bank reconciliation to ERPNext</a></li>
+              <li><a href="./accounting/reconciliation-listener/process-ml-reconciliation-results.md">Process ML reconciliation results</a></li>
+              <li><a href="./accounting/reconciliation-listener/record-reconciliation-completion-and-failure.md">Record reconciliation completion and failure</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Recovery Controller">Recovery Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/recovery-controller/">accounting/recovery-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/recovery-controller/reconcile-lost-documents-with-active-files.md">Reconcile lost documents with active files</a></li>
+              <li><a href="./accounting/recovery-controller/report-and-investigate-lost-files.md">Report and investigate lost files</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Register Controller">Register Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/register-controller/">accounting/register-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/register-controller/manage-company-statutory-registers.md">Manage company statutory registers</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Registrable Controller Declaration Controller">Registrable Controller Declaration Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/registrable-controller-declaration-controller/">accounting/registrable-controller-declaration-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/registrable-controller-declaration-controller/generate-registrable-controller-declaration-pdf.md">Generate Registrable Controller Declaration PDF</a></li>
+              <li><a href="./accounting/registrable-controller-declaration-controller/manage-registrable-controller-declarations.md">Manage registrable controller declarations</a></li>
+              <li><a href="./accounting/registrable-controller-declaration-controller/mark-rcd-review-as-complete.md">Mark RCD review as complete</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Report Generation">Report Generation</h3>
+          <small class="muted">Inventory files: <a href="./accounting/report-generation/">accounting/report-generation/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/report-generation/trigger-erpnext-management-report-generation.md">Trigger ERPNext management report generation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Retrigger Documents To Ml">Retrigger Documents To Ml</h3>
+          <small class="muted">Inventory files: <a href="./accounting/retrigger-documents-to-ml/">accounting/retrigger-documents-to-ml/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/retrigger-documents-to-ml/batch-recover-document-ml-extraction.md">Recover stuck receipt ML extraction</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Revert Sleek Match Rematch Command">Revert Sleek Match Rematch Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/revert-sleek-match-rematch-command/">accounting/revert-sleek-match-rematch-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/revert-sleek-match-rematch-command/remediate-sleek-match-bank-link-overwrites.md">Remediate sleek-match bank link overwrites</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Risk Assesment Form">Risk Assesment Form</h3>
+          <small class="muted">Inventory files: <a href="./accounting/risk-assesment-form/">accounting/risk-assesment-form/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/risk-assesment-form/complete-kyc-risk-assessment-scoring.md">Complete KYC risk assessment scoring</a></li>
+              <li><a href="./accounting/risk-assesment-form/manage-risk-assessment-customer-acceptance.md">Manage risk assessment customer acceptance</a></li>
+              <li><a href="./accounting/risk-assesment-form/record-sba-business-account-risk-decisions.md">Record SBA business account decisions on risk assessment</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Risk Assessment Form Approval">Risk Assessment Form Approval</h3>
+          <small class="muted">Inventory files: <a href="./accounting/risk-assessment-form-approval/">accounting/risk-assessment-form-approval/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/risk-assessment-form-approval/manage-risk-assessment-form-approvals.md">Manage risk assessment form approvals</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sb Document Status Sync Command">Sb Document Status Sync Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sb-document-status-sync-command/">accounting/sb-document-status-sync-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sb-document-status-sync-command/sync-sleekbooks-document-status-to-coding-engine.md">Sync Sleekbooks document status to Coding Engine</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sb Manual Reconciliation Listener">Sb Manual Reconciliation Listener</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sb-manual-reconciliation-listener/">accounting/sb-manual-reconciliation-listener/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sb-manual-reconciliation-listener/sync-manual-bank-reconciliation-with-bookkeeping.md">Sync manual bank reconciliation with bookkeeping</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sba Auto Creation">Sba Auto Creation</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sba-auto-creation/">accounting/sba-auto-creation/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sba-auto-creation/automated-sba-business-account-creation.md">Automated SBA business account creation</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Send Digest Emails Command">Send Digest Emails Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/send-digest-emails-command/">accounting/send-digest-emails-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/send-digest-emails-command/send-sleek-bookkeeping-digest-emails.md">Sleek bookkeeping digest emails</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Send Email Notification For Future Dss">Send Email Notification For Future Dss</h3>
+          <small class="muted">Inventory files: <a href="./accounting/send-email-notification-for-future-dss/">accounting/send-email-notification-for-future-dss/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/send-email-notification-for-future-dss/notify-operations-of-future-dated-document-events.md">Notify operations of future-dated document events</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Send Slack Message">Send Slack Message</h3>
+          <small class="muted">Inventory files: <a href="./accounting/send-slack-message/">accounting/send-slack-message/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/send-slack-message/notify-accounting-team-on-questionnaire-completion.md">Notify accounting team on questionnaire completion</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Share Controller">Share Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/share-controller/">accounting/share-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/share-controller/allocate-and-update-shareholder-shareholdings.md">Allocate and update shareholder shareholdings</a></li>
+              <li><a href="./accounting/share-controller/manage-company-share-classes.md">Manage company share classes</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Access Control">Sleek Access Control</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-access-control/">accounting/sleek-access-control/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-access-control/align-pbac-role-templates-with-access-control.md">Align PBAC role templates with access control</a></li>
+              <li><a href="./accounting/sleek-access-control/notify-users-of-policy-access-outcomes.md">Notify users of policy access outcomes</a></li>
+              <li><a href="./accounting/sleek-access-control/request-additional-sleek-policy-access.md">Request additional Sleek policy access</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Auditor">Sleek Auditor</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-auditor/">accounting/sleek-auditor/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-auditor/manage-sleek-auditor-audit-trail.md">Manage Sleek Auditor audit trail</a></li>
+              <li><a href="./accounting/sleek-auditor/record-and-review-company-audit-activity.md">Record and review company audit activity</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Digests">Sleek Digests</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-digests/">accounting/sleek-digests/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-digests/manage-sleek-digest-settings.md">Manage Sleek Digest settings</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Kyc">Sleek Kyc</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-kyc/">accounting/sleek-kyc/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-kyc/process-sleek-kyc-verification-webhooks.md">Process Sleek KYC verification webhooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Ml Producer Routes">Sleek Ml Producer Routes</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-ml-producer-routes/">accounting/sleek-ml-producer-routes/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-ml-producer-routes/compare-document-images.md">Compare document images</a></li>
+              <li><a href="./accounting/sleek-ml-producer-routes/queue-bookkeeping-work-for-ml.md">Queue bookkeeping work for ML</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleek Site Onboarding">Sleek Site Onboarding</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleek-site-onboarding/">accounting/sleek-site-onboarding/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleek-site-onboarding/check-marketing-company-name-availability.md">Check marketing company name availability</a></li>
+              <li><a href="./accounting/sleek-site-onboarding/check-signup-email-availability.md">Check signup email availability</a></li>
+              <li><a href="./accounting/sleek-site-onboarding/prepare-onboarding-checkout-cart.md">Prepare onboarding checkout cart</a></li>
+              <li><a href="./accounting/sleek-site-onboarding/resume-onboarding-save-for-later-email.md">Resume onboarding with save-for-later email</a></li>
+              <li><a href="./accounting/sleek-site-onboarding/verify-company-eligibility-sleek-onboarding.md">Verify company eligibility for Sleek site onboarding</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Sleekbooks">Sleekbooks</h3>
+          <small class="muted">Inventory files: <a href="./accounting/sleekbooks/">accounting/sleekbooks/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/sleekbooks/view-company-chart-of-accounts-from-sleekbooks.md">View company chart of accounts from SleekBooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Smart Rules">Smart Rules</h3>
+          <small class="muted">Inventory files: <a href="./accounting/smart-rules/">accounting/smart-rules/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/smart-rules/manage-supplier-smart-rules.md">Manage supplier smart rules</a></li>
+              <li><a href="./accounting/smart-rules/supplier-smart-rules-for-coding.md">Supplier smart rules for coding</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Soft Delete Documents">Soft Delete Documents</h3>
+          <small class="muted">Inventory files: <a href="./accounting/soft-delete-documents/">accounting/soft-delete-documents/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/soft-delete-documents/soft-delete-document-events-by-company.md">Soft-delete document events by company</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Supplier">Supplier</h3>
+          <small class="muted">Inventory files: <a href="./accounting/supplier/">accounting/supplier/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/supplier/configure-bulk-auto-publish-main-suppliers.md">Configure bulk auto-publish for main suppliers</a></li>
+              <li><a href="./accounting/supplier/find-similar-supplier-matches.md">Find similar supplier matches</a></li>
+              <li><a href="./accounting/supplier/review-supplier-activity-document-footprint.md">Review supplier activity and document footprint</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Supplier Rules">Supplier Rules</h3>
+          <small class="muted">Inventory files: <a href="./accounting/supplier-rules/">accounting/supplier-rules/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/supplier-rules/manage-supplier-accounting-defaults.md">Manage supplier accounting defaults</a></li>
+              <li><a href="./accounting/supplier-rules/view-supplier-rule-coverage-and-counts.md">View supplier rule coverage and counts</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Suppliers">Suppliers</h3>
+          <small class="muted">Inventory files: <a href="./accounting/suppliers/">accounting/suppliers/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/suppliers/bulk-auto-publish-main-supplier-rules.md">Bulk set auto-publish on main supplier rules</a></li>
+              <li><a href="./accounting/suppliers/manage-supplier-master-data.md">Manage supplier master data</a></li>
+              <li><a href="./accounting/suppliers/manage-supplier-parent-child-relationships.md">Manage supplier parent-child relationships</a></li>
+              <li><a href="./accounting/suppliers/reconcile-parent-supplier-child-counts.md">Reconcile parent supplier child counts</a></li>
+              <li><a href="./accounting/suppliers/review-supplier-specialty-and-rule-coverage.md">Review supplier specialty and rule coverage</a></li>
+              <li><a href="./accounting/suppliers/sync-supplier-catalog-from-coding-engine.md">Sync supplier catalog from coding engine</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Tasks Command">Tasks Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/tasks-command/">accounting/tasks-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/tasks-command/sync-dext-into-sleekbooks.md">Sync Dext into SleekBooks</a></li>
+              <li><a href="./accounting/tasks-command/sync-hubdoc-into-sleekbooks.md">Sync Hubdoc into SleekBooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Templates">Templates</h3>
+          <small class="muted">Inventory files: <a href="./accounting/templates/">accounting/templates/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/templates/manage-coding-templates.md">Manage coding templates</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Twilio Sms">Twilio Sms</h3>
+          <small class="muted">Inventory files: <a href="./accounting/twilio-sms/">accounting/twilio-sms/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/twilio-sms/activate-whatsapp-receipt-service.md">Activate WhatsApp receipt service</a></li>
+              <li><a href="./accounting/twilio-sms/submit-receipts-via-whatsapp.md">Submit receipts via WhatsApp</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Twilio V2">Twilio V2</h3>
+          <small class="muted">Inventory files: <a href="./accounting/twilio-v2/">accounting/twilio-v2/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/twilio-v2/recover-whatsapp-studio-delivery-failures.md">Recover WhatsApp Studio delivery failures</a></li>
+              <li><a href="./accounting/twilio-v2/submit-receipts-via-whatsapp-studio-flow.md">Submit receipts via WhatsApp (Studio flow)</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Twilio Whatsapp">Twilio Whatsapp</h3>
+          <small class="muted">Inventory files: <a href="./accounting/twilio-whatsapp/">accounting/twilio-whatsapp/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/twilio-whatsapp/send-whatsapp-messages-to-clients.md">Send WhatsApp messages to clients</a></li>
+              <li><a href="./accounting/twilio-whatsapp/submit-receipts-via-whatsapp.md">Submit receipts via WhatsApp</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Two Factor Authentication">Two Factor Authentication</h3>
+          <small class="muted">Inventory files: <a href="./accounting/two-factor-authentication/">accounting/two-factor-authentication/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/two-factor-authentication/manage-user-two-factor-authentication-settings.md">Manage user two-factor authentication settings</a></li>
+              <li><a href="./accounting/two-factor-authentication/otp-verification-sign-in-onboarding.md">Verify identity with OTP (sign-in and onboarding)</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Uipath Queue">Uipath Queue</h3>
+          <small class="muted">Inventory files: <a href="./accounting/uipath-queue/">accounting/uipath-queue/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/uipath-queue/submit-accounting-automation-to-uipath-rpa.md">Submit accounting automation to UiPath RPA queues</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Update Conversion Amount">Update Conversion Amount</h3>
+          <small class="muted">Inventory files: <a href="./accounting/update-conversion-amount/">accounting/update-conversion-amount/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/update-conversion-amount/backfill-receipt-totals-functional-currency.md">Backfill receipt totals in functional currency</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="User Activity">User Activity</h3>
+          <small class="muted">Inventory files: <a href="./accounting/user-activity/">accounting/user-activity/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/user-activity/record-user-activity-for-bookkeeping.md">Record user activity for bookkeeping operations</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Wallet">Wallet</h3>
+          <small class="muted">Inventory files: <a href="./accounting/wallet/">accounting/wallet/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/wallet/manage-company-credit-wallet.md">Manage company credit wallet</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Webhook">Webhook</h3>
+          <small class="muted">Inventory files: <a href="./accounting/webhook/">accounting/webhook/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/webhook/forward-erpnext-invoices-to-sleek-receipts.md">Forward ERPNext invoices to Sleek Receipts</a></li>
+              <li><a href="./accounting/webhook/integrate-ml-extraction-and-similarity-callbacks.md">Apply ML extraction and image-similarity webhooks to documents</a></li>
+              <li><a href="./accounting/webhook/process-zoho-receipt-resubmission.md">Process Zoho receipt resubmission</a></li>
+              <li><a href="./accounting/webhook/propagate-bank-reconciliation-from-sb.md">Propagate bank reconciliation from SleekBooks</a></li>
+              <li><a href="./accounting/webhook/sync-erpnext-invoice-data-to-documents.md">Apply ERPNext invoice data to documents</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Webhook Controller">Webhook Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/webhook-controller/">accounting/webhook-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/webhook-controller/apply-onfido-verification-outcomes-from-webhooks.md">Apply Onfido verification outcomes from webhooks</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Xero">Xero</h3>
+          <small class="muted">Inventory files: <a href="./accounting/xero/">accounting/xero/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/xero/access-xero-company-reference-data.md">Align bookkeeping with Xero organisation reference data</a></li>
+              <li><a href="./accounting/xero/connect-xero-oauth-consent-and-callback.md">Connect Xero OAuth (consent and callback)</a></li>
+              <li><a href="./accounting/xero/provision-company-bank-accounts-xero-bsm.md">Provision company bank accounts in Xero from BSM</a></li>
+              <li><a href="./accounting/xero/view-xero-chart-accounts-for-company.md">View Xero chart of accounts for a company</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Xero Auth">Xero Auth</h3>
+          <small class="muted">Inventory files: <a href="./accounting/xero-auth/">accounting/xero-auth/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/xero-auth/connect-xero-accounting-integration.md">Connect Xero accounting integration</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Xero Document Status Sync Command">Xero Document Status Sync Command</h3>
+          <small class="muted">Inventory files: <a href="./accounting/xero-document-status-sync-command/">accounting/xero-document-status-sync-command/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/xero-document-status-sync-command/align-xero-published-documents-with-xero.md">Align Xero-published documents with Xero</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+        <article class="topic skip-feature-transform">
+          <h3 data-title="Zendesk Controller">Zendesk Controller</h3>
+          <small class="muted">Inventory files: <a href="./accounting/zendesk-controller/">accounting/zendesk-controller/</a></small>
+          <div class="grid">
+            <section class="box" style="grid-column: 1 / -1;">
+              <h4>Features</h4>
+              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">
+              <li><a href="./accounting/zendesk-controller/escalate-cdd-and-kyc-refresh-to-zendesk.md">Escalate CDD and KYC refresh to Zendesk</a></li>
+              <li><a href="./accounting/zendesk-controller/manage-company-zendesk-tickets.md">Manage company Zendesk tickets</a></li>
+              <li><a href="./accounting/zendesk-controller/review-zendesk-ticket-linkage-logs.md">Review Zendesk ticket linkage logs</a></li>
+              </ul>
+            </section>
+          </div>
+        </article>
+      <!-- GENERATED_ACCOUNTING_TOPICS_END -->
       </section>
     </div>
     <script>
@@ -58,6 +2129,19 @@
         modules.forEach((moduleEl) => {
           const title = moduleEl.querySelector("h3");
           const listItems = moduleEl.querySelectorAll("ul li");
+
+          if (moduleEl.classList.contains("skip-feature-transform")) {
+            listItems.forEach((li) => {
+              const raw = li.textContent.trim();
+              if (/\[Must-have\]/i.test(raw)) totalMustHave += 1;
+            });
+            totalFeatures += listItems.length;
+            if (title) {
+              const base = title.getAttribute("data-title") || title.textContent.trim();
+              title.innerHTML = `${base} <span class="pill">${listItems.length} features</span>`;
+            }
+            return;
+          }
 
           listItems.forEach((li, idx) => {
             const raw = li.textContent.trim();

@@ -19,8 +19,8 @@
       .wrap { max-width: 1150px; margin: 0 auto; padding: 24px 16px 40px; }
       h1 { margin: 0 0 8px; }
       .muted { color: var(--muted); }
-      .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
-      .menu { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 0; }
+      .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 20px; }
+      .menu { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 20px; }
       .menu a { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: #101a2f; color: #c9d9fa; text-decoration: none; font-size: 13px; }
       .menu a.active { border-color: #5a8dde; background: #162747; color: #e5efff; }
       .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
@@ -85,7 +85,7 @@
         { name: "CLM (Customer Lifecycle Management)", modules: 16, listed: 16, mustHave: 2, highlights: ["Sleek Admin and Customer App prefixed modules", "One folder per module under clm/", "Module image references captured"], page: "./domain-clm.html" },
         { name: "Compliance", modules: 1, listed: 3, mustHave: 3, highlights: ["Dynamic KYC questionnaire", "Risk scoring thresholds", "Review and approval flow"], page: "./domain-compliance.html" },
         { name: "CorpSec", modules: 3, listed: 88, mustHave: 63, highlights: ["72 Admin App + 13 Client App MD rows", "customer-main / customer-common / customer-root evidence", "Legacy register sample"], page: "./domain-corpsec.html" },
-        { name: "Accounting", modules: 1, listed: 3, mustHave: 3, highlights: ["Payment capture and matching", "Reconciliation exceptions", "Admin follow-up workflow"], page: "./domain-accounting.html" }
+        { name: "Accounting", modules: 158, listed: 339, mustHave: 0, highlights: ["One CorpSec-style link list per module folder", "Bookkeeping, integrations, and admin surfaces", "Tag [Must-have] on domain page when scope is known"], page: "./domain-accounting.html" }
       ];
 
       function renderStats() {
