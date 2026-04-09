@@ -23,3 +23,4 @@ npm-debug.log*
 
 # Dependencies
 node_modules/
+feature-annotations.sqlite

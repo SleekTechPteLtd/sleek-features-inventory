@@ -1,80 +1,63 @@
 #!/usr/bin/env node
 /**
  * Feature Matrix annotation server
- * Serves the HTML statically and persists annotations to feature-annotations.sqlite
+ * Persists annotations to feature-annotations.json (plain text, git-friendly)
  *
  * Usage: npm start
  *        open http://localhost:3000/domain-accounting.html
  */
 
 import express from 'express';
-import Database from 'better-sqlite3';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, '..');
-const DB_PATH = join(ROOT, 'feature-annotations.sqlite');
+const ROOT      = join(__dirname, '..');
+const DB_PATH   = join(ROOT, 'feature-annotations.json');
 
-const db = new Database(DB_PATH);
+// ── In-memory state ────────────────────────────────────────────────────────
+function load() {
+  if (existsSync(DB_PATH)) {
+    return JSON.parse(readFileSync(DB_PATH, 'utf8'));
+  }
+  return { annotations: {}, additions: [] };
+}
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS annotations (
-    row_id         INTEGER PRIMARY KEY,
-    priority       TEXT CHECK(priority IN ('high', 'medium', 'low')),
-    comment        TEXT DEFAULT '',
-    false_positive INTEGER DEFAULT 0
-  );
+function save(state) {
+  writeFileSync(DB_PATH, JSON.stringify(state, null, 2), 'utf8');
+}
 
-  CREATE TABLE IF NOT EXISTS additions (
-    id             INTEGER PRIMARY KEY AUTOINCREMENT,
-    category       TEXT NOT NULL,
-    capability     TEXT NOT NULL,
-    url            TEXT NOT NULL,
-    ce             INTEGER DEFAULT 0,
-    cp             INTEGER DEFAULT 0,
-    aa             INTEGER DEFAULT 0,
-    sb             INTEGER DEFAULT 0,
-    priority       TEXT,
-    comment        TEXT DEFAULT '',
-    false_positive INTEGER DEFAULT 0
-  );
-`);
+let state = load();
 
-const upsertAnnotation = db.prepare(`
-  INSERT INTO annotations (row_id, priority, comment, false_positive)
-  VALUES (@row_id, @priority, @comment, @false_positive)
-  ON CONFLICT(row_id) DO UPDATE SET
-    priority       = excluded.priority,
-    comment        = excluded.comment,
-    false_positive = excluded.false_positive
-`);
-
+// ── Express ────────────────────────────────────────────────────────────────
 const app = express();
 app.use(express.json());
 app.use(express.static(ROOT));
 
 app.get('/api/state', (_req, res) => {
-  const annotations = db.prepare('SELECT * FROM annotations').all();
-  const additions   = db.prepare('SELECT * FROM additions ORDER BY id').all();
-  res.json({ annotations, additions });
+  res.json({
+    annotations: Object.entries(state.annotations).map(([row_id, ann]) => ({ row_id: Number(row_id), ...ann })),
+    additions:   state.additions,
+  });
 });
 
 app.put('/api/annotations/:rowId', (req, res) => {
-  const row_id = parseInt(req.params.rowId, 10);
-  if (isNaN(row_id)) return res.status(400).json({ error: 'invalid rowId' });
+  const rowId = parseInt(req.params.rowId, 10);
+  if (isNaN(rowId)) return res.status(400).json({ error: 'invalid rowId' });
   const { priority, comment, false_positive } = req.body;
-  upsertAnnotation.run({
-    row_id,
+  state.annotations[rowId] = {
     priority:       priority || null,
     comment:        comment  || '',
-    false_positive: false_positive ? 1 : 0,
-  });
+    false_positive: !!false_positive,
+  };
+  save(state);
   res.json({ ok: true });
 });
 
 app.delete('/api/annotations/:rowId', (req, res) => {
-  db.prepare('DELETE FROM annotations WHERE row_id = ?').run(parseInt(req.params.rowId, 10));
+  delete state.annotations[parseInt(req.params.rowId, 10)];
+  save(state);
   res.json({ ok: true });
 });
 
@@ -83,19 +66,19 @@ app.post('/api/additions', (req, res) => {
   if (!category || !capability || !url) {
     return res.status(400).json({ error: 'category, capability, and url are required' });
   }
-  const result = db.prepare(`
-    INSERT INTO additions (category, capability, url, ce, cp, aa, sb, priority, comment)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(
-    category, capability, url,
-    ce ? 1 : 0, cp ? 1 : 0, aa ? 1 : 0, sb ? 1 : 0,
-    priority || null, comment || '',
-  );
-  res.json({ id: result.lastInsertRowid });
+  const id = state.additions.length
+    ? Math.max(...state.additions.map(a => a.id)) + 1
+    : 1;
+  const row = { id, category, capability, url, ce: !!ce, cp: !!cp, aa: !!aa, sb: !!sb, priority: priority || null, comment: comment || '', false_positive: false };
+  state.additions.push(row);
+  save(state);
+  res.json({ id });
 });
 
 app.delete('/api/additions/:id', (req, res) => {
-  db.prepare('DELETE FROM additions WHERE id = ?').run(parseInt(req.params.id, 10));
+  const id = parseInt(req.params.id, 10);
+  state.additions = state.additions.filter(a => a.id !== id);
+  save(state);
   res.json({ ok: true });
 });
 
