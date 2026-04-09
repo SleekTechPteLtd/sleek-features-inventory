@@ -20,3 +20,6 @@ npm-debug.log*
 
 # Optional tooling caches
 .cache/
+
+# Dependencies
+node_modules/

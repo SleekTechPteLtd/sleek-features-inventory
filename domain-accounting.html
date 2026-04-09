@@ -50,6 +50,36 @@
       .ce-no-img svg { opacity: 0.45; }
       .ce-card-label { padding: 6px 8px; font-size: 11px; color: #a0b8e0; line-height: 1.35; }
       .ce-screenshot-badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 999px; background: #0f2a1e; border: 1px solid #1e5a3a; color: #6bcfa0; margin-top: 10px; }
+
+      /* ── Feature Matrix Annotations ── */
+      .fm-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+      .fm-toolbar h3 { margin:0; flex:1; font-size:1rem; color:#b7caf2; }
+      .fm-btn { padding:4px 12px; border-radius:6px; border:1px solid var(--line); background:#101d36; color:#c9d9fa; font-size:12px; cursor:pointer; }
+      .fm-btn:hover { border-color:#5a8dde; color:#e5efff; }
+      .fm-btn.primary { border-color:#2f7e59; background:#143a2a; color:#a6f2cd; }
+      .fm-priority-select { font-size:11px; background:#0c1629; border:1px solid #304a77; border-radius:4px; color:#c9d9fa; padding:2px 4px; }
+      .fm-priority-select.p-high   { border-color:#f97316; color:#f97316; }
+      .fm-priority-select.p-medium { border-color:#facc15; color:#facc15; }
+      .fm-priority-select.p-low    { border-color:#60a5fa; color:#60a5fa; }
+      .fm-notes { font-size:11px; background:#0c1629; border:1px solid #304a77; border-radius:4px; color:#c9d9fa; padding:3px 5px; width:100%; min-width:120px; resize:vertical; font-family:inherit; }
+      .fm-fp-check { accent-color:#f97316; width:14px; height:14px; cursor:pointer; }
+      tr.fm-fp-row td:first-child { text-decoration:line-through; opacity:0.5; }
+      tr.fm-fp-row { opacity:0.55; }
+      tr.fm-addition td:first-child a { color:#9dc5ff; }
+      tr.fm-addition { border-left:2px solid #3d6a9e; }
+
+      /* Modal */
+      .fm-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:100; align-items:center; justify-content:center; }
+      .fm-modal-backdrop.open { display:flex; }
+      .fm-modal { background:#121a2b; border:1px solid var(--line); border-radius:12px; padding:20px; width:460px; max-width:95vw; }
+      .fm-modal h4 { margin:0 0 14px; color:#b7caf2; font-size:.95rem; }
+      .fm-field { margin-bottom:10px; }
+      .fm-field label { display:block; font-size:11px; color:var(--muted); margin-bottom:3px; }
+      .fm-field input[type=text], .fm-field input[type=url], .fm-field select, .fm-field textarea { width:100%; background:#0c1629; border:1px solid #304a77; border-radius:5px; color:#dbe7ff; padding:6px 8px; font-size:12px; font-family:inherit; }
+      .fm-field input[type=url]:invalid { border-color:#f97316; }
+      .fm-field .fm-surface-checks { display:flex; gap:12px; }
+      .fm-field .fm-surface-checks label { font-size:12px; color:#c9d9fa; display:flex; align-items:center; gap:4px; }
+      .fm-modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
     </style>
   </head>
   <body>
@@ -497,10 +527,13 @@
       <!-- ════════════════════════════════════════════════════════
            Canonical Feature Matrix
            ════════════════════════════════════════════════════════ -->
-      <section class="panel">
-        <h3 style="margin:0 0 6px;font-size:1rem;color:#b7caf2;">Canonical Feature Matrix</h3>
+      <section class="panel" id="matrix-panel">
+        <div class="fm-toolbar">
+          <h3>Canonical Feature Matrix</h3>
+          <button class="fm-btn primary" id="fm-add-btn">+ Add feature</button>
+        </div>
         <p style="margin:0 0 14px;font-size:12px;color:var(--muted);">Capabilities observed across all four surfaces. CE = Coding Engine · CP = Customer Portal · AA = Admin App · SB = SleekBooks</p>
-        <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <table id="feature-matrix" style="width:100%;border-collapse:collapse;font-size:12px;">
           <thead>
             <tr style="border-bottom:1px solid var(--line);">
               <th style="text-align:left;padding:6px 10px;color:#b7caf2;font-weight:600;">Capability</th>
@@ -508,11 +541,14 @@
               <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">CP</th>
               <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">AA</th>
               <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">SB</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">Priority</th>
+              <th style="text-align:left;padding:6px 10px;color:#b7caf2;font-weight:600;">Notes</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;" title="False positive — mark if this row shouldn't be here">FP</th>
             </tr>
           </thead>
           <tbody>
             <!-- ── Documents & Receipts ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Documents &amp; Receipts</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Documents &amp; Receipts</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;">
               <td style="padding:5px 10px;color:#dbe7ff;">Receipt / expense upload</td>
               <td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td>
@@ -530,7 +566,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Country / region scope</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Assign document to accountant</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <!-- ── Bank Statements ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Bank Statements</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Bank Statements</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank statement list</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank statement upload</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank statement filters</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
@@ -540,13 +576,13 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Tags</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Review queue (needs attention)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <!-- ── Reconciliation ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Reconciliation</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Reconciliation</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank reconciliation tool</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Cash coding</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Payment reconciliation</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">ML auto-reconciliation</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <!-- ── Invoicing & Payments ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Invoicing &amp; Payments</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Invoicing &amp; Payments</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Sales invoice list</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Sales invoice creation</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Sales invoice archiving</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
@@ -555,7 +591,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Journal entries</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Period closing voucher</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <!-- ── Suppliers & Clients ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Suppliers &amp; Clients</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Suppliers &amp; Clients</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Supplier list &amp; search</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Supplier coding rules / defaults</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Supplier detail</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
@@ -563,7 +599,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client plan view</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client document counts</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <!-- ── Financial Reports ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Financial Reports</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Financial Reports</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">General Ledger</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Balance Sheet</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Profit &amp; Loss Statement</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
@@ -575,7 +611,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank Reconciliation Statement</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">BAS Statement (AU)</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <!-- ── Setup & Configuration ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Setup &amp; Configuration</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Setup &amp; Configuration</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Chart of Accounts</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Company settings</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Bank account management</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
@@ -584,7 +620,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Find &amp; recode</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Tax templates (sales &amp; purchase)</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
             <!-- ── Administration ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Administration</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Administration</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">User management &amp; KYC</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Company list management</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Billing &amp; subscriptions</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
@@ -594,7 +630,7 @@
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Document templates</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Request templates</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <!-- ── Workflows & Compliance ── -->
-            <tr><td colspan="5" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Workflows &amp; Compliance</td></tr>
+            <tr><td colspan="8" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Workflows &amp; Compliance</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Accounting onboarding workflow</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Camunda workflow management</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
             <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Document request pipeline</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
@@ -1051,6 +1087,238 @@
         if (mustHaveCountEl) mustHaveCountEl.textContent = totalMustHave;
       })();
     </script>
+
+  <!-- ── Add-feature modal ── -->
+  <div class="fm-modal-backdrop" id="fm-modal">
+    <div class="fm-modal">
+      <h4>Add missing feature</h4>
+      <div class="fm-field">
+        <label>Category</label>
+        <select id="fm-cat"></select>
+      </div>
+      <div class="fm-field">
+        <label>Capability *</label>
+        <input type="text" id="fm-cap" placeholder="e.g. Expense claim reports" required />
+      </div>
+      <div class="fm-field">
+        <label>URL where you can see this feature * <span style="color:#f97316">(required)</span></label>
+        <input type="url" id="fm-url" placeholder="https://…" required />
+      </div>
+      <div class="fm-field">
+        <label>Surfaces</label>
+        <div class="fm-surface-checks">
+          <label><input type="checkbox" id="fm-ce"> CE</label>
+          <label><input type="checkbox" id="fm-cp"> CP</label>
+          <label><input type="checkbox" id="fm-aa"> AA</label>
+          <label><input type="checkbox" id="fm-sb"> SB</label>
+        </div>
+      </div>
+      <div class="fm-field">
+        <label>Priority</label>
+        <select id="fm-pri"><option value="">—</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+      </div>
+      <div class="fm-field">
+        <label>Notes</label>
+        <textarea id="fm-note" rows="2"></textarea>
+      </div>
+      <div class="fm-modal-actions">
+        <button class="fm-btn" id="fm-cancel">Cancel</button>
+        <button class="fm-btn primary" id="fm-submit">Add row</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const table  = document.getElementById('feature-matrix');
+      const tbody  = table.querySelector('tbody');
+      const modal  = document.getElementById('fm-modal');
+      const catSel = document.getElementById('fm-cat');
+
+      // ── 1. Stamp every non-header row with a data-row-id ──────────────────
+      let rowId = 0;
+      const categories = [];
+      for (const tr of tbody.rows) {
+        const first = tr.cells[0];
+        if (first && first.colSpan > 1) {
+          // Category header row
+          const cat = first.textContent.trim();
+          tr.dataset.category = cat;
+          if (!categories.includes(cat)) categories.push(cat);
+        } else {
+          tr.dataset.rowId = rowId++;
+          // Append 3 annotation cells
+          const tdPri  = tr.insertCell(-1);
+          const tdNote = tr.insertCell(-1);
+          const tdFp   = tr.insertCell(-1);
+
+          tdPri.style.cssText  = 'text-align:center;padding:4px 8px;vertical-align:middle;';
+          tdNote.style.cssText = 'padding:4px 8px;vertical-align:middle;';
+          tdFp.style.cssText   = 'text-align:center;padding:4px 8px;vertical-align:middle;';
+
+          const sel = document.createElement('select');
+          sel.className = 'fm-priority-select';
+          sel.innerHTML = '<option value="">—</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option>';
+          sel.dataset.row = tr.dataset.rowId;
+          tdPri.appendChild(sel);
+
+          const ta = document.createElement('textarea');
+          ta.className = 'fm-notes';
+          ta.rows = 1;
+          ta.placeholder = 'notes…';
+          ta.dataset.row = tr.dataset.rowId;
+          tdNote.appendChild(ta);
+
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.className = 'fm-fp-check';
+          cb.dataset.row = tr.dataset.rowId;
+          tdFp.appendChild(cb);
+        }
+      }
+
+      // Populate category dropdown in modal
+      for (const cat of categories) {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = cat;
+        catSel.appendChild(opt);
+      }
+
+      // ── 2. Save helpers ────────────────────────────────────────────────────
+      function saveRow(rowIdStr) {
+        const tr  = tbody.querySelector(`tr[data-row-id="${rowIdStr}"]`);
+        if (!tr) return;
+        const sel = tr.querySelector('.fm-priority-select');
+        const ta  = tr.querySelector('.fm-notes');
+        const cb  = tr.querySelector('.fm-fp-check');
+        fetch(`/api/annotations/${rowIdStr}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            priority:       sel.value || null,
+            comment:        ta.value,
+            false_positive: cb.checked,
+          }),
+        });
+        applyFpStyle(tr, cb.checked);
+      }
+
+      function applyFpStyle(tr, isFp) {
+        tr.classList.toggle('fm-fp-row', !!isFp);
+      }
+
+      // ── 3. Wire change events ──────────────────────────────────────────────
+      tbody.addEventListener('change', e => {
+        const el = e.target;
+        if (el.classList.contains('fm-priority-select')) {
+          el.className = 'fm-priority-select' + (el.value ? ` p-${el.value}` : '');
+          saveRow(el.dataset.row);
+        }
+        if (el.classList.contains('fm-fp-check')) {
+          saveRow(el.dataset.row);
+        }
+      });
+      tbody.addEventListener('blur', e => {
+        if (e.target.classList.contains('fm-notes')) saveRow(e.target.dataset.row);
+      }, true);
+
+      // ── 4. Render an addition row ──────────────────────────────────────────
+      function renderAddition(a) {
+        // Find the category header row to insert after its section
+        let insertBefore = null;
+        let inCategory = false;
+        for (const tr of tbody.rows) {
+          if (tr.dataset.category === a.category) { inCategory = true; continue; }
+          if (inCategory && tr.dataset.category) { insertBefore = tr; break; }
+        }
+        const tr = tbody.insertRow(insertBefore ? insertBefore.rowIndex - tbody.rows[0].rowIndex : -1);
+        tr.className = 'fm-addition';
+        tr.dataset.additionId = a.id;
+        tr.style.borderBottom = '1px solid #1e2d4a';
+
+        const mkCenter = v => `<td style="text-align:center;padding:5px 10px;color:${v?'#a6f2cd':'#9db0d7'}">${v?'✓':'—'}</td>`;
+        tr.innerHTML = `
+          <td style="padding:5px 10px;"><a href="${escHtml(a.url)}" target="_blank" rel="noopener">${escHtml(a.capability)}</a></td>
+          ${mkCenter(a.ce)}${mkCenter(a.cp)}${mkCenter(a.aa)}${mkCenter(a.sb)}
+          <td style="text-align:center;padding:4px 8px;vertical-align:middle;"></td>
+          <td style="padding:4px 8px;vertical-align:middle;"><span style="font-size:11px;color:var(--muted)">${escHtml(a.comment||'')}</span></td>
+          <td style="text-align:center;padding:4px 8px;vertical-align:middle;"></td>
+        `;
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // ── 5. Load state from API ─────────────────────────────────────────────
+      fetch('/api/state')
+        .then(r => r.json())
+        .then(({ annotations, additions }) => {
+          for (const ann of annotations) {
+            const tr  = tbody.querySelector(`tr[data-row-id="${ann.row_id}"]`);
+            if (!tr) continue;
+            const sel = tr.querySelector('.fm-priority-select');
+            const ta  = tr.querySelector('.fm-notes');
+            const cb  = tr.querySelector('.fm-fp-check');
+            if (ann.priority) {
+              sel.value = ann.priority;
+              sel.className = `fm-priority-select p-${ann.priority}`;
+            }
+            ta.value = ann.comment || '';
+            cb.checked = !!ann.false_positive;
+            applyFpStyle(tr, cb.checked);
+          }
+          for (const a of additions) renderAddition(a);
+        })
+        .catch(() => {
+          // Server not running — annotations silently unavailable
+        });
+
+      // ── 6. Add-feature modal ───────────────────────────────────────────────
+      document.getElementById('fm-add-btn').addEventListener('click', () => {
+        modal.classList.add('open');
+        document.getElementById('fm-cap').value = '';
+        document.getElementById('fm-url').value = '';
+        document.getElementById('fm-note').value = '';
+        document.getElementById('fm-pri').value = '';
+        ['fm-ce','fm-cp','fm-aa','fm-sb'].forEach(id => document.getElementById(id).checked = false);
+      });
+
+      document.getElementById('fm-cancel').addEventListener('click', () => modal.classList.remove('open'));
+      modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+      document.getElementById('fm-submit').addEventListener('click', async () => {
+        const cap = document.getElementById('fm-cap').value.trim();
+        const url = document.getElementById('fm-url').value.trim();
+        const cat = catSel.value;
+        if (!cap) { document.getElementById('fm-cap').focus(); return; }
+        if (!url || !document.getElementById('fm-url').validity.valid) {
+          document.getElementById('fm-url').focus(); return;
+        }
+        const body = {
+          category:   cat,
+          capability: cap,
+          url,
+          ce: document.getElementById('fm-ce').checked,
+          cp: document.getElementById('fm-cp').checked,
+          aa: document.getElementById('fm-aa').checked,
+          sb: document.getElementById('fm-sb').checked,
+          priority: document.getElementById('fm-pri').value || null,
+          comment:  document.getElementById('fm-note').value,
+        };
+        const res = await fetch('/api/additions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        if (res.ok) {
+          const { id } = await res.json();
+          renderAddition({ ...body, id });
+          modal.classList.remove('open');
+        }
+      });
+    })();
+  </script>
 
   </body>
 </html>
