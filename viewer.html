@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature Viewer</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+      :root { --bg:#0b1220; --panel:#121a2b; --line:#2a3757; --text:#e6ecfb; --muted:#9db0d7; }
+      * { box-sizing: border-box; }
+      body { margin:0; font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
+      .wrap { max-width:900px; margin:0 auto; padding:24px 16px 60px; }
+      .nav { display:flex; align-items:center; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+      .back { padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:#101a2f; color:#c9d9fa; text-decoration:none; font-size:13px; cursor:pointer; }
+      .back:hover { border-color:#5a8dde; }
+      .breadcrumb { color:var(--muted); font-size:13px; }
+      .panel { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:28px 32px; }
+      .error { color:#f87171; background:#2a1219; border:1px solid #7f1d1d; border-radius:8px; padding:16px; }
+
+      /* Markdown content styles */
+      .panel h1 { font-size:1.5rem; margin:0 0 20px; color:#e8f0ff; border-bottom:1px solid var(--line); padding-bottom:12px; }
+      .panel h2 { font-size:1.1rem; margin:28px 0 10px; color:#b7caf2; }
+      .panel h3 { font-size:0.95rem; margin:20px 0 8px; color:#9db0d7; }
+      .panel h4 { font-size:0.9rem; margin:16px 0 6px; color:#8ca3cc; }
+      .panel p { line-height:1.7; margin:0 0 12px; color:#d0ddf5; }
+      .panel ul, .panel ol { padding-left:20px; margin:0 0 12px; color:#c4d4f0; line-height:1.7; }
+      .panel li { margin-bottom:4px; }
+      .panel a { color:#9dc5ff; text-decoration:none; }
+      .panel a:hover { text-decoration:underline; }
+      .panel code { font-family: 'JetBrains Mono', 'Fira Code', monospace; background:#0c1629; border:1px solid #253655; border-radius:4px; padding:1px 5px; font-size:0.85em; color:#a5c8ff; }
+      .panel pre { background:#0c1629; border:1px solid var(--line); border-radius:8px; padding:14px 16px; overflow-x:auto; margin:0 0 16px; }
+      .panel pre code { background:none; border:none; padding:0; font-size:0.88em; color:#c9dcff; }
+      .panel table { width:100%; border-collapse:collapse; margin:0 0 20px; font-size:0.9rem; }
+      .panel th { background:#0f1e38; color:#b7caf2; padding:8px 12px; text-align:left; border:1px solid var(--line); font-weight:600; }
+      .panel td { padding:8px 12px; border:1px solid var(--line); color:#c4d4f0; vertical-align:top; }
+      .panel td strong { color:#dbe8ff; }
+      .panel tr:nth-child(even) td { background:#0d1830; }
+      .panel blockquote { border-left:3px solid #3a5a8c; margin:0 0 12px; padding:8px 16px; background:#0e1d36; color:#9db0d7; }
+      .panel hr { border:none; border-top:1px solid var(--line); margin:24px 0; }
+
+      #loading { color:var(--muted); font-size:14px; padding:40px 0; text-align:center; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav">
+        <a class="back" onclick="history.back(); return false;" href="#">← Back</a>
+        <span class="breadcrumb" id="breadcrumb"></span>
+      </nav>
+      <div id="loading">Loading…</div>
+      <div class="panel" id="content" style="display:none;"></div>
+    </div>
+    <script>
+      (function () {
+        const params = new URLSearchParams(location.search);
+        const file = params.get('file');
+
+        if (!file) {
+          document.getElementById('loading').textContent = 'No file specified. Add ?file=path/to/file.md';
+          return;
+        }
+
+        // Breadcrumb from path
+        const parts = file.split('/').filter(Boolean);
+        const filename = parts[parts.length - 1].replace('.md', '').replace(/-/g, ' ');
+        document.getElementById('breadcrumb').textContent = parts.slice(0, -1).join(' / ');
+
+        fetch(file)
+          .then(r => {
+            if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+            return r.text();
+          })
+          .then(md => {
+            const html = marked.parse(md);
+            const content = document.getElementById('content');
+            content.innerHTML = html;
+            content.style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+
+            // Set page title from H1
+            const h1 = content.querySelector('h1');
+            if (h1) document.title = h1.textContent;
+          })
+          .catch(err => {
+            document.getElementById('loading').innerHTML =
+              `<div class="error">Failed to load <code>${file}</code>: ${err.message}</div>`;
+          });
+      })();
+    </script>
+  </body>
+</html>

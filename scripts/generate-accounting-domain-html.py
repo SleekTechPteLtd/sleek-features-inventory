@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Regenerate domain-accounting.html from accounting/<module>/*.md inventory.
+Regenerate domain-accounting.html from by-surface/*/bookkeeping/*/ inventory.
 
 Usage (from repo root):
   python3 scripts/generate-accounting-domain-html.py
@@ -42,18 +42,29 @@ def link_title_from_file(md_path: Path) -> str:
     return humanize_slug(stem)
 
 
-def emit_article(module_dir: Path, module_slug: str) -> str:
+SURFACE_LABEL = {
+    "customer-app": "Customer app",
+    "admin-app": "Admin app",
+    "sleekbooks": "SleekBooks",
+    "coding-engine": "Coding engine",
+}
+
+
+def emit_article(module_dir: Path, surface: str, module_slug: str) -> str:
     md_files = sorted(module_dir.glob("*.md"))
     if not md_files:
         return ""
 
     display = humanize_slug(module_slug)
+    surf_label = SURFACE_LABEL.get(surface, surface)
     lines: list[str] = []
     lines.append('        <article class="topic skip-feature-transform">')
-    lines.append(f'          <h3 data-title="{html.escape(display, quote=True)}">{html.escape(display)}</h3>')
-    folder_href = f"./accounting/{module_slug}/"
     lines.append(
-        f'          <small class="muted">Inventory files: <a href="{html.escape(folder_href, quote=True)}">accounting/{html.escape(module_slug)}/</a></small>'
+        f'          <h3 data-title="{html.escape(display, quote=True)}">{html.escape(surf_label)} · {html.escape(display)}</h3>'
+    )
+    folder_href = f"./by-surface/{surface}/bookkeeping/{module_slug}/"
+    lines.append(
+        f'          <small class="muted">Inventory: <a href="{html.escape(folder_href, quote=True)}">by-surface/{html.escape(surface)}/bookkeeping/{html.escape(module_slug)}/</a></small>'
     )
     lines.append('          <div class="grid">')
     lines.append('            <section class="box" style="grid-column: 1 / -1;">')
@@ -62,10 +73,11 @@ def emit_article(module_dir: Path, module_slug: str) -> str:
         '              <ul style="column-count: 2; column-gap: 24px; font-size: 12px;">'
     )
     for md in md_files:
-        rel = f"./accounting/{module_slug}/{md.name}"
+        raw = f"by-surface/{surface}/bookkeeping/{module_slug}/{md.name}"
+        viewer_href = f"./viewer.html?file={raw}"
         title = link_title_from_file(md)
         lines.append(
-            f'              <li><a href="{html.escape(rel, quote=True)}">{html.escape(title)}</a></li>'
+            f'              <li><a href="{html.escape(viewer_href, quote=True)}">{html.escape(title)}</a></li>'
         )
     lines.append("              </ul>")
     lines.append("            </section>")
@@ -76,18 +88,29 @@ def emit_article(module_dir: Path, module_slug: str) -> str:
 
 def main() -> int:
     root = repo_root()
-    accounting = root / "accounting"
-    if not accounting.is_dir():
-        print(f"error: missing {accounting}", file=sys.stderr)
+    by_surface = root / "by-surface"
+    if not by_surface.is_dir():
+        print(f"error: missing {by_surface}", file=sys.stderr)
         return 1
 
-    module_dirs = sorted(
-        p for p in accounting.iterdir() if p.is_dir() and not p.name.startswith(".")
-    )
-
+    order = ["customer-app", "admin-app", "sleekbooks", "coding-engine"]
     blocks: list[str] = []
-    for d in module_dirs:
-        blocks.append(emit_article(d, d.name))
+    n_mod = 0
+    n_feat = 0
+
+    for surface in order:
+        bk = by_surface / surface / "bookkeeping"
+        if not bk.is_dir():
+            continue
+        module_dirs = sorted(
+            p for p in bk.iterdir() if p.is_dir() and not p.name.startswith(".")
+        )
+        for d in module_dirs:
+            b = emit_article(d, surface, d.name)
+            if b:
+                blocks.append(b)
+                n_mod += 1
+                n_feat += len(list(d.glob("*.md")))
 
     generated = "".join(blocks)
 
@@ -97,7 +120,7 @@ def main() -> int:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleek Features Inventory - Accounting</title>
+    <title>Sleek Features Inventory - Bookkeeping by surface</title>
     <style>
       :root { --bg:#0b1220; --panel:#121a2b; --line:#2a3757; --text:#e6ecfb; --muted:#9db0d7; }
       * { box-sizing: border-box; } body { margin:0; font-family: Inter, Arial, sans-serif; background:var(--bg); color:var(--text); }
@@ -124,12 +147,12 @@ def main() -> int:
   </head>
   <body>
     <div class="wrap">
-      <h1>Accounting Domain</h1>
-      <p class="muted">Modules inside the `accounting/` TLD domain folder.</p>
+      <h1>Bookkeeping inventory (by surface)</h1>
+      <p class="muted">Capabilities grouped by <strong>customer app</strong>, <strong>admin app</strong>, <strong>SleekBooks</strong>, and <strong>coding engine</strong> — see <a href="./by-surface/README.md">by-surface/README.md</a>.</p>
       <nav class="menu">
-        <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a class="active" href="./domain-accounting.html">Accounting</a>
+        <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a class="active" href="./domain-accounting.html">Bookkeeping</a>
       </nav>
-      <section class="panel"><strong>Domain reference:</strong> <a href="./accounting/README.md">accounting/README.md</a></section>
+      <section class="panel"><strong>Reference:</strong> <a href="./accounting/README.md">accounting/README.md</a> (domain column remains Bookkeeping &amp; Accounting on the master sheet)</section>
       <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span></div></section>
       <p class="muted">Each module below links to markdown feature rows. Add a <code>[Must-have]</code> prefix on a list item to count it toward migration scope. Interactive must-have and priority labels apply only to modules that do not use the link-list layout.</p>
       <section class="panel">
@@ -206,8 +229,6 @@ def main() -> int:
     full = template_before + generated + template_after
     out_path.write_text(full, encoding="utf-8")
 
-    n_mod = sum(1 for b in blocks if b)
-    n_feat = sum(len(list(d.glob("*.md"))) for d in module_dirs)
     print(f"wrote {out_path} ({n_mod} modules, {n_feat} feature files)")
     return 0
 
