@@ -2,7 +2,10 @@
 """
 Regenerate domain-clm.html from clm/feature-set/**/*.md master sheets.
 
-Groups the Canonical Feature Matrix by primary repository (see PRIMARY_REPO_ORDER).
+Groups the Canonical Feature Matrix by primary repository (see PRIMARY_REPO_ORDER),
+then by CLM theme (see CLM_THEME_RULES): e.g. invoices, subscriptions, credit notes,
+payments, offboarding, upgrades/downgrades.
+
 Each row links to the inventory markdown via viewer.html. Repository columns
 show ✓ when the Service / Repository field mentions that repo (substring match).
 """
@@ -34,6 +37,60 @@ PRIMARY_REPO_ORDER: list[str] = [
     "customer-billing",
     "other",
 ]
+
+# CLM theme: (id, subsection heading, substring needles on title + path).
+# First match wins — keep more specific themes before broader ones.
+CLM_THEME_RULES: list[tuple[str, str, tuple[str, ...]]] = [
+    (
+        "offboarding",
+        "Offboarding & onboarding",
+        ("offboarding", "onboarding", "archive-company", "offboarding-request"),
+    ),
+    ("xero", "Xero integration", ("xero",)),
+    (
+        "upgrades",
+        "Upgrades & downgrades",
+        ("upgrade", "downgrade", "proration", "/upgrades/"),
+    ),
+    (
+        "credit_notes",
+        "Credit notes",
+        ("credit-note", "credit note", "credit_notes", "credit-notes-to", "/credit-notes"),
+    ),
+    (
+        "subscriptions",
+        "Subscriptions",
+        ("subscription", "auto-renew", "/subscription", "renewal reminder"),
+    ),
+    (
+        "payments",
+        "Payment requests & checkout",
+        (
+            "payment",
+            "stripe",
+            "checkout",
+            "pay invoice",
+            "credit card",
+            "add card",
+            "payment-token",
+            "/payment-",
+            "/stripe",
+            "webhook",
+        ),
+    ),
+    (
+        "coupons_credits",
+        "Coupons & credit balance",
+        ("coupon", "discount", "credit balance", "/credit-balance", "/coupons"),
+    ),
+    (
+        "invoices",
+        "Invoices & billing documents",
+        ("invoice", "invoic", "/invoice/", "/invoices"),
+    ),
+]
+
+CLM_THEME_ORDER: list[str] = [t[0] for t in CLM_THEME_RULES] + ["other"]
 
 _CLM_DIR = Path(__file__).resolve().parent
 ROOT = _CLM_DIR.parent
@@ -104,6 +161,21 @@ def section_title(repo_key: str) -> str:
     return labels.get(repo_key, repo_key.replace("-", " ").title())
 
 
+def clm_theme_id(title: str, rel: str) -> str:
+    blob = f"{title} {rel}".lower().replace("\\", "/")
+    for key, _label, needles in CLM_THEME_RULES:
+        if any(n in blob for n in needles):
+            return key
+    return "other"
+
+
+def theme_heading(theme_id: str) -> str:
+    for key, label, _ in CLM_THEME_RULES:
+        if key == theme_id:
+            return label
+    return "Other CLM topics"
+
+
 def esc(s: str) -> str:
     return html.escape(s, quote=True)
 
@@ -120,24 +192,37 @@ def build_matrix_rows(features: list[dict]) -> str:
         by_primary[f["primary"]].append(f)
     parts: list[str] = []
     keys_ordered = [k for k in PRIMARY_REPO_ORDER if k in by_primary]
+    colspan = 1 + len(REPO_COLUMNS) + 3
     for repo_key in keys_ordered:
-        rows = sorted(by_primary[repo_key], key=lambda x: x["title"].lower())
-        colspan = 1 + len(REPO_COLUMNS) + 3
+        rows = by_primary[repo_key]
+        by_theme: dict[str, list[dict]] = defaultdict(list)
+        for f in rows:
+            tid = clm_theme_id(f["title"], f["rel"])
+            by_theme[tid].append(f)
         parts.append(
-            f'<tr><td colspan="{colspan}" style="padding:6px 10px;background:#0a1325;'
+            f'<tr class="fm-matrix-repo"><td colspan="{colspan}" style="padding:6px 10px;background:#0a1325;'
             f'color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">'
             f"{esc(section_title(repo_key))}</td></tr>"
         )
-        for f in rows:
-            viewer = f'./viewer.html?file={esc(f["rel"])}'
-            cap_cell = (
-                f'<td style="padding:5px 10px;color:#dbe7ff;">'
-                f'<a href="{viewer}">{esc(f["title"])}</a></td>'
-            )
-            checks = "".join(td_check(x) for x in f["flags"])
+        for theme_id in CLM_THEME_ORDER:
+            if theme_id not in by_theme:
+                continue
+            theme_rows = sorted(by_theme[theme_id], key=lambda x: x["title"].lower())
             parts.append(
-                f'<tr style="border-bottom:1px solid #1e2d4a;">{cap_cell}{checks}</tr>'
+                f'<tr class="fm-matrix-theme"><td colspan="{colspan}" style="padding:5px 10px 5px 22px;'
+                f'background:#0e1828;color:#9dafc6;font-weight:600;font-size:10px;'
+                f'border-top:1px solid #1a2744;">{esc(theme_heading(theme_id))}</td></tr>'
             )
+            for f in theme_rows:
+                viewer = f'./viewer.html?file={esc(f["rel"])}'
+                cap_cell = (
+                    f'<td style="padding:5px 10px;color:#dbe7ff;">'
+                    f'<a href="{viewer}">{esc(f["title"])}</a></td>'
+                )
+                checks = "".join(td_check(x) for x in f["flags"])
+                parts.append(
+                    f'<tr style="border-bottom:1px solid #1e2d4a;">{cap_cell}{checks}</tr>'
+                )
     return "\n".join(parts)
 
 
@@ -195,7 +280,7 @@ def build_html(features: list[dict]) -> str:
   <body>
     <div class="wrap">
       <h1>CLM Domain (Customer Lifecycle Management)</h1>
-      <p class="muted">Generated from <code>clm/feature-set/**/*.md</code>. Matrix columns are repositories mentioned in each feature&rsquo;s <strong>Service / Repository</strong> field. Rows are grouped by <em>primary</em> repository (first match in priority order: backend → frontend → service-delivery → …).</p>
+      <p class="muted">Generated from <code>clm/feature-set/**/*.md</code>. Matrix columns are repositories mentioned in each feature&rsquo;s <strong>Service / Repository</strong> field. Rows are grouped by <em>primary</em> repository (first match in priority order: backend → frontend → service-delivery → …), then by <em>CLM theme</em> (keyword match on feature title and file path — edit <code>CLM_THEME_RULES</code> in <code>generate-clm-domain-html.py</code> to adjust).</p>
       <nav class="menu">
         <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a class="active" href="./domain-clm.html">CLM (Customer Lifecycle Management)</a><a href="./domain-compliance.html">Compliance</a><a href="./domain-corpsec.html">CorpSec</a><a href="./domain-accounting.html">Accounting</a>
       </nav>
@@ -205,7 +290,7 @@ def build_html(features: list[dict]) -> str:
 
       <section class="panel" id="matrix-panel">
         <div class="fm-toolbar">
-          <h3>Canonical Feature Matrix (by repository)</h3>
+          <h3>Canonical Feature Matrix (by repository &amp; theme)</h3>
         </div>
         <p style="margin:0 0 14px;font-size:12px;color:var(--muted);">SBF = Sleek Billings Frontend · SBB = Sleek Billings Backend · SDS = Service Delivery API · SW = Sleek Website · CB = Customer Billing. A check means the inventory row cites that codebase.</p>
         <table id="feature-matrix" style="width:100%;border-collapse:collapse;font-size:12px;">
@@ -233,7 +318,11 @@ def build_html(features: list[dict]) -> str:
         for (const tr of tbody.rows) {{
           const first = tr.cells[0];
           if (first && first.colSpan > 1) {{
-            tr.dataset.category = first.textContent.trim();
+            if (tr.classList.contains('fm-matrix-repo')) {{
+              tr.dataset.category = first.textContent.trim();
+            }} else if (tr.classList.contains('fm-matrix-theme')) {{
+              tr.dataset.subtheme = first.textContent.trim();
+            }}
             continue;
           }}
           tr.dataset.rowId = rowId++;
