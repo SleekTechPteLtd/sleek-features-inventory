@@ -26,6 +26,61 @@
       .grid { display:grid; gap:10px; grid-template-columns: repeat(2, minmax(0,1fr)); margin-top:10px; } .box { border:1px dashed #37507b; border-radius:8px; padding:10px; background:#101d36; min-height:110px; }
       .box h4 { margin:0 0 6px; font-size:13px; color:#c9d9fa; } .box ul { margin:0; padding-left:18px; color:#afc2e8; font-size:13px; } .editable { border:1px solid #304a77; border-radius:6px; padding:8px; background:#0c1629; min-height:54px; color:#d8e5ff; font-size:13px; }
       a { color:#9dc5ff; text-decoration:none; } @media (max-width: 880px) { .grid { grid-template-columns: 1fr; } }
+
+      /* ── Screenshot gallery ── */
+      .ce-panel { margin-bottom: 20px; }
+      .ce-panel h2 { margin: 0 0 4px; font-size: 1rem; color: #b7caf2; }
+      .ce-panel > p { margin: 0 0 16px; font-size: 12px; color: var(--muted); }
+      .ce-section-grid { display: flex; gap: 12px; align-items: flex-start; }
+      .ce-col { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+      @media (max-width: 720px) { .ce-section-grid { flex-direction: column; } .ce-col { width: 100%; } }
+      .ce-section { background: #0d1728; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+      .ce-section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2px; }
+      .ce-section-title { font-size: 13px; font-weight: 600; color: #dbe8ff; }
+      .ce-section-count { font-size: 11px; color: var(--muted); }
+      .ce-section-url { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+      .ce-feature-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      @media (max-width: 500px) { .ce-feature-list { grid-template-columns: 1fr; } }
+      .ce-card { background: #101d36; border: 1px solid #243352; border-radius: 7px; overflow: hidden; }
+      .ce-thumb { position: relative; width: 100%; aspect-ratio: 16/7; background: #0c1629; border-bottom: 1px solid #1e304f; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+      .ce-thumb a { display: block; width: 100%; height: 100%; }
+      .ce-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: opacity 0.15s; }
+      .ce-thumb.no-img img { display: none; }
+      .ce-no-img { display: none; flex-direction: column; align-items: center; gap: 4px; color: #3d5a8a; font-size: 11px; }
+      .ce-thumb.no-img .ce-no-img { display: flex; }
+      .ce-no-img svg { opacity: 0.45; }
+      .ce-card-label { padding: 6px 8px; font-size: 11px; color: #a0b8e0; line-height: 1.35; }
+      .ce-screenshot-badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 999px; background: #0f2a1e; border: 1px solid #1e5a3a; color: #6bcfa0; margin-top: 10px; }
+
+      /* ── Feature Matrix Annotations ── */
+      .fm-toolbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+      .fm-toolbar h3 { margin:0; flex:1; font-size:1rem; color:#b7caf2; }
+      .fm-btn { padding:4px 12px; border-radius:6px; border:1px solid var(--line); background:#101d36; color:#c9d9fa; font-size:12px; cursor:pointer; }
+      .fm-btn:hover { border-color:#5a8dde; color:#e5efff; }
+      .fm-btn.primary { border-color:#2f7e59; background:#143a2a; color:#a6f2cd; }
+      .fm-priority-select { font-size:11px; background:#0c1629; border:1px solid #304a77; border-radius:4px; color:#c9d9fa; padding:2px 4px; }
+      .fm-priority-select.p-high   { border-color:#f97316; color:#f97316; }
+      .fm-priority-select.p-medium { border-color:#facc15; color:#facc15; }
+      .fm-priority-select.p-low    { border-color:#60a5fa; color:#60a5fa; }
+      .fm-notes { font-size:11px; background:#0c1629; border:1px solid #304a77; border-radius:4px; color:#c9d9fa; padding:3px 5px; width:100%; min-width:120px; resize:vertical; font-family:inherit; }
+      .fm-fp-check { accent-color:#f97316; width:14px; height:14px; cursor:pointer; }
+      tr.fm-fp-row td:first-child { text-decoration:line-through; opacity:0.5; }
+      tr.fm-fp-row { opacity:0.55; }
+      tr.fm-addition td:first-child a { color:#9dc5ff; }
+      tr.fm-addition { border-left:2px solid #3d6a9e; }
+
+      /* Modal */
+      .fm-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:100; align-items:center; justify-content:center; }
+      .fm-modal-backdrop.open { display:flex; }
+      .fm-modal { background:#121a2b; border:1px solid var(--line); border-radius:12px; padding:20px; width:460px; max-width:95vw; }
+      .fm-modal h4 { margin:0 0 14px; color:#b7caf2; font-size:.95rem; }
+      .fm-field { margin-bottom:10px; }
+      .fm-field label { display:block; font-size:11px; color:var(--muted); margin-bottom:3px; }
+      .fm-field input[type=text], .fm-field input[type=url], .fm-field select, .fm-field textarea { width:100%; background:#0c1629; border:1px solid #304a77; border-radius:5px; color:#dbe7ff; padding:6px 8px; font-size:12px; font-family:inherit; }
+      .fm-field input[type=url]:invalid { border-color:#f97316; }
+      .fm-field .fm-surface-checks { display:flex; gap:12px; }
+      .fm-field .fm-surface-checks label { font-size:12px; color:#c9d9fa; display:flex; align-items:center; gap:4px; }
+      .fm-modal-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
     </style>
   </head>
   <body>
@@ -35,6 +90,280 @@
       <nav class="menu">
         <a href="./roadmap-scope-visual.html">Overview</a><a href="./domain-platform.html">Platform</a><a href="./domain-clm.html">CLM</a><a href="./domain-compliance.html">Compliance</a><a class="active" href="./domain-corpsec.html">CorpSec</a><a href="./domain-accounting.html">Accounting</a>
       </nav>
+
+      <!-- ════════════════════════════════════════════════════════
+           Admin App UI — organised view with screenshot slots
+           Screenshots go in: by-surface/admin-app/screenshots/<section>/<slug>.png
+           ════════════════════════════════════════════════════════ -->
+      <section class="panel ce-panel">
+        <h2>Admin App UI — <a href="https://admin-sit.sleek.sg" target="_blank" rel="noopener" style="font-weight:400;">admin-sit.sleek.sg</a></h2>
+        <p>Internal admin corpsec features. Drop a <code>.png</code> into <code>by-surface/admin-app/screenshots/&lt;section&gt;/&lt;slug&gt;.png</code> and the thumbnail appears automatically.</p>
+
+        <div class="ce-section-grid">
+
+          <!-- ── Left col: Company Management + People & Officers ── -->
+          <div class="ce-col">
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">Company Management</span>
+                <span class="ce-section-count">5 features</span>
+              </div>
+              <div class="ce-section-url">/admin/companies/ · /admin/company-overview/</div>
+              <div class="ce-feature-list" id="aa-cs-company"></div>
+            </div>
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">People &amp; Officers</span>
+                <span class="ce-section-count">4 features</span>
+              </div>
+              <div class="ce-section-url">/admin/company-overview/?currentPage=Officers</div>
+              <div class="ce-feature-list" id="aa-cs-people"></div>
+            </div>
+          </div>
+
+          <!-- ── Right col: Requests & Documents + File Store ── -->
+          <div class="ce-col">
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">Requests &amp; Documents</span>
+                <span class="ce-section-count">4 features</span>
+              </div>
+              <div class="ce-section-url">/admin/requests/ · /admin/request-templates/ · /admin/documents/</div>
+              <div class="ce-feature-list" id="aa-cs-requests"></div>
+            </div>
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">File Store &amp; Mailroom</span>
+                <span class="ce-section-count">3 features</span>
+              </div>
+              <div class="ce-section-url">/admin/company-overview/?currentPage=Files</div>
+              <div class="ce-feature-list" id="aa-cs-filestore"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <script>
+        (function() {
+          var AA_CS_FEATURES = {
+            'aa-cs-company': [
+              { label: 'Company list',                         slug: 'corpsec-company/company-list' },
+              { label: 'Company overview',                     slug: 'corpsec-company/company-overview' },
+              { label: 'Company core details',                 slug: 'corpsec-company/company-core-details' },
+              { label: 'Company business profile',             slug: 'corpsec-company/company-business-profile' },
+              { label: 'Company deadlines',                    slug: 'corpsec-company/company-deadlines' },
+            ],
+            'aa-cs-people': [
+              { label: 'Manage directors',                     slug: 'corpsec-people/manage-directors' },
+              { label: 'Manage shareholders',                  slug: 'corpsec-people/manage-shareholders' },
+              { label: 'Manage UBOs',                          slug: 'corpsec-people/manage-ubos' },
+              { label: 'Manage company secretaries',           slug: 'corpsec-people/manage-secretaries' },
+            ],
+            'aa-cs-requests': [
+              { label: 'Requests list',                        slug: 'corpsec-requests/requests-list' },
+              { label: 'Request detail / edit',                slug: 'corpsec-requests/request-detail' },
+              { label: 'Document templates',                   slug: 'corpsec-requests/document-templates' },
+              { label: 'Request templates',                    slug: 'corpsec-requests/request-templates' },
+            ],
+            'aa-cs-filestore': [
+              { label: 'File store browser',                   slug: 'corpsec-filestore/file-store-browser' },
+              { label: 'Mailroom',                             slug: 'corpsec-filestore/mailroom' },
+              { label: 'File upload',                          slug: 'corpsec-filestore/file-upload' },
+            ],
+          };
+
+          var PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="m21 15-5-5L5 19"/></svg>';
+
+          Object.keys(AA_CS_FEATURES).forEach(function(containerId) {
+            var el = document.getElementById(containerId);
+            if (!el) return;
+            AA_CS_FEATURES[containerId].forEach(function(f) {
+              var imgSrc = 'by-surface/admin-app/screenshots/' + f.slug + '.png';
+              var card = document.createElement('div');
+              card.className = 'ce-card';
+              card.innerHTML =
+                '<div class="ce-thumb" id="aa-cs-thumb-' + f.slug.replace(/\//g,'-') + '">' +
+                  '<a href="' + imgSrc + '" target="_blank" rel="noopener">' +
+                    '<img src="' + imgSrc + '" alt="' + f.label + '" loading="lazy" ' +
+                         'onerror="this.closest(\'.ce-thumb\').classList.add(\'no-img\')">' +
+                  '</a>' +
+                  '<div class="ce-no-img">' + PLACEHOLDER_SVG + '<span>no screenshot</span></div>' +
+                '</div>' +
+                '<div class="ce-card-label">' + f.label + '</div>';
+              el.appendChild(card);
+            });
+          });
+        })();
+      </script>
+
+      <!-- ════════════════════════════════════════════════════════
+           Customer App UI — organised view with screenshot slots
+           Screenshots go in: by-surface/customer-app/screenshots/<section>/<slug>.png
+           ════════════════════════════════════════════════════════ -->
+      <section class="panel ce-panel">
+        <h2>Customer App UI — <a href="https://sg-app-sit.sleek.com" target="_blank" rel="noopener" style="font-weight:400;">sg-app-sit.sleek.com</a></h2>
+        <p>Client-facing corpsec features. Drop a <code>.png</code> into <code>by-surface/customer-app/screenshots/&lt;section&gt;/&lt;slug&gt;.png</code> and the thumbnail appears automatically.</p>
+
+        <div class="ce-section-grid">
+
+          <!-- ── Left col: Requests ── -->
+          <div class="ce-col">
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">Requests</span>
+                <span class="ce-section-count">3 features</span>
+              </div>
+              <div class="ce-section-url">/customer/corpsec/requests</div>
+              <div class="ce-feature-list" id="ca-cs-requests"></div>
+            </div>
+          </div>
+
+          <!-- ── Right col: Files ── -->
+          <div class="ce-col">
+            <div class="ce-section">
+              <div class="ce-section-header">
+                <span class="ce-section-title">Files</span>
+                <span class="ce-section-count">1 feature</span>
+              </div>
+              <div class="ce-section-url">/customer/corpsec/files</div>
+              <div class="ce-feature-list" id="ca-cs-files"></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <script>
+        (function() {
+          var CA_CS_FEATURES = {
+            'ca-cs-requests': [
+              { label: 'Ongoing requests',                     slug: 'corpsec-requests/ongoing-requests' },
+              { label: 'History of requests',                  slug: 'corpsec-requests/history-requests' },
+              { label: 'Create new request',                   slug: 'corpsec-requests/create-request' },
+            ],
+            'ca-cs-files': [
+              { label: 'Company secretary file browser',       slug: 'corpsec-files/file-browser' },
+            ],
+          };
+
+          var PLACEHOLDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="m21 15-5-5L5 19"/></svg>';
+
+          Object.keys(CA_CS_FEATURES).forEach(function(containerId) {
+            var el = document.getElementById(containerId);
+            if (!el) return;
+            CA_CS_FEATURES[containerId].forEach(function(f) {
+              var imgSrc = 'by-surface/customer-app/screenshots/' + f.slug + '.png';
+              var card = document.createElement('div');
+              card.className = 'ce-card';
+              card.innerHTML =
+                '<div class="ce-thumb" id="ca-cs-thumb-' + f.slug.replace(/\//g,'-') + '">' +
+                  '<a href="' + imgSrc + '" target="_blank" rel="noopener">' +
+                    '<img src="' + imgSrc + '" alt="' + f.label + '" loading="lazy" ' +
+                         'onerror="this.closest(\'.ce-thumb\').classList.add(\'no-img\')">' +
+                  '</a>' +
+                  '<div class="ce-no-img">' + PLACEHOLDER_SVG + '<span>no screenshot</span></div>' +
+                '</div>' +
+                '<div class="ce-card-label">' + f.label + '</div>';
+              el.appendChild(card);
+            });
+          });
+        })();
+      </script>
+
+      <!-- ════════════════════════════════════════════════════════
+           Canonical Feature Matrix
+           ════════════════════════════════════════════════════════ -->
+      <section class="panel" id="matrix-panel">
+        <div class="fm-toolbar">
+          <h3>Canonical Feature Matrix</h3>
+          <button class="fm-btn primary" id="fm-add-btn">+ Add feature</button>
+        </div>
+        <p style="margin:0 0 14px;font-size:12px;color:var(--muted);">Capabilities observed across both surfaces. AA = Admin App · CA = Customer App</p>
+        <table id="feature-matrix" style="width:100%;border-collapse:collapse;font-size:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--line);">
+              <th style="text-align:left;padding:6px 10px;color:#b7caf2;font-weight:600;">Capability</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">AA</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">CA</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;">Priority</th>
+              <th style="text-align:left;padding:6px 10px;color:#b7caf2;font-weight:600;">Notes</th>
+              <th style="text-align:center;padding:6px 10px;color:#b7caf2;font-weight:600;" title="False positive — mark if this row shouldn't be here">FP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ── Company Management ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Company Management</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View &amp; search company list</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Filter &amp; sort company list</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View &amp; edit company core details</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Edit company information &amp; business activity codes</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Edit company business profile</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View &amp; edit staff assigned to company</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View &amp; manage company deadlines</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View CDD questionnaire history</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage AU tax registrations</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <!-- ── People & Officers ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">People &amp; Officers</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage directors</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage nominee directors</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage individual shareholders</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage corporate shareholders</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage trust shareholders</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage ultimate beneficial owners (UBOs)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage public officers</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage registrable controllers</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage significant controllers register</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage designated representatives</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage company secretaries</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage company admins &amp; transfer ownership</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Manage share classes</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <!-- ── Requests & Documents ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Requests &amp; Documents</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">View &amp; search requests list</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Create new request</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Update request status</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Edit &amp; update request document content</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Save request as PDF</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Send request to SleekSign</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Document templates (create / edit / delete / generate)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Request templates (create / edit / remove)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Auto-sign configuration &amp; employee toggling</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <!-- ── File Store ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">File Store</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Browse company file store</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Upload files to company file store</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Download &amp; delete company files</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Search files in company file store</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Create folder &amp; generate standard folder structure</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Browse &amp; manage company mailroom</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Notify company owner (mailroom)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <!-- ── Workflows ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Workflows</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Company deadlines workflow</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">AGM &amp; annual return workflow</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Appointment of director workflow</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Change / resignation of director workflow</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Share transfer workflow (SG)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Amend company share structure workflow</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Company incorporation workflow (SG / HK / UK)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">AR filing (select, source docs, upload)</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td></tr>
+            <!-- ── Client-Facing ── -->
+            <tr><td colspan="6" style="padding:6px 10px;background:#0a1325;color:#7a9cd4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;">Client-Facing</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Ongoing requests view</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">History of requests view</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — appointment of new director</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — change company address / name</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — change of business activity</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — change / resignation of director</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — change of officer's/shareholder's particulars</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — open bank account</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr style="border-bottom:1px solid #1e2d4a;"><td style="padding:5px 10px;color:#dbe7ff;">Client request — update my details</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+            <tr><td style="padding:5px 10px;color:#dbe7ff;">Company secretary file browser</td><td style="text-align:center;padding:5px 10px;color:#9db0d7;">—</td><td style="text-align:center;padding:5px 10px;color:#a6f2cd;">✓</td></tr>
+          </tbody>
+        </table>
+      </section>
+
       <section class="panel"><strong>Domain reference:</strong> <a href="./viewer.html?file=corpsec/README.md">corpsec/README.md</a></section>
       <section class="panel"><strong>Inventory counts:</strong><div class="pill-row"><span class="pill">Modules: <span id="moduleCount">0</span></span><span class="pill">Features: <span id="featureCount">0</span></span><span class="pill">Must-have: <span id="mustHaveCount">0</span></span></div></section>
       <p class="muted">Admin and Client App lists link to markdown inventory rows (master sheet entry points). Legacy sample module uses the interactive must-have / priority chrome.</p>
@@ -146,16 +475,47 @@
             </section>
           </div>
         </article>
-        <article class="topic">
-          <h3>Company Register Management (sample)</h3>
-          <small class="muted"><a href="./viewer.html?file=by-surface/admin-app/corpsec/company-register-management.md">corpsec/company-register-management.md</a></small>
-          <div class="grid">
-            <section class="box"><h4>Features</h4><ul><li>Register updates and history</li><li>Officer/shareholder data edits</li><li>Export and audit visibility</li></ul></section>
-            <section class="box"><h4>Image references</h4><div class="subgrid"><h5>Today version</h5><div class="editable" contenteditable="true">Add current production links/paths/screenshots</div><h5>Migration version</h5><div class="editable" contenteditable="true">Add planned migration UX links/paths/mockups</div></div></section>
-          </div>
-        </article>
       </section>
     </div>
+
+  <!-- ── Add-feature modal ── -->
+  <div class="fm-modal-backdrop" id="fm-modal">
+    <div class="fm-modal">
+      <h4>Add missing feature</h4>
+      <div class="fm-field">
+        <label>Category</label>
+        <select id="fm-cat"></select>
+      </div>
+      <div class="fm-field">
+        <label>Capability *</label>
+        <input type="text" id="fm-cap" placeholder="e.g. Manage company officers" required />
+      </div>
+      <div class="fm-field">
+        <label>URL where you can see this feature * <span style="color:#f97316">(required)</span></label>
+        <input type="url" id="fm-url" placeholder="https://…" required />
+      </div>
+      <div class="fm-field">
+        <label>Surfaces</label>
+        <div class="fm-surface-checks">
+          <label><input type="checkbox" id="fm-aa"> AA</label>
+          <label><input type="checkbox" id="fm-ca"> CA</label>
+        </div>
+      </div>
+      <div class="fm-field">
+        <label>Priority</label>
+        <select id="fm-pri"><option value="">—</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+      </div>
+      <div class="fm-field">
+        <label>Notes</label>
+        <textarea id="fm-note" rows="2"></textarea>
+      </div>
+      <div class="fm-modal-actions">
+        <button class="fm-btn" id="fm-cancel">Cancel</button>
+        <button class="fm-btn primary" id="fm-submit">Add row</button>
+      </div>
+    </div>
+  </div>
+
     <script>
       (function () {
         const modules = document.querySelectorAll(".topic");
@@ -215,6 +575,195 @@
         if (mustHaveCountEl) mustHaveCountEl.textContent = totalMustHave;
       })();
     </script>
+
+  <script>
+    (() => {
+      const table  = document.getElementById('feature-matrix');
+      const tbody  = table.querySelector('tbody');
+      const modal  = document.getElementById('fm-modal');
+      const catSel = document.getElementById('fm-cat');
+
+      // ── 1. Stamp every non-header row with a data-row-id ──────────────────
+      let rowId = 0;
+      const categories = [];
+      for (const tr of tbody.rows) {
+        const first = tr.cells[0];
+        if (first && first.colSpan > 1) {
+          // Category header row
+          const cat = first.textContent.trim();
+          tr.dataset.category = cat;
+          if (!categories.includes(cat)) categories.push(cat);
+        } else {
+          tr.dataset.rowId = rowId++;
+          // Append 3 annotation cells
+          const tdPri  = tr.insertCell(-1);
+          const tdNote = tr.insertCell(-1);
+          const tdFp   = tr.insertCell(-1);
+
+          tdPri.style.cssText  = 'text-align:center;padding:4px 8px;vertical-align:middle;';
+          tdNote.style.cssText = 'padding:4px 8px;vertical-align:middle;';
+          tdFp.style.cssText   = 'text-align:center;padding:4px 8px;vertical-align:middle;';
+
+          const sel = document.createElement('select');
+          sel.className = 'fm-priority-select';
+          sel.innerHTML = '<option value="">—</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option>';
+          sel.dataset.row = tr.dataset.rowId;
+          tdPri.appendChild(sel);
+
+          const ta = document.createElement('textarea');
+          ta.className = 'fm-notes';
+          ta.rows = 1;
+          ta.placeholder = 'notes…';
+          ta.dataset.row = tr.dataset.rowId;
+          tdNote.appendChild(ta);
+
+          const cb = document.createElement('input');
+          cb.type = 'checkbox';
+          cb.className = 'fm-fp-check';
+          cb.dataset.row = tr.dataset.rowId;
+          tdFp.appendChild(cb);
+        }
+      }
+
+      // Populate category dropdown in modal
+      for (const cat of categories) {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = cat;
+        catSel.appendChild(opt);
+      }
+
+      // ── 2. Save helpers ────────────────────────────────────────────────────
+      function saveRow(rowIdStr) {
+        const tr  = tbody.querySelector(`tr[data-row-id="${rowIdStr}"]`);
+        if (!tr) return;
+        const sel = tr.querySelector('.fm-priority-select');
+        const ta  = tr.querySelector('.fm-notes');
+        const cb  = tr.querySelector('.fm-fp-check');
+        fetch(`/api/annotations/${rowIdStr}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            priority:       sel.value || null,
+            comment:        ta.value,
+            false_positive: cb.checked,
+          }),
+        });
+        applyFpStyle(tr, cb.checked);
+      }
+
+      function applyFpStyle(tr, isFp) {
+        tr.classList.toggle('fm-fp-row', !!isFp);
+      }
+
+      // ── 3. Wire change events ──────────────────────────────────────────────
+      tbody.addEventListener('change', e => {
+        const el = e.target;
+        if (el.classList.contains('fm-priority-select')) {
+          el.className = 'fm-priority-select' + (el.value ? ` p-${el.value}` : '');
+          saveRow(el.dataset.row);
+        }
+        if (el.classList.contains('fm-fp-check')) {
+          saveRow(el.dataset.row);
+        }
+      });
+      tbody.addEventListener('blur', e => {
+        if (e.target.classList.contains('fm-notes')) saveRow(e.target.dataset.row);
+      }, true);
+
+      // ── 4. Render an addition row ──────────────────────────────────────────
+      function renderAddition(a) {
+        let insertBefore = null;
+        let inCategory = false;
+        for (const tr of tbody.rows) {
+          if (tr.dataset.category === a.category) { inCategory = true; continue; }
+          if (inCategory && tr.dataset.category) { insertBefore = tr; break; }
+        }
+        const tr = tbody.insertRow(insertBefore ? insertBefore.rowIndex - tbody.rows[0].rowIndex : -1);
+        tr.className = 'fm-addition';
+        tr.dataset.additionId = a.id;
+        tr.style.borderBottom = '1px solid #1e2d4a';
+
+        const mkCenter = v => `<td style="text-align:center;padding:5px 10px;color:${v?'#a6f2cd':'#9db0d7'}">${v?'✓':'—'}</td>`;
+        tr.innerHTML = `
+          <td style="padding:5px 10px;"><a href="${escHtml(a.url)}" target="_blank" rel="noopener">${escHtml(a.capability)}</a></td>
+          ${mkCenter(a.aa)}${mkCenter(a.ca)}
+          <td style="text-align:center;padding:4px 8px;vertical-align:middle;"></td>
+          <td style="padding:4px 8px;vertical-align:middle;"><span style="font-size:11px;color:var(--muted)">${escHtml(a.comment||'')}</span></td>
+          <td style="text-align:center;padding:4px 8px;vertical-align:middle;"></td>
+        `;
+      }
+
+      function escHtml(s) {
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      // ── 5. Load state from API ─────────────────────────────────────────────
+      fetch('/api/state')
+        .then(r => r.json())
+        .then(({ annotations, additions }) => {
+          for (const ann of annotations) {
+            const tr  = tbody.querySelector(`tr[data-row-id="${ann.row_id}"]`);
+            if (!tr) continue;
+            const sel = tr.querySelector('.fm-priority-select');
+            const ta  = tr.querySelector('.fm-notes');
+            const cb  = tr.querySelector('.fm-fp-check');
+            if (ann.priority) {
+              sel.value = ann.priority;
+              sel.className = `fm-priority-select p-${ann.priority}`;
+            }
+            ta.value = ann.comment || '';
+            cb.checked = !!ann.false_positive;
+            applyFpStyle(tr, cb.checked);
+          }
+          for (const a of additions) renderAddition(a);
+        })
+        .catch(() => {
+          // Server not running — annotations silently unavailable
+        });
+
+      // ── 6. Add-feature modal ───────────────────────────────────────────────
+      document.getElementById('fm-add-btn').addEventListener('click', () => {
+        modal.classList.add('open');
+        document.getElementById('fm-cap').value = '';
+        document.getElementById('fm-url').value = '';
+        document.getElementById('fm-note').value = '';
+        document.getElementById('fm-pri').value = '';
+        ['fm-aa','fm-ca'].forEach(id => document.getElementById(id).checked = false);
+      });
+
+      document.getElementById('fm-cancel').addEventListener('click', () => modal.classList.remove('open'));
+      modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+      document.getElementById('fm-submit').addEventListener('click', async () => {
+        const cap = document.getElementById('fm-cap').value.trim();
+        const url = document.getElementById('fm-url').value.trim();
+        const cat = catSel.value;
+        if (!cap) { document.getElementById('fm-cap').focus(); return; }
+        if (!url || !document.getElementById('fm-url').validity.valid) {
+          document.getElementById('fm-url').focus(); return;
+        }
+        const body = {
+          category:   cat,
+          capability: cap,
+          url,
+          aa: document.getElementById('fm-aa').checked,
+          ca: document.getElementById('fm-ca').checked,
+          priority: document.getElementById('fm-pri').value || null,
+          comment:  document.getElementById('fm-note').value,
+        };
+        const res = await fetch('/api/additions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        if (res.ok) {
+          const { id } = await res.json();
+          renderAddition({ ...body, id });
+          modal.classList.remove('open');
+        }
+      });
+    })();
+  </script>
 
   </body>
 </html>
