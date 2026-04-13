@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /**
- * Captures screenshots of 16 customer portal accounting features from sg-app-sit.sleek.com
- * Auth is injected from ~/Downloads/sg-app-localstorage.json (exported from live session)
+ * Captures screenshots from sg-app-sit.sleek.com:
+ * - Customer portal bookkeeping → by-surface/customer-portal/screenshots/
+ * - Customer app corpsec → by-surface/customer-app/screenshots/corpsec/
+ *
+ * Auth: ~/Downloads/sleek-localstorage.json (coding-engine export; same JWT shape as before).
+ * If corpsec pages misbehave with Sleek-admin flags in localStorage, export a real client session
+ * into that file (or the same keys) and re-run.
+ *
+ * Open Bank Account (requests hub / dashboard) is omitted until a stable GET /customer/... route is known.
  *
  * Usage: node scripts/capture-customer-portal-screenshots.mjs
  */
@@ -12,7 +19,15 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUTPUT_BASE = join(__dirname, '..', 'by-surface', 'customer-portal', 'screenshots');
+const OUTPUT_PORTAL = join(__dirname, '..', 'by-surface', 'customer-portal', 'screenshots');
+const OUTPUT_CUSTOMER_APP_CORPSEC = join(
+  __dirname,
+  '..',
+  'by-surface',
+  'customer-app',
+  'screenshots',
+  'corpsec',
+);
 // Derive auth from the coding engine export — same JWT, different key names
 const CE_AUTH_FILE = join(process.env.HOME, 'Downloads', 'sleek-localstorage.json');
 const BASE_URL = 'https://sg-app-sit.sleek.com';
@@ -54,12 +69,19 @@ const authData = {
 
 // Ensure output directories exist
 for (const section of ['expenses', 'sales-invoices', 'bank-statements', 'files']) {
-  mkdirSync(join(OUTPUT_BASE, section), { recursive: true });
+  mkdirSync(join(OUTPUT_PORTAL, section), { recursive: true });
+}
+for (const section of ['secretary', 'requests', 'profile']) {
+  mkdirSync(join(OUTPUT_CUSTOMER_APP_CORPSEC, section), { recursive: true });
+}
+
+function resolveOutputBase(feature) {
+  return feature.outputBase === 'customer-app-corpsec' ? OUTPUT_CUSTOMER_APP_CORPSEC : OUTPUT_PORTAL;
 }
 
 /**
  * Feature definitions: slug → url + optional interaction before screenshot
- * interact(page) runs after the 20s wait, before screenshot
+ * interact(page) runs after the settle wait, before screenshot
  */
 const features = [
   // ── Expenses ───────────────────────────────────────────────────────────────
@@ -221,6 +243,63 @@ const features = [
     slug: 'files/files-list',
     url: '/customer/bookkeeping/files',
   },
+
+  // ── Customer app / Corpsec ─────────────────────────────────────────────────
+  {
+    slug: 'secretary/company-secretary-file-browser',
+    url: '/customer/secretary',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/on-going-requests',
+    url: '/customer/on-going-request',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/history-of-requests',
+    url: '/customer/history-of-request',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/appointment-of-new-director',
+    url: '/customer/appointment-of-director-v2',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/resignation-of-director',
+    url: '/customer/resignation-of-director-v2',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/change-of-director',
+    url: '/customer/change-of-director-v2',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/change-of-business-activity',
+    url: '/customer/change-of-business-activity',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/change-of-company-name',
+    url: '/customer/change-of-company-name',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/change-of-company-address',
+    url: '/customer/change-of-address',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'requests/change-of-particulars',
+    url: '/customer/change-of-particular',
+    outputBase: 'customer-app-corpsec',
+  },
+  {
+    slug: 'profile/update-my-details',
+    url: '/customer/profile',
+    outputBase: 'customer-app-corpsec',
+  },
 ];
 
 async function main() {
@@ -242,7 +321,7 @@ async function main() {
   let failed = 0;
 
   for (const feature of features) {
-    const outputPath = join(OUTPUT_BASE, `${feature.slug}.png`);
+    const outputPath = join(resolveOutputBase(feature), `${feature.slug}.png`);
     console.log(`\n→ ${feature.slug}`);
 
     try {
