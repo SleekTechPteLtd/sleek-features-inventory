@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node scripts/serve.mjs"
+    "start": "node scripts/serve.mjs",
+    "capture-clm-screenshots": "node scripts/capture-clm-screenshots.mjs"
   },
   "dependencies": {
 "express": "^5.2.1",
