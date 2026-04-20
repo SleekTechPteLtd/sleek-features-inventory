@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Customer |
 | **Business Outcome** | Customers have full visibility into their active and past service subscriptions, allowing them to monitor renewal obligations and act before services lapse. |
-| **Entry Point / Surface** | Sleek App > Billings & Subscriptions > My Subscriptions tab |
+| **Entry Point / Surface** | **Customer app** — **`/billing/billing-and-subscriptions?tab=subscriptions`** (Billing & Subscriptions → My Subscriptions tab). |
 | **Short Description** | Displays a filterable, searchable table of current and past service subscriptions showing subscription name, financial year, start/end dates, and renewal status (Overdue, Due, Not due, Renewed, Upgraded, Downgraded, Cancelled). Auto-renewal and one-time subscription indicators are shown inline. Overdue and due items are pinned to the top. |
 | **Variants / Markets** | Unknown |
 | **Dependencies / Related Flows** | Billing History tab (BillingHistoryContent.vue), Payment Methods tab (PaymentMethodsContent.vue), Renew Subscriptions flow (renew-subscriptions route / RenewSubscriptionsPage.vue), sleek-billings-backend API |

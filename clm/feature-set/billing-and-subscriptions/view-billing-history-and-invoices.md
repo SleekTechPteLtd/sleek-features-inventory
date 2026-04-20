@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Customer (Company Admin / Finance User) |
 | **Business Outcome** | Gives customers a self-serve record of all settled charges — paid invoices and credited credit notes — so they can verify payments, retrieve PDF copies, and reconcile billing without contacting support. |
-| **Entry Point / Surface** | Sleek Customer Portal > Billing > Billing & Subscriptions > Billing History tab (`/billing/billing-and-subscriptions?tab=history`) |
+| **Entry Point / Surface** | **Customer app** — **`/billing/billing-and-subscriptions?tab=history`** (Billing & Subscriptions → Billing History tab). |
 | **Short Description** | Displays a table of all paid invoices and credit notes for the customer's company, searchable by reference or invoice number. Columns show reference (with credit-note-type pill), invoice number, status (Paid / Credited), amount, issue date, and payment date. Clicking a Paid or Credited invoice number fetches a fresh signed external URL and renders the PDF inline in an iframe. |
 | **Variants / Markets** | Unknown — currency code is read from CMS `localization.currency_code` in platform config, suggesting multi-market support (likely SG, HK, UK, AU), but markets are not hard-coded in this component |
 | **Dependencies / Related Flows** | Platform Config store (`configModule/GET_PLATFORM_CONFIG`); CMS `localization` feature prop for currency; Sleek Billings API (`GET /invoices`, `GET /invoices/:id/external-url`); My Subscriptions tab and Payment Methods tab (siblings on same page); Xero / external billing system (source of `externalUrl` and `externalNumber`) |

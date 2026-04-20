@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Client (company user) |
 | **Business Outcome** | Enables clients to pay for one or more expiring subscriptions using a saved or new Stripe credit card, completing the subscription renewal cycle and maintaining uninterrupted service. |
-| **Entry Point / Surface** | Sleek App > Billing & Subscriptions > Renew (payment page at `/payment/` with `?sid=` query params) |
+| **Entry Point / Surface** | **Customer app** — **`/billing/renew-subscriptions`**. (After this entry, card payment may continue on the legacy payment page with subscription id query params — see Evidence.) |
 | **Short Description** | Clients arrive at the payment page with subscription IDs pre-selected via URL. They choose a saved card or enter new card details via Stripe Elements, optionally apply a promo code, and confirm payment. The backend charges the card and redirects back to the Billing & Subscriptions dashboard on success. |
 | **Variants / Markets** | SG (currency hardcoded to SGD in the frontend) |
 | **Dependencies / Related Flows** | Billing & Subscriptions dashboard (`/billings-and-subscriptions/`) as source and redirect target; Stripe (card tokenisation via react-stripe-elements); Credit card management (save/list cards); Coupon/promo locking flow; Bank transfer / external payment alternative (`applyForExternalPaymentForMultipleSubscriptions`); Google Analytics ecommerce plugin (transaction tracking on success) |
