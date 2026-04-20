@@ -150,6 +150,13 @@ EXCLUDED_CLM_GALLERY_ROUTES: frozenset[str] = frozenset(
     }
 )
 
+# Same basenames as EXCLUDED_CLM_CAPTURE_REL_PATHS in scripts/capture-clm-screenshots.mjs — no gallery thumbs.
+EXCLUDED_CLM_SCREENSHOT_MD_REL_PATHS: frozenset[str] = frozenset(
+    {
+        "payment-success/pay-subscription-billing-invoice.md",
+    }
+)
+
 # Surface URLs (aligned with capture-clm-screenshots.mjs / domain-corpsec.html)
 CLM_BILLINGS_PORTAL_URL = "https://sg-billings-sit.sleek.com/"
 CLM_ADMIN_APP_URL = "https://admin-sit.sleek.sg"
@@ -271,6 +278,8 @@ def screenshot_paths_for_feature_md(md_path: Path) -> list[Path]:
     try:
         rel = md_path.relative_to(FEATURE_ROOT)
     except ValueError:
+        return []
+    if rel.as_posix() in EXCLUDED_CLM_SCREENSHOT_MD_REL_PATHS:
         return []
     stem = md_path.stem
     sub = rel.parent.as_posix()

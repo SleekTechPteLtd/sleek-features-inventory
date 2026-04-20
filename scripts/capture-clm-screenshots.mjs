@@ -87,6 +87,14 @@ const SKIP_ENTRY_SUBSTRINGS = [
   'no ui -',
 ];
 
+/**
+ * Inventory markdown paths (relative to clm/feature-set/) excluded from screenshot capture.
+ * Keep in sync with product requests — e.g. tokenised or one-off flows not worth automating.
+ */
+const EXCLUDED_CLM_CAPTURE_REL_PATHS = new Set([
+  'payment-success/pay-subscription-billing-invoice.md', // Pay Subscription Billing Invoice /billing/payment/success
+]);
+
 /** Path patterns that are REST/API, not SPA routes (exclude from capture). */
 function isExcludedApiPath(path) {
   const p = path.toLowerCase();
@@ -314,6 +322,9 @@ function buildScreenshotPlan() {
   const seen = new Map();
 
   for (const file of files) {
+    const relMd = relative(FEATURE_ROOT, file).replace(/\\/g, '/');
+    if (EXCLUDED_CLM_CAPTURE_REL_PATHS.has(relMd)) continue;
+
     const md = readFileSync(file, 'utf8');
     const { cell } = parseEntryPoint(md);
     if (!cell || shouldSkipEntryCell(cell)) continue;
