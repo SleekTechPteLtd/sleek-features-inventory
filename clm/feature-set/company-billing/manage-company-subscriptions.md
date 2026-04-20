@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Admin |
 | **Business Outcome** | Gives internal admins full visibility and control over a company's service subscriptions so they can monitor delivery health, act on upcoming renewals, and adjust subscription state without requiring engineering intervention. |
-| **Entry Point / Surface** | Admin App > Company Billing > Subscriptions tab |
+| **Entry Point / Surface** | **sleek-website** admin app — **`/admin/company-billing/?tab=0`** (Subscriptions tab; webpack entry name **admin-company-billing**). Same UI embedded under Company overview → Billing (Billing Beta). Optional **`subscriptionId`** opens subscription detail. |
 | **Short Description** | Admins browse, search, filter, sort, and act on all of a company's active and deactivated service subscriptions. The detail view exposes subscription-level actions: toggle auto-renewal, update renewal amount or date, cancel renewal, offboard, discontinue, reactivate, edit financial year end, and amend core fields (start/end date, delivery status, type of purchase, linked subscription). An audit log drawer surfaces the full change history per subscription. |
 | **Variants / Markets** | Unknown |
 | **Dependencies / Related Flows** | sleek-billings-api (customer-subscriptions, payment-methods, audit-logs endpoints); Xero (tax rates via `/xero/tax-rates`); Company Billing — Invoices & Credit Note tab; Company Billing — Credit Balance tab; Subscription renewal auto-charge pipeline; Offboarding request flow; Deliverables overview (DeliverablesOverviewSection component) |

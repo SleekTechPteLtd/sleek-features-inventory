@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Admin (internal Sleek operations staff) |
 | **Business Outcome** | Gives billing admins full control over a company's invoice lifecycle — from creation and dispatch through payment collection, voiding, and credit note issuance — so that billing records remain accurate and recoverable without engineering intervention. |
-| **Entry Point / Surface** | Sleek Admin Panel → Company detail → Billing tab → Invoices section |
+| **Entry Point / Surface** | **sleek-website** admin app — **`/admin/company-billing/?tab=1`** (Invoices & Credit Note tab). Same bundle as Company overview → Billing (Billing Beta). Optional query: **`tab`**, **`activeCreditNote`**, **`subscriptionId`**. |
 | **Short Description** | Admins view, search, and act on all invoices and credit notes for a company. Actions include editing draft invoices, marking invoices as paid, voiding authorised invoices (with a mandatory reason), deleting drafts, duplicating invoices, and initiating refund or downgrade credit notes. Credit notes can be marked as credited once payment is disbursed, and both document types can be viewed against their linked Xero record. |
 | **Variants / Markets** | SG, HK, UK, AU (tax calculation and Stripe Direct Debit are UK-specific; currency is platform-configured per market) |
 | **Dependencies / Related Flows** | Xero (invoice/credit-note sync, external URLs); Stripe (card and direct-debit charge via `chargePaymentMethod`); sleek-billings-api microservice (all read/write operations); company subscriptions (linked to invoice line items); credit balance (applied as discount on invoices); audit log (`getAuditLogsByCompanyIdAndTags` tagged per invoice) |

@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Admin (Billing Super Admin) |
 | **Business Outcome** | Gives Billing Super Admins full control over a subscription's renewal lifecycle — adjusting renewal dates and amounts, toggling auto-renewal, cancelling upcoming renewals, and offboarding or reactivating subscriptions — so that billing accurately reflects commercial agreements and client status. |
-| **Entry Point / Surface** | Sleek Admin > Company Billing > Subscription Detail |
+| **Entry Point / Surface** | **sleek-website** admin app — **`/admin/company-billing/?tab=0`** — open a subscription row for **Subscription detail** (renewal actions; **`BILLING_SUPER_ADMIN`**). Optional **`subscriptionId`** deep-link. |
 | **Short Description** | Admins can update the next renewal date and custom renewal amount, enable or disable auto-renewal, cancel an upcoming renewal, offboard a client from a service, reactivate or discontinue a subscription, and update the financial year end — all with mandatory reasons for audit. |
 | **Variants / Markets** | Unknown |
 | **Dependencies / Related Flows** | Sleek Billings API (external billing service); Audit Logs (getAuditLogsByCompanyIdAndTags); Company Billing view; Subscription Detail view; Auto-renewal charge scheduling (AUTO_RENEWAL_CHARGE config) |

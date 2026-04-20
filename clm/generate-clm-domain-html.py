@@ -288,6 +288,13 @@ def screenshot_urls_for_feature_md(md_path: Path) -> list[str]:
 def route_from_clm_screenshot_href(href: str) -> str:
     """Recover SPA path from capture filename: {stem}__a__b__c.png -> /a/b/c."""
     base = Path(href).stem
+    # capture-clm-screenshots.mjs: company-billing routes encode tab in filename (-tab0, -tab1, …).
+    if "company-billing" in base.lower():
+        if "-tab" in base:
+            m = re.search(r"-tab(\d+)", base)
+            tab = m.group(1) if m else "0"
+            return f"/admin/company-billing?tab={tab}"
+        return "/admin/company-billing"
     parts = base.split("__")
     if len(parts) < 2:
         return "/"

@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Admin (internal Sleek operations staff) |
 | **Business Outcome** | Enables Sleek admins to manually adjust a company's credit balance and maintain an auditable transaction history, so that credits can be applied to offset future invoices without requiring a new payment. |
-| **Entry Point / Surface** | Admin panel > Company > Billing > Credit Balance tab (tab index 2) |
+| **Entry Point / Surface** | **sleek-website** admin app — **`/admin/company-billing/?tab=2`** (Credit Balance tab). |
 | **Short Description** | Admins view a company's available credit balance and full transaction history (date, initiating user, description, reason, linked invoice, and signed amount). Via a modal dialog, they can add or deduct credit by entering an amount and mandatory reason; the adjustment is posted to the sleek-billing service and the list auto-refreshes. |
 | **Variants / Markets** | Unknown — currency is read from `platformConfig.currency.code`, suggesting per-market behaviour, but no explicit market gating is visible in the frontend code |
 | **Dependencies / Related Flows** | Company Billing (Subscriptions tab, Invoices & Credit Notes tab); invoice linking on credit transactions (external invoice URL + number rendered inline); sleek-billing payment service |

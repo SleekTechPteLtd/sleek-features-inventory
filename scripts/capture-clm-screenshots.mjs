@@ -22,6 +22,8 @@
  * Env:
  *   CLM_BILLINGS_BASE, CLM_ADMIN_BASE, CLM_CUSTOMER_BASE,
  *   CLM_BILLINGS_AUTH, CLM_ADMIN_AUTH, CLM_CUSTOMER_AUTH
+ *   CLM_ADMIN_COMPANY_ID — default company id for `/admin/company-billing/` when `cid` is omitted in the inventory cell
+ *   CLM_ADMIN_SUBSCRIPTION_ID — optional; replaces placeholder subscriptionId in Entry Point routes
  */
 
 import { chromium } from 'playwright';
@@ -47,6 +49,12 @@ const CUSTOMER_AUTH_FILE = process.env.CLM_CUSTOMER_AUTH || join(process.env.HOM
 
 const VIEWPORT = { width: 1400, height: 900 };
 const WAIT_MS = Number(process.env.CLM_SCREENSHOT_WAIT_MS || 5000);
+
+/** Default SIT company for `/admin/company-billing/` when `cid` is omitted (same default as capture-admin-app-screenshots.mjs). */
+const CLM_ADMIN_COMPANY_ID =
+  process.env.CLM_ADMIN_COMPANY_ID || '6768ce4b939e53003e993169';
+/** Optional subscription id for deep-linking subscription detail (`subscriptionId=` query). */
+const CLM_ADMIN_SUBSCRIPTION_ID = process.env.CLM_ADMIN_SUBSCRIPTION_ID || '';
 
 const ARGS = new Set(process.argv.slice(2));
 const DRY_RUN = ARGS.has('--dry-run');
@@ -168,7 +176,10 @@ function extractRoutesFromEntryCell(cell) {
       }
       // Remove embedded `VERB /path` segments so slash-regex does not pick API paths from mixed text
       const withoutVerbs = stripHttpVerbApiSegments(part);
-      const pathMatches = withoutVerbs.match(/\/[a-zA-Z0-9_./-]+/g);
+      // Include optional query string so `/admin/company-billing/?cid=…&tab=1` is one route.
+      const pathMatches = withoutVerbs.match(
+        /\/[a-zA-Z0-9_./-]+(?:\?[a-zA-Z0-9_=&.%<>+-]*)?/gi,
+      );
       if (pathMatches) {
         for (const pm of pathMatches) {
           const r = normalizeRoute(pm);
@@ -177,7 +188,29 @@ function extractRoutesFromEntryCell(cell) {
       }
     }
   }
-  return [...routes].filter((r) => r.length > 1 && !isExcludedApiPath(r));
+  return [...routes]
+    .map((r) => finalizeAdminCompanyBillingRoute(r))
+    .filter((r) => r.length > 1 && !isExcludedApiPath(r));
+}
+
+/**
+ * Ensures `cid` on Company Billing admin routes; replaces placeholder subscription ids when env is set.
+ */
+function finalizeAdminCompanyBillingRoute(route) {
+  let r = route;
+  const lower = r.toLowerCase();
+  if (!lower.startsWith('/admin/company-billing')) return r;
+
+  if (!/[?&]cid=/.test(r)) {
+    const sep = r.includes('?') ? '&' : '?';
+    r = `${r}${sep}cid=${encodeURIComponent(CLM_ADMIN_COMPANY_ID)}`;
+  }
+
+  if (CLM_ADMIN_SUBSCRIPTION_ID && /subscriptionId=(<[^>]+>|YOUR_|PLACEHOLDER|TBD)/i.test(r)) {
+    r = r.replace(/subscriptionId=[^&]*/, `subscriptionId=${encodeURIComponent(CLM_ADMIN_SUBSCRIPTION_ID)}`);
+  }
+
+  return r;
 }
 
 function parseEntryPoint(md) {
@@ -258,7 +291,16 @@ function loadAuthJson(path) {
 
 function slugFromFile(filePath, route) {
   const rel = relative(FEATURE_ROOT, filePath).replace(/\.md$/, '');
-  const safeRoute = route.replace(/^\//, '').replace(/\//g, '__');
+  const qIndex = route.indexOf('?');
+  let pathPart = qIndex === -1 ? route : route.slice(0, qIndex);
+  pathPart = pathPart.replace(/\/+$/, '');
+  let safeRoute = pathPart.replace(/^\//, '').replace(/\//g, '__');
+  if (qIndex !== -1) {
+    const params = new URLSearchParams(route.slice(qIndex + 1));
+    const tab = params.get('tab');
+    if (tab !== null && tab !== '') safeRoute += `-tab${tab}`;
+    if (params.get('subscriptionId')) safeRoute += '-subscriptionDetail';
+  }
   return `${rel}__${safeRoute}`;
 }
 
@@ -281,7 +323,8 @@ function buildScreenshotPlan() {
       if (isExcludedApiPath(route)) continue;
       const surface = resolveSurface(cell, route);
       if (surface === 'skip') continue;
-      const key = `${surface}|${route}`;
+      // Per markdown file so multiple features can share the same SPA URL with different screenshots.
+      const key = `${file}|${surface}|${route}`;
       if (seen.has(key)) continue;
       seen.set(key, { file, route, cell, surface });
     }

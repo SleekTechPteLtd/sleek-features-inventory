@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Admin (Sales Admin, Billing Operations Admin, Billing Super Admin) |
 | **Business Outcome** | Enables internal admins to generate and send invoices to client companies for Sleek services, with the ability to charge an existing payment method on file immediately. |
-| **Entry Point / Surface** | Admin Portal > Company > Company Billing > "Payment Request" button |
+| **Entry Point / Surface** | **sleek-website** admin app — **`/admin/company-billing/?tab=0`** — **Payment Request** opens **`InvoiceForm`** (invoice composer). |
 | **Short Description** | Admin selects service line items, applies tax rates and optional discounts, sets purpose of purchase per line (onboarding, renewal, upgrade, etc.), and submits the invoice to Xero. Once authorised, the invoice can be sent via email link or charged directly against the company's saved payment method (card or direct debit). |
 | **Variants / Markets** | SG, HK, UK, AU (platform config controls currency and tax calculation mode — UK uses exclusive tax, others inclusive) |
 | **Dependencies / Related Flows** | Xero (invoice creation, tax rates); SleekBillings payment service (invoice CRUD, charge, subscriptions, credit balance, payment methods); Stripe (card validation/charge); Company Subscriptions; Credit Balance; Coupon/Discount engine |
