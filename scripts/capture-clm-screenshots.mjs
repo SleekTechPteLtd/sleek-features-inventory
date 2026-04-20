@@ -24,6 +24,7 @@
  *   CLM_BILLINGS_AUTH, CLM_ADMIN_AUTH, CLM_CUSTOMER_AUTH
  *   CLM_ADMIN_COMPANY_ID — default company id for `/admin/company-billing/` when `cid` is omitted in the inventory cell
  *   CLM_ADMIN_SUBSCRIPTION_ID — optional; replaces placeholder subscriptionId in Entry Point routes
+ *   CLM_PAYMENT_PAGE_TOKEN — optional; expands `/billing/payment` (after :token is stripped from inventory) for customer payment page capture
  */
 
 import { chromium } from 'playwright';
@@ -55,6 +56,8 @@ const CLM_ADMIN_COMPANY_ID =
   process.env.CLM_ADMIN_COMPANY_ID || '6768ce4b939e53003e993169';
 /** Optional subscription id for deep-linking subscription detail (`subscriptionId=` query). */
 const CLM_ADMIN_SUBSCRIPTION_ID = process.env.CLM_ADMIN_SUBSCRIPTION_ID || '';
+/** Payment token for customer app `/billing/payment/:token` (pay-invoice-via-payment-link inventory). */
+const CLM_PAYMENT_PAGE_TOKEN = process.env.CLM_PAYMENT_PAGE_TOKEN || '';
 
 const ARGS = new Set(process.argv.slice(2));
 const DRY_RUN = ARGS.has('--dry-run');
@@ -198,7 +201,21 @@ function extractRoutesFromEntryCell(cell) {
   }
   return [...routes]
     .map((r) => finalizeAdminCompanyBillingRoute(r))
+    .map((r) => finalizeBillingPaymentTokenRoute(r))
     .filter((r) => r.length > 1 && !isExcludedApiPath(r));
+}
+
+/**
+ * Expands inventory `/billing/payment` (path after `:token` is stripped) using CLM_PAYMENT_PAGE_TOKEN.
+ */
+function finalizeBillingPaymentTokenRoute(route) {
+  let r = route.replace(/\/+$/, '');
+  if (r === '/billing/payment') {
+    if (CLM_PAYMENT_PAGE_TOKEN) {
+      return `/billing/payment/${CLM_PAYMENT_PAGE_TOKEN.replace(/^\/+/, '')}`;
+    }
+  }
+  return route;
 }
 
 /**

@@ -9,7 +9,7 @@
 | **Canonical Owner** | TBD |
 | **Primary User / Actor** | Customer (new company registrant completing onboarding) |
 | **Business Outcome** | Ensures customers successfully transition from payment to company incorporation or the main dashboard, with email verification gating for beta users to prevent unauthorized progression. |
-| **Entry Point / Surface** | Sleek App > Billing > Payment Completion (`/billing/payment/completion?token=&paidWith=&origin=`) |
+| **Entry Point / Surface** | **Customer app** — **`/billing/payment-completion?paidWith=CREDIT_CARD&origin=betaOnboarding`** — post-payment confirmation (“Payment confirmed”, CMS onboarding steps, **Continue company setup**). Optional **token** query for email verification when **origin** is beta onboarding. |
 | **Short Description** | After completing payment, customers see a confirmation screen with CMS-driven onboarding steps and a "Continue Company Setup" CTA. For beta onboarding flows (`origin=betaOnboarding`), the system verifies email via payment token before routing to incorporation; for all other flows, routes directly to the customer dashboard. |
 | **Variants / Markets** | SG, HK (zh locale explicitly handled for CMS step content); other markets Unknown |
 | **Dependencies / Related Flows** | Platform CMS config (`sleek_site_onboarding > default_pages > payment_completion`); Email verification page (`/billing/payment/verification`); Company incorporation flow (`/customer/incorporate`); Customer dashboard (`/customer/dashboard`); Billing backend `GET /payment-token/{token}/is-user-verified` |
