@@ -29,6 +29,7 @@ The canonical **process, column definitions, and spreadsheet link** live in:
 | `README.md` | This file — orientation and workflow |
 | `Sleek Feature Scope Audit Hub.md` | Audit goals, sheet columns, process, links |
 | `platform/` | First markdown area: Platform + Sleeksign; [index](./platform/README.md) |
+| `sba/` | SBA (Sleek Business Account) banking microservices; [index](./sba/README.md) |
 | `clm/` | CLM domain draft inventory; [index](./clm/README.md) |
 | `compliance/` | Compliance domain draft inventory; [index](./compliance/README.md) |
 | `corpsec/` | CorpSec domain draft inventory; [index](./corpsec/README.md) |
