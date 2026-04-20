@@ -2,6 +2,9 @@
 """
 Regenerate domain-clm.html from clm/feature-set/**/*.md master sheets.
 
+Some top-level feature-set folders are skipped (see EXCLUDED_FEATURE_SET_SUBDIRS).
+Decoded screenshot routes can be skipped in the surface gallery only (see EXCLUDED_CLM_GALLERY_ROUTES).
+
 Groups the Canonical Feature Matrix by primary repository (see PRIMARY_REPO_ORDER),
 then by CLM theme (see CLM_THEME_RULES): e.g. invoices, subscriptions, credit notes,
 payments, offboarding, upgrades/downgrades.
@@ -108,6 +111,45 @@ FEATURE_ROOT = _CLM_DIR / "feature-set"
 SCREENSHOTS_ROOT = ROOT / "by-surface" / "clm" / "screenshots"
 OUT_PATH = ROOT / "domain-clm.html"
 
+# Top-level folder under clm/feature-set/ to omit from domain-clm.html (matrix + gallery).
+# Maps user-facing routes / areas to inventory directory names, e.g. subscription-config/edit →
+# subscription-config-form, /admin/invoices/reconcile → admin-invoices-reconcile.
+EXCLUDED_FEATURE_SET_SUBDIRS: frozenset[str] = frozenset(
+    {
+        "admin-incomplete-orders",
+        "admin-invoices-reconcile",
+        "admin-invoices-update-services",
+        "admin-new-coupons",
+        "admin-new-coupons-create-edit",
+        "admin-paid-incomplete-orders",
+        "admin-subscriptions-paid",
+        "admin-subscriptions-paid-edit",
+        "admin-subscriptions-unpaid",
+        "admin-transactions",
+        "coupons-form",
+        "credit-balance",
+        "deliverables-analytics",
+        "delivery-config-form",
+        "external-invoice",
+        "onboarding",
+        "overview",
+        "payments",
+        "subscription-config-form",
+        "xero-config-monitoring",
+        "xero-webhook",
+    }
+)
+
+# SPA routes recovered from screenshot filenames (see route_from_clm_screenshot_href) omitted
+# from the three-surface gallery only. Use when the same inventory row has multiple captures
+# (e.g. list vs edit) but edit should not appear in domain-clm.html.
+EXCLUDED_CLM_GALLERY_ROUTES: frozenset[str] = frozenset(
+    {
+        "/subscription-config/edit",
+        "/delivery-config/edit",
+    }
+)
+
 # Surface URLs (aligned with capture-clm-screenshots.mjs / domain-corpsec.html)
 CLM_BILLINGS_PORTAL_URL = "https://sg-billings-sit.sleek.com/"
 CLM_ADMIN_APP_URL = "https://admin-sit.sleek.sg"
@@ -149,6 +191,23 @@ def parse_md(path: Path) -> tuple[str, str, str, bool]:
         title = hm.group(1).strip() if hm else path.stem.replace("-", " ").title()
     rel = path.relative_to(ROOT).as_posix()
     return title, service_repo, rel, critical_high
+
+
+def feature_set_first_segment(repo_rel: str) -> str | None:
+    """First directory under clm/feature-set/ for a repo-root-relative path."""
+    p = repo_rel.replace("\\", "/")
+    prefix = "clm/feature-set/"
+    if not p.startswith(prefix):
+        return None
+    rest = p[len(prefix) :].strip("/")
+    if not rest:
+        return None
+    return rest.split("/")[0]
+
+
+def is_excluded_feature_md(repo_rel: str) -> bool:
+    seg = feature_set_first_segment(repo_rel)
+    return seg is not None and seg in EXCLUDED_FEATURE_SET_SUBDIRS
 
 
 def repo_flags(service_blob: str) -> list[bool]:
@@ -259,6 +318,8 @@ def collect_gallery_items(features: list[dict]) -> dict[str, list[dict]]:
     for f in features:
         for href in f.get("screenshots") or []:
             route = route_from_clm_screenshot_href(href)
+            if route.lower() in EXCLUDED_CLM_GALLERY_ROUTES:
+                continue
             b = clm_gallery_bucket(route, f["service_repo"], f["primary"])
             tid = clm_theme_id(f["title"], f["rel"])
             buckets[b].append(
@@ -599,6 +660,9 @@ def main() -> int:
     paths = sorted(FEATURE_ROOT.rglob("*.md"))
     features: list[dict] = []
     for path in paths:
+        rel = path.relative_to(ROOT).as_posix()
+        if is_excluded_feature_md(rel):
+            continue
         title, service_repo, rel, critical_high = parse_md(path)
         flags = repo_flags(service_repo)
         pri = primary_repo(service_repo)
