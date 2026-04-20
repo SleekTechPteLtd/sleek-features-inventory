@@ -18,7 +18,7 @@ Top-level domain for **Sleek Business Account** banking capabilities implemented
 | `sba-bank-dbs-api` | DBS integration — FAST, PayNow, TT, A2A, virtual accounts, CAMT, FX. |
 | `sba-nium-api` | NIUM cards — delegated model RHA, virtual cards, KYB, webhooks. |
 | `sba-nium-payout` | NIUM payouts — beneficiaries, international remittance. |
-| `customer-sba` | Customer Vue microfrontend — /sba banking UI (Single-SPA); calls `sba-bank-api`. |
+| `customer-sba` | Customer Vue microfrontend — /sba banking UI (Single-SPA); calls `sba-bank-api`. Inventory rows are split per route in `customer-sba/src/routes/routes.js`. |
 
 ## Regenerate the domain page
 
